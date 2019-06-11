@@ -1,1 +1,1 @@
-from exp2DShowerTree import Simulator
+import run2DShower
