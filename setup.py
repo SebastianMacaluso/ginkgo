@@ -7,5 +7,5 @@ setup(name='ToyJetsShower',
       author='Sebastian Macaluso, Kyle Cranmer, Duccio Pappadopulo',
       author_email='sm4511@nyu.edu',
       license='MIT',
-      packages=['ToyJetsShower'],
+      packages=['.'],
       zip_safe=False)
