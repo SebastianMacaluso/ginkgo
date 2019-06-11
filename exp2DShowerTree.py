@@ -13,7 +13,12 @@ import torch
 from torch import nn
 import pyro
 from pyro_simulator import PyroSimulator
-out_dir='trees/'
+import os
+
+
+out_dir=os.getcwd()+'/trees/'
+print('out_dir=',out_dir)
+
 
 phi_dist = pyro.distributions.Uniform(0, 2 * np.pi)
 
