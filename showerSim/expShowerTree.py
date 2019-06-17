@@ -13,16 +13,7 @@ import torch
 from torch import nn
 import pyro
 from pyro_simulator import PyroSimulator
-import os
-
-
-out_dir=os.getcwd()+'/trees/'
-print('out_dir=',out_dir)
-
-
-phi_dist = pyro.distributions.Uniform(0, 2 * np.pi)
-
-
+out_dir='trees/'
 
 class Simulator(PyroSimulator):
 
@@ -38,7 +29,7 @@ class Simulator(PyroSimulator):
     n_nails = number of nails
     start_pos = starting position (default = n_nails / 2)
     """
-    def __init__(self, pt_cut=1., jet_p=None, rate=1., Mw=None , jet_name=None):
+    def __init__(self, pt_cut=1., jet_pt=None, rate=1., Mw=None , jet_name=None):
         super(Simulator, self).__init__()
 
         self.pt_cut=pt_cut
@@ -47,10 +38,10 @@ class Simulator(PyroSimulator):
         self.jet_name = jet_name
         # self.deltaMax=deltaMax
 
-        if jet_p == None:
-            self.jet_p = [0,0]
+        if jet_pt == None:
+            self.jet_pt = 500
         else:
-            self.jet_p = jet_p
+            self.jet_pt = jet_pt
 
     def forward(self, inputs):
       inputs = inputs.view(-1, 1)
@@ -75,17 +66,14 @@ class Simulator(PyroSimulator):
       i = 0
       # sigma = kt
       # deltaMax=kt
-      py = self.jet_p[0]
-      pz = self.jet_p[1]
+      px = self.jet_pt
 
-
-
-      tree, content, deltas, draws = _traverse(py,pz, extra_info=False, deltaMax=kt, sigma=None, cut_off=self.pt_cut, rate=self.rate, Mw=self.Mw)
+      tree, content, deltas, draws = _traverse(px, extra_info=False, deltaMax=kt, sigma=None, cut_off=self.pt_cut, rate=self.rate, Mw=self.Mw)
 
       tree = np.asarray([tree])
       tree = np.asarray([np.asarray(e).reshape(-1, 2) for e in tree])
       content = np.asarray([content])
-      content = np.asarray([np.asarray(e).reshape(-1, 2) for e in content])
+      content = np.asarray([np.asarray(e).reshape(-1, 1) for e in content])
 
       print('Tree = ', tree)
       print('Content = ', content)
@@ -143,7 +131,7 @@ class Simulator(PyroSimulator):
 
 #------------------------------------------------------------------------------------------------------------- 
 # Recursive function to access fastjet clustering history and make the tree. We will call this function below in _traverse.
-def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, draws, deltaMax=None, sigma=None, drew=None, cut_off=None,  rate=None, Mw=None, extra_info=True): #root should be a fj.PseudoJet
+def _traverse_rec(root, parent_id, is_left, tree, content, deltas, draws, deltaMax=None, sigma=None, drew=None, cut_off=None,  rate=None, Mw=None, extra_info=True): #root should be a fj.PseudoJet
   
   id=len(tree)//2
   if parent_id>=0:
@@ -159,8 +147,7 @@ def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, dra
   tree.append(-1)
     
 #     We fill the content vector with the values of the node
-  content.append(root_y)
-  content.append(root_z)
+  content.append(root)
 
   # draws.append(drew)
 
@@ -176,36 +163,23 @@ def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, dra
   #------------------------------
   # Call the function recursively
 
-  root_y=root_y/2
-  root_z = root_z / 2
-
-  # phi_dist = pyro.distributions.Uniform(0,2*np.pi)
-  draw_phi = pyro.sample("phi" + str(id) + str(is_left), phi_dist)
+  root=root/2
 
   if Mw and id == 0:
-    # ptL = torch.tensor([root - Mw / 2])
-    # ptR = torch.tensor([root + Mw / 2])
-
-    ptL_y = root_y - Mw / 2 * np.sin(draw_phi)
-    ptL_z = root_z - Mw / 2 * np.cos(draw_phi)
-
-    ptR_y = root_y + Mw / 2 * np.sin(draw_phi)
-    ptR_z = root_z + Mw / 2 * np.cos(draw_phi)
-
-
+    ptL = torch.tensor([root - Mw / 2])
+    ptR = torch.tensor([root + Mw / 2])
     # sigma = sigmaStart
     draw = 'heavy'
     deltas.append('Mw')
     draws.append('heavy')
 
-    _traverse_rec(ptL_y, ptL_z, id, True, tree, content, deltas, draws, deltaMax=deltaMax,  cut_off=cut_off, rate=rate,
+    _traverse_rec(ptL, id, True, tree, content, deltas, draws, deltaMax=deltaMax,  cut_off=cut_off, rate=rate,
                   extra_info=extra_info)  # pieces[0] is the left child
-    _traverse_rec(ptR_y, ptR_z, id, False, tree, content, deltas, draws, deltaMax=deltaMax,  cut_off=cut_off,  rate=rate,
+    _traverse_rec(ptR, id, False, tree, content, deltas, draws, deltaMax=deltaMax,  cut_off=cut_off,  rate=rate,
                   extra_info=extra_info)  # pieces[1] is the right child
 
 
   else:
-
 
     # Exponential distribution: Exponential(lambda)= lambda * Exp[- lambda x ]. Then log_prob= Log[Exponential(lambda=draw)]
     decay_dist = pyro.distributions.Exponential(rate)
@@ -221,17 +195,14 @@ def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, dra
     # print('sigma =', sigma)
 
     # The cut_off gives a kt measure
-    if delta> cut_off:
+    if delta> 2*cut_off:
 
-      ptL_y = root_y - delta * np.sin(draw_phi)
-      ptL_z = root_z - delta * np.cos(draw_phi)
+      ptL = root - delta/2
+      ptR = root + delta/2
 
-      ptR_y = root_y + delta * np.sin(draw_phi)
-      ptR_z = root_z + delta * np.cos(draw_phi)
-
-      # print('root y =', root_y)
-      # print('ptL, id =', id ,' = ', ptL_y)
-      # print('ptR, id =', id, ' = ', ptR_y)
+      print('root =', root)
+      print('ptL, id =', id ,' = ', ptL)
+      print('ptR, id =', id, ' = ', ptR)
 
       print('+=+=' * 10)
 
@@ -239,9 +210,9 @@ def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, dra
       deltas.append(delta)
       draws.append(draw_decay)
 
-      _traverse_rec(ptL_y, ptL_z, id, True, tree, content, deltas, draws, deltaMax=delta,   cut_off=cut_off, rate=rate,
+      _traverse_rec(ptL, id, True, tree, content, deltas, draws, deltaMax=delta,   cut_off=cut_off, rate=rate,
                     extra_info=extra_info)  # pieces[0] is the left child
-      _traverse_rec(ptR_y, ptR_z, id, False, tree, content, deltas, draws, deltaMax=delta,  cut_off=cut_off, rate=rate,
+      _traverse_rec(ptR, id, False, tree, content, deltas, draws, deltaMax=delta,  cut_off=cut_off, rate=rate,
                     extra_info=extra_info)  # pieces[1] is the right child
 
     else:
@@ -296,7 +267,7 @@ def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, dra
   
 #------------------------------------------------------------------------------------------------------------- 
 # This function call the recursive function to make the trees starting from the root
-def _traverse(root_y, root_z, deltaMax=None, extra_info=False, sigma=None , cut_off=None, rate=None, Mw=None):#root should be a fj.PseudoJet
+def _traverse(root, deltaMax=None, extra_info=False, sigma=None , cut_off=None, rate=None, Mw=None):#root should be a fj.PseudoJet
 
 
 
@@ -308,10 +279,7 @@ def _traverse(root_y, root_z, deltaMax=None, extra_info=False, sigma=None , cut_
   # abs_charge=[]
   # muon=[]
 #   sum_abs_charge=0
-
-
-
-  _traverse_rec(root_y, root_z, -1, False, tree, content,deltas, draws, deltaMax=deltaMax, sigma=None, cut_off=cut_off, rate=rate,Mw=Mw, extra_info=extra_info) #We start from the root=jet 4-vector
+  _traverse_rec(root, -1, False, tree, content,deltas, draws, deltaMax=deltaMax, sigma=None, cut_off=cut_off, rate=rate,Mw=Mw, extra_info=extra_info) #We start from the root=jet 4-vector
 
 
   return tree, content, deltas, draws
@@ -351,7 +319,7 @@ def make_dictionary(tree, content, mass=None, pt=None, charge=None, abs_charge=N
   jet["root_id"] = 0
   jet["tree"] = tree[0]  # Labels for the jet constituents in the tree
   #             jet["content"] = np.reshape(content[i],(-1,4,1)) #Where content[i][0] is the jet 4-momentum, and the other entries are the jets constituents 4 momentum. Use this format if using TensorFlow
-  jet["content"] = np.reshape(content[0], (-1, 2))  # Use this format if using Pytorch
+  jet["content"] = np.reshape(content[0], (-1, 1))  # Use this format if using Pytorch
   # jet["mass"] = mass
   # jet["pt"] = pt
   # jet["energy"] = content[0][0, 3]

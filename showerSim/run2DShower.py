@@ -4,6 +4,7 @@ import pprint
 import matplotlib.pyplot as plt
 import sys
 
+import exp2DShowerTree
 
 
 #-----------------------
@@ -22,8 +23,14 @@ kt_scale = torch.tensor([[100.]])
 # from gaussShowerTree import Simulator
 # simulator = Simulator(jet_pt=0., rate=10., Mw=80., pt_cut=2.)
 
-from exp2DShowerTree import Simulator
-simulator = Simulator(jet_p=[300.,50.], rate=2, Mw=80., pt_cut=1., jet_name='16')
+# import pyro
+# import exp2DShowerTree
+# from exp2DShowerTree import Simulator
+
+# Lambda=8
+# decay_dist = pyro.distributions.Exponential(Lambda)
+
+simulator = exp2DShowerTree.Simulator(jet_p=[300.,500.], rate=8, Mw=80., pt_cut=1., jet_name='18')
 
 
 

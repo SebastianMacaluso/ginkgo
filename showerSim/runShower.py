@@ -22,7 +22,7 @@ kt_scale = torch.tensor([[100.]])
 # simulator = Simulator(jet_pt=0., rate=10., Mw=80., pt_cut=2.)
 
 from expShowerTree import Simulator
-simulator = Simulator(jet_pt=0., rate=5., Mw=80., pt_cut=1.)
+simulator = Simulator(jet_pt=0., rate=2, Mw=80., pt_cut=2., jet_name='11')
 
 
 
