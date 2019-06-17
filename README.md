@@ -15,11 +15,13 @@ Note that this is an early development version.
 - [`data`](data/): Dir with the trees.
 
 - [`analysis`](analysis): 
+
     -[`likelihood.py`](showerSim/likelihood.py): Calculate the log likelihood of a splitting node and of (a branch of) a tree.
 
 - [`showerSim`](showerSim/): Dir with the simulation code.
 
--[`exp2DShowerTree.py`](showerSim/exp2DShowerTree.py): Parton shower code to generate the trees. 
+    -[`exp2DShowerTree.py`](showerSim/exp2DShowerTree.py): Parton shower code to generate the trees. 
+    
     -[`run2DShower.py`](showerSim/run2DShower.py): Run the parton shower.
     
 
