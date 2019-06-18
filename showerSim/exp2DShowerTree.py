@@ -94,6 +94,9 @@ class Simulator(PyroSimulator):
       jet['Delta_0']=kt
       jet['pt_cut']=self.pt_cut
       jet['M_Hard']=self.Mw
+
+      jet['deltas']=deltas
+      jet['draws']=draws
       print('Jet dictionary =', jet)
       print('===' * 10)
 

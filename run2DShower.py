@@ -30,7 +30,7 @@ kt_scale = torch.tensor([[100.]])
 # Lambda=8
 # decay_dist = pyro.distributions.Exponential(Lambda)
 
-simulator = exp2DShowerTree.Simulator(jet_p=[300.,500.], rate=8, Mw=80., pt_cut=1., jet_name='18')
+simulator = exp2DShowerTree.Simulator(jet_p=[300.,500.], rate=8, Mw=80., pt_cut=1., jet_name='19')
 
 
 

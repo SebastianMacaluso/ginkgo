@@ -17,8 +17,8 @@ def split_likelihood(in_jet, root_id=None, parent_node_id= None):
   '''
   Calculate the log likelihood of a splitting
   :param in_jet: dictionary with the jet info
-  :param root_id:  id of the node that used to get the split likelihood
-  :param parent_id: parent id of the starting node.
+  :param root_id:  id of the node used to get the split likelihood
+  :param parent_node_id: id of the parent of the splitting node. If not provided, the function will search for it.
   :return: log(split likelihood) of the root id node.
   '''
 
@@ -47,17 +47,24 @@ def split_likelihood(in_jet, root_id=None, parent_node_id= None):
 
     # Parent momentum
     #         p_P=pL+pR
-    if root_id == in_jet["root_id"]:
+
+    if parent_node_id == None:
+      parent_node_id = np.where(in_jet['tree'] == root_id)[0]
+
+    print('parent_node_id=',parent_node_id)
+
+
+    # If the node is the root of the tree, we use Delta_p=Delta_0. Delta_0. If the 1st splitting is for Delta=M_hard/2, then the 1st children will have Delta_p=Delta_0
+    if root_id == in_jet["root_id"] or \
+        (in_jet['M_Hard'] != None and len(parent_node_id)>0 and parent_node_id[0] == in_jet["root_id"]):
       Delta_p = Delta_0
       print('Delta parent=', Delta_p)
+
+
     else:
 
       # Parent momentum
-      if parent_node_id!=None:
-        p_parent = in_jet["content"][parent_node_id]
-      else:
-        p_parent = in_jet["content"][np.where(in_jet['tree'] == root_id)[0]]
-
+      p_parent = in_jet["content"][parent_node_id]
       print('p_parent = ', p_parent)
 
       Delta_p = np.sqrt(np.sum((p_parent / 2 - p) ** 2))
@@ -71,6 +78,12 @@ def split_likelihood(in_jet, root_id=None, parent_node_id= None):
     print(' r =', r)
 
     split_likelihood = Lambda * np.exp(- Lambda * r)
+
+
+    if root_id == in_jet["root_id"] and in_jet['M_Hard'] != None:
+      # print('jet[M_Hard] =', in_jet['M_Hard'])
+      split_likelihood = 1
+
 
     return np.log(split_likelihood)
 
@@ -106,8 +119,16 @@ def traverse_likelihood(in_jet, root_id=None, parent_id=None):
   print('Initial scale for the splitting =', Delta_0)
   print('jet[M_Hard] =', in_jet['M_Hard'])
 
+  deltas=[]
+  draws=[]
+
   branch_likelihood(in_jet, root_id=root_id, parent_id=parent_id, Delta_0=Delta_0, Lambda=Lambda,
-                    log_likelihood=log_likelihood)
+                    log_likelihood=log_likelihood, deltas=deltas, draws=draws)
+
+  print('---'*10)
+  print('Reconstructed deltas =',deltas)
+  print('Reconstructed draws =',draws)
+  print('---' * 10)
 
   print('log_likelihood list =', log_likelihood)
 
@@ -119,7 +140,7 @@ def traverse_likelihood(in_jet, root_id=None, parent_id=None):
 
 
 # -----------
-def branch_likelihood(in_jet, root_id=None, parent_id=None, Lambda=None, Delta_0=None, log_likelihood=None):
+def branch_likelihood(in_jet, root_id=None, parent_id=None, Lambda=None, Delta_0=None, log_likelihood=None, deltas=None, draws=None):
   '''
   Recursive function to traverse the tree (or a branch) and get the tree log likelihood.
   :param jet: dictionary with the jet info
@@ -148,7 +169,7 @@ def branch_likelihood(in_jet, root_id=None, parent_id=None, Lambda=None, Delta_0
     pL = in_jet["content"][left]
     #         pR=jet["content"][right]
 
-    if parent_id < 0:
+    if parent_id < 0 or (parent_id== 0 and in_jet['M_Hard'] != None):
 
       Delta_p = Delta_0
       # print('Delta parent=', Delta_p)
@@ -162,12 +183,17 @@ def branch_likelihood(in_jet, root_id=None, parent_id=None, Lambda=None, Delta_0
       Delta_p = np.sqrt(np.sum((p_parent / 2 - p) ** 2))
       # print('p_parent/2-p =', p_parent / 2 - p)
       # print('(p_parent/2-p)**2) =', (p_parent / 2 - p) ** 2)
-      # print('Delta parent=', Delta_p)
+      print('Delta parent=', Delta_p)
 
     Delta = np.sqrt(np.sum((p / 2 - pL) ** 2))
 
+
     r = Delta / Delta_p
-    # print(' r =', r)
+    print(' r =', r)
+
+    deltas.append(Delta)
+    draws.append(r)
+
 
     split_likelihood = Lambda * np.exp(- Lambda * r)
 
@@ -175,6 +201,10 @@ def branch_likelihood(in_jet, root_id=None, parent_id=None, Lambda=None, Delta_0
     if parent_id < 0 and in_jet['M_Hard'] != None:
       # print('jet[M_Hard] =', in_jet['M_Hard'])
       split_likelihood = 1
+      deltas.pop()
+      deltas.append(in_jet['M_Hard']/2)
+      draws.pop()
+      draws.append('heavy')
 
     log_likelihood.append(np.log(split_likelihood))
 
@@ -185,9 +215,9 @@ def branch_likelihood(in_jet, root_id=None, parent_id=None, Lambda=None, Delta_0
     #         print('----'*10)
 
     branch_likelihood(in_jet, root_id=in_jet["tree"][root_id][0], parent_id=root_id, Lambda=Lambda, Delta_0=Delta_0,
-                      log_likelihood=log_likelihood)
+                      log_likelihood=log_likelihood, deltas=deltas, draws=draws)
     branch_likelihood(in_jet, root_id=in_jet["tree"][root_id][1], parent_id=root_id, Lambda=Lambda, Delta_0=Delta_0,
-                      log_likelihood=log_likelihood)
+                      log_likelihood=log_likelihood, deltas=deltas, draws=draws)
 
 
 #--------------------------------------------------------------------------------------------
@@ -195,7 +225,7 @@ if __name__=='__main__':
 
   #-------------------------
   # Load a jet
-  input_jet = 'tree_17_truth'
+  input_jet = 'tree_18_truth'
   input_dir= '../data/'
 
   fd = open(input_dir+ str(input_jet) + '.pkl', "rb")
@@ -211,7 +241,7 @@ if __name__=='__main__':
   print('Calculating the log likelihood of a splitting')
 
   node_id=1
-  node_likelihood = split_likelihood(jet_dic, root_id=1)
+  node_likelihood = split_likelihood(jet_dic, root_id=4)
   # print('+=+='*20)
   # node_likelihood = split_likelihood(jet_dic, root_id=1, parent_node_id=0)
   print('Node '+str(node_id)+' log likelihood =',node_likelihood)
