@@ -35,7 +35,7 @@ Note that this is an early development version.
 1. Clone the ToyJetsShower repository
 2. `cd ToyJetsShower`
 3. `pip install -e .`
-4.`>>> import run2DShower`
+4. `>>> import run2DShower`
 
 
 
