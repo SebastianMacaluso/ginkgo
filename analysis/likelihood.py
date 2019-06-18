@@ -13,7 +13,7 @@ import os
 ###   GET THE SPLITTING LIKELIHOOD
 # -------------------------------------------------------------------------------------------------------------
 
-def split_likelihood(in_jet, root_id=None):
+def split_likelihood(in_jet, root_id=None, parent_node_id= None):
   '''
   Calculate the log likelihood of a splitting
   :param in_jet: dictionary with the jet info
@@ -53,7 +53,11 @@ def split_likelihood(in_jet, root_id=None):
     else:
 
       # Parent momentum
-      p_parent = in_jet["content"][np.where(in_jet['tree'] == root_id)[0]]
+      if parent_node_id!=None:
+        p_parent = in_jet["content"][parent_node_id]
+      else:
+        p_parent = in_jet["content"][np.where(in_jet['tree'] == root_id)[0]]
+
       print('p_parent = ', p_parent)
 
       Delta_p = np.sqrt(np.sum((p_parent / 2 - p) ** 2))
@@ -208,6 +212,8 @@ if __name__=='__main__':
 
   node_id=1
   node_likelihood = split_likelihood(jet_dic, root_id=1)
+  # print('+=+='*20)
+  # node_likelihood = split_likelihood(jet_dic, root_id=1, parent_node_id=0)
   print('Node '+str(node_id)+' log likelihood =',node_likelihood)
 
 
