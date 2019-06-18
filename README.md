@@ -47,17 +47,3 @@ Note that this is an early development version.
 
 
 
-
-
-Running the simulation as a python package:
-
-- cd to main dir
-- pip install -e .
-
-
-
-
-
-
-
-
