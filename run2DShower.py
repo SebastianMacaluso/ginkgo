@@ -4,7 +4,7 @@ import pprint
 import matplotlib.pyplot as plt
 import sys
 
-import exp2DShowerTree
+from showerSim import exp2DShowerTree
 
 
 #-----------------------

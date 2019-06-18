@@ -12,11 +12,11 @@ import numpy as np
 import torch
 from torch import nn
 import pyro
-from pyro_simulator import PyroSimulator
+from showerSim.pyro_simulator import PyroSimulator
 import os
 
 
-out_dir=os.getcwd()+'/../data/'
+out_dir=os.getcwd()+'/data/'
 print('out_dir=',out_dir)
 
 
@@ -28,16 +28,7 @@ print('out_dir=',out_dir)
 class Simulator(PyroSimulator):
 
     """
-    Generalized Galton board example from arXiv:1805.12244.
 
-
-    Has one parameter:
-    theta
-
-    Three hyperparameters:
-    n_row = number of rows
-    n_nails = number of nails
-    start_pos = starting position (default = n_nails / 2)
     """
     def __init__(self, pt_cut=1., jet_p=None, rate=1., Mw=None , jet_name=None):
         super(Simulator, self).__init__()

@@ -5,7 +5,7 @@ from pyro import poutine
 import inspect
 import numpy as np
 
-from simulator import Simulator
+from showerSim.simulator import Simulator
 
 
 class PyroSimulator(Simulator):
