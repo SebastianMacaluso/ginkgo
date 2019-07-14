@@ -30,12 +30,12 @@ kt_scale = torch.tensor([[100.]])
 # Lambda=8
 # decay_dist = pyro.distributions.Exponential(Lambda)
 
-simulator = exp2DShowerTree.Simulator(jet_p=[300.,500.], rate=8, Mw=80., pt_cut=1., jet_name='19')
+simulator = exp2DShowerTree.Simulator(jet_p=[300.,500.], rate=8, Mw=80., pt_cut=1.)
 
 
 
 #simulator = Simulator(sensitivities=True)
-output = simulator(kt_scale)
+_, content = simulator(kt_scale)
 
 #
 sys.exit()
@@ -43,7 +43,7 @@ sys.exit()
 # print('Trace nodes =', simulator.trace(theta).nodes)
 #
 # x, joint_score, joint_log_ratio = simulator.augmented_data(theta,theta, theta_ref)
-x, joint_score, joint_log_ratio, joint_log_prob = simulator.augmented_data(kt_scale,None, None)
+x, joint_score, joint_log_ratio, joint_log_prob = simulator.augmented_data(kt_scale, None, None)
 
 # print('x = ', x)
 # print('joint_score = ',joint_score)

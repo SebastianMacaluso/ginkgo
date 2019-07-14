@@ -13,11 +13,11 @@ import torch
 from torch import nn
 import pyro
 from showerSim.pyro_simulator import PyroSimulator
+from showerSim.utils import get_logger
 import os
 
 
-out_dir=os.getcwd()+'/data/'
-print('out_dir=',out_dir)
+logger = get_logger(level="DEBUG")
 
 
 # phi_dist = pyro.distributions.Uniform(0, 2 * np.pi)
@@ -26,17 +26,15 @@ print('out_dir=',out_dir)
 
 
 class Simulator(PyroSimulator):
-
     """
 
     """
-    def __init__(self, pt_cut=1., jet_p=None, rate=1., Mw=None , jet_name=None):
+    def __init__(self, pt_cut=1., jet_p=None, rate=1., Mw=None):
         super(Simulator, self).__init__()
 
-        self.pt_cut=pt_cut
-        self.rate=rate
-        self.Mw=Mw
-        self.jet_name = jet_name
+        self.pt_cut = pt_cut
+        self.rate = rate
+        self.Mw = Mw
         # self.deltaMax=deltaMax
 
         if jet_p == None:
@@ -53,18 +51,18 @@ class Simulator(PyroSimulator):
       # beta=2
       # alpha = torch.tensor(num_samples * [2.])
       # beta = torch.tensor(num_samples * [2.])
-      print('Num samples = ', num_samples)
-      print('Energy Scales = ', kt)
+      logger.info(f"Num samples: {num_samples}")
+      logger.info(f"Energy Scales: {kt}")
 
       # Define a pyro distribution
       # distribution_u = pyro.distributions.Uniform(0, 1).expand([num_samples])
       # dist_bern = pyro.distributions.Bernoulli(probs=a)
 
       # print('distribution_u = ', distribution_u)
-      print('---' * 3)
+      #print('---' * 3)
       # dist_beta = pyro.distributions.Beta(alpha, beta)
       # dist_beta = pyro.distributions.Normal(alpha, beta)
-      i = 0
+      # i = 0
       # sigma = kt
       # deltaMax=kt
       py = self.jet_p[0]
@@ -74,20 +72,17 @@ class Simulator(PyroSimulator):
       globals()['phi_dist'] = pyro.distributions.Uniform(0, 2 * np.pi)
       globals()['decay_dist'] = pyro.distributions.Exponential(self.rate)
 
-      tree, content, deltas, draws = _traverse(py,pz, extra_info=False, deltaMax=kt, sigma=None, cut_off=self.pt_cut, rate=self.rate, Mw=self.Mw)
+      tree, content, deltas, draws = _traverse(py, pz, extra_info=False, deltaMax=kt, sigma=None, cut_off=self.pt_cut, rate=self.rate, Mw=self.Mw)
 
       tree = np.asarray([tree])
       tree = np.asarray([np.asarray(e).reshape(-1, 2) for e in tree])
       content = np.asarray([content])
       content = np.asarray([np.asarray(e).reshape(-1, 2) for e in content])
 
-      print('Tree = ', tree)
-      print('Content = ', content)
-      print('---'*10)
-      print('Deltas =', deltas)
-      print('---'*10)
-      print('draws =', draws)
-      print('---' * 10)
+      logger.debug(f"Tree: {tree}")
+      logger.debug(f"Content: {content}")
+      logger.debug(f"Deltas: {deltas}")
+      logger.debug(f"Draws: {draws}")
 
       jet = make_dictionary(tree, content)
       jet['Lambda']=self.rate
@@ -97,14 +92,15 @@ class Simulator(PyroSimulator):
 
       jet['deltas']=deltas
       jet['draws']=draws
-      print('Jet dictionary =', jet)
-      print('===' * 10)
+      logger.debug(f"Jet dictionary: {jet}")
 
+      return jet, content
 
-      # SAVE OUTPUT FILE
-      out_filename = out_dir+ 'tree_'+str(self.jet_name)+'_truth'+'.pkl'
-      print('out_filename=', out_filename)
-      with open(out_filename, "wb") as f: pickle.dump(jet, f, protocol=2)
+    @staticmethod
+    def save(jet, jet_name):
+      out_filename = os.path.join(os.getcwd(), "data", "tree_" + jet_name + "_truth.pkl")
+      with open(out_filename, "wb") as f:
+        pickle.dump(jet, f, protocol=2)
 
       #
       # # while ptL[0] > self.pt_cut: #This only considers the 1st element of the batch - CHANGE!!!
@@ -125,9 +121,6 @@ class Simulator(PyroSimulator):
       #   print('sigma= ', sigma)
       #   print('Left particle pT for branching #', i, ' = ', ptL)
       #   print('Right particle pT for branching #', i, '= ', ptR)
-      print('---' * 10)
-
-      return content
 
 
       # sys.exit()
