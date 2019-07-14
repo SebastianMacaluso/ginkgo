@@ -44,9 +44,9 @@ class Simulator(PyroSimulator):
         else:
             self.jet_p = jet_p
 
-    def forward(self, inputs):
+    def forward(self, inputs, num_samples=1, printout = False):
       inputs = inputs.view(-1, 1)
-      num_samples = inputs.shape[0]
+      # num_samples = inputs.shape[0]
       kt = inputs[:, 0]  # We could have input variables
 
       # alpha=2
@@ -61,7 +61,8 @@ class Simulator(PyroSimulator):
       # dist_bern = pyro.distributions.Bernoulli(probs=a)
 
       # print('distribution_u = ', distribution_u)
-      print('---' * 3)
+
+      # print('---' * 3)
       # dist_beta = pyro.distributions.Beta(alpha, beta)
       # dist_beta = pyro.distributions.Normal(alpha, beta)
       i = 0
@@ -74,37 +75,46 @@ class Simulator(PyroSimulator):
       globals()['phi_dist'] = pyro.distributions.Uniform(0, 2 * np.pi)
       globals()['decay_dist'] = pyro.distributions.Exponential(self.rate)
 
-      tree, content, deltas, draws = _traverse(py,pz, extra_info=False, deltaMax=kt, sigma=None, cut_off=self.pt_cut, rate=self.rate, Mw=self.Mw)
 
-      tree = np.asarray([tree])
-      tree = np.asarray([np.asarray(e).reshape(-1, 2) for e in tree])
-      content = np.asarray([content])
-      content = np.asarray([np.asarray(e).reshape(-1, 2) for e in content])
+      jet_list=[]
+      for i in range(num_samples):
 
-      print('Tree = ', tree)
-      print('Content = ', content)
-      print('---'*10)
-      print('Deltas =', deltas)
-      print('---'*10)
-      print('draws =', draws)
-      print('---' * 10)
+        tree, content, deltas, draws = _traverse(py,pz, extra_info=False, deltaMax=kt, sigma=None, cut_off=self.pt_cut, rate=self.rate, Mw=self.Mw)
 
-      jet = make_dictionary(tree, content)
-      jet['Lambda']=self.rate
-      jet['Delta_0']=kt
-      jet['pt_cut']=self.pt_cut
-      jet['M_Hard']=self.Mw
+        tree = np.asarray([tree])
+        tree = np.asarray([np.asarray(e).reshape(-1, 2) for e in tree])
+        content = np.asarray([content])
+        content = np.asarray([np.asarray(e).reshape(-1, 2) for e in content])
 
-      jet['deltas']=deltas
-      jet['draws']=draws
-      print('Jet dictionary =', jet)
-      print('===' * 10)
+        # print('Tree = ', tree)
+        # print('Content = ', content)
+        # print('---'*10)
+        # print('Deltas =', deltas)
+        # print('---'*10)
+        # print('draws =', draws)
+        # print('---' * 10)
+
+        jet = make_dictionary(tree, content)
+        jet['Lambda']=self.rate
+        jet['Delta_0']=kt
+        jet['pt_cut']=self.pt_cut
+        jet['M_Hard']=self.Mw
+
+        jet['deltas']=deltas
+        jet['draws']=draws
+
+        jet_list.append(jet)
+
+
+      if printout:
+        print('Jet dictionary =', jet_list)
+        print('===' * 10)
 
 
       # SAVE OUTPUT FILE
       out_filename = out_dir+ 'tree_'+str(self.jet_name)+'_truth'+'.pkl'
       print('out_filename=', out_filename)
-      with open(out_filename, "wb") as f: pickle.dump(jet, f, protocol=2)
+      with open(out_filename, "wb") as f: pickle.dump(jet_list, f, protocol=2)
 
       #
       # # while ptL[0] > self.pt_cut: #This only considers the 1st element of the batch - CHANGE!!!
@@ -235,9 +245,9 @@ def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, dra
       # print('ptL, id =', id ,' = ', ptL_y)
       # print('ptR, id =', id, ' = ', ptR_y)
 
-      print('+=+=' * 10)
+      # print('+=+=' * 10)
 
-      print('---' * 10)
+      # print('---' * 10)
       deltas.append(delta)
       draws.append(draw_decay)
 
@@ -248,7 +258,7 @@ def _traverse_rec(root_y, root_z, parent_id, is_left, tree, content, deltas, dra
 
     else:
 
-      print('---' * 10)
+      # print('---' * 10)
       deltas.append('outer')
       draws.append('outer')
 

@@ -73,6 +73,7 @@ def split_likelihood(in_jet, root_id=None, parent_node_id= None):
       print('Delta parent=', Delta_p)
 
     Delta = np.sqrt(np.sum((p / 2 - pL) ** 2))
+    print('Delta = ', Delta)
 
     r = Delta / Delta_p
     print(' r =', r)
@@ -240,11 +241,11 @@ if __name__=='__main__':
   print('---' * 20)
   print('Calculating the log likelihood of a splitting')
 
-  node_id=1
-  node_likelihood = split_likelihood(jet_dic, root_id=4)
+  node_id=4
+  node_likelihood = split_likelihood(jet_dic, root_id=node_id)
   # print('+=+='*20)
   # node_likelihood = split_likelihood(jet_dic, root_id=1, parent_node_id=0)
-  print('Node '+str(node_id)+' log likelihood =',node_likelihood)
+  print('Node '+str(node_id)+' splitting log likelihood =',node_likelihood)
 
 
   # -------------------------
