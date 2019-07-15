@@ -39,8 +39,8 @@ simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=4, Mw=80., pt_cut=
 
 #simulator = Simulator(sensitivities=True)
 
-jet_list = simulator(kt_scale, num_samples=2)
-simulator.save(jet_list, "test_jet")
+jet_list = simulator(kt_scale, num_samples=10)
+simulator.save(jet_list, "./data", "test_jet")
 #
 
 sys.exit()

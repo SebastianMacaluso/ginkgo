@@ -27,19 +27,25 @@ logger = get_logger()
 def make_dictionary(
     tree, content, mass=None, pt=None, charge=None, abs_charge=None, muon=None
 ):
-    jet = {}
+    """
+    Create a dictionary with all the jet tree info
+    (topology, constituents features: eta, phi, pT, E, muon label)
+    Keep only the leading jet (?)
+    """
+    jet = dict()
 
     jet["root_id"] = 0
     jet["tree"] = tree[0]  # Labels for the jet constituents in the tree
-    #             jet["content"] = np.reshape(content[i],(-1,4,1)) #Where content[i][0] is the jet 4-momentum, and the other entries are the jets constituents 4 momentum. Use this format if using TensorFlow
+    # jet["content"] = np.reshape(content[i],(-1,4,1))
+    # #Where content[i][0] is the jet 4-momentum, and the other entries are the jets constituents 4 momentum.
+    # Use this format if using TensorFlow
     jet["content"] = np.reshape(content[0], (-1, 2))  # Use this format if using Pytorch
     # jet["mass"] = mass
     # jet["pt"] = pt
     # jet["energy"] = content[0][0, 3]
     #
-    px = content[0][
-        0
-    ]  # The jet is the first entry of content. And then we have (px,py,pz,E)
+    # px = content[0][0]
+    # The jet is the first entry of content. And then we have (px,py,pz,E)
     # py = content[0][0, 1]
     # pz = content[0][0, 2]
     # p = (content[0][0, 0:3] ** 2).sum() ** 0.5
@@ -60,9 +66,6 @@ def make_dictionary(
 
 
 class Simulator(PyroSimulator):
-    """
-
-    """
 
     def __init__(self, jet_p=None, pt_cut=1.0, rate=1.0, Mw=None):
         super(Simulator, self).__init__()
@@ -73,10 +76,11 @@ class Simulator(PyroSimulator):
 
         if jet_p is None:
             self.jet_p = [0.0, 0.0]
+        else:
+            self.jet_p = jet_p
 
     def forward(self, inputs, num_samples=1):
         inputs = inputs.view(-1, 1)
-        # num_samples = inputs.shape[0]
         kt = inputs[:, 0]  # We could have input variables
 
         # alpha=2

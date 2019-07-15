@@ -10,8 +10,7 @@ def generate_jets(args):
     simulator = exp2DShowerTree.Simulator(jet_p=args.jet_p, rate=args.rate, Mw=80., pt_cut=args.pt_cut)
     jet_list = simulator(kt_scale, num_samples=args.num_samples)
     logger.info(f"Starting generation of {args.num_samples} jets")
-    simulator.save(jet_list, args.oudir, args.filename)
-    x, joint_score, joint_log_ratio, joint_log_prob = simulator.augmented_data(kt_scale, None, None)
+    simulator.save(jet_list, args.outdir, args.filename)
     logger.info(f"Done!")
 
 
@@ -23,13 +22,13 @@ if __name__ == "__main__":
         "-v", "--verbose", action="store_true", help="Increase output verbosity"
     )
     parser.add_argument(
-        "--outdir", type=str, required=True, help="Name of outputdir"
+        "--outdir", type=str, required=True, help="Output directory"
     )
     parser.add_argument(
         "--filename", type=str, required=True, help="Name of output file"
     )
     parser.add_argument(
-        "--num_samples", type=float, required=True, help="Number of jet samples"
+        "--num_samples", type=int, required=True, help="Number of jet samples"
     )
     parser.add_argument(
         "--kt_scale", type=float, default=60., help="kt-scale for clustering"
