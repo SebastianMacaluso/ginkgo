@@ -17,7 +17,7 @@ Gaussian distribution shower
 
 
 # input_scale = torch.tensor(4*[[100.]])
-kt_scale = torch.tensor([[100.]])
+kt_scale = torch.tensor([[60.]])
 
 
 # from gaussShowerTree import Simulator
@@ -30,14 +30,19 @@ kt_scale = torch.tensor([[100.]])
 # Lambda=8
 # decay_dist = pyro.distributions.Exponential(Lambda)
 
-simulator = exp2DShowerTree.Simulator(jet_p=[300.,500.], rate=8, Mw=80., pt_cut=1.)
+# Values that give ~ 50 leaves, typically with px,py >0 for all of them.
+simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=4, Mw=80., pt_cut=0.04)
 
 
+# Values for tests
+# simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, Mw=80., pt_cut=0.04, jet_name='32')
 
 #simulator = Simulator(sensitivities=True)
-_, content = simulator(kt_scale)
 
+jet_list = simulator(kt_scale, num_samples=2)
+simulator.save(jet_list, "test_jet")
 #
+
 sys.exit()
 
 # print('Trace nodes =', simulator.trace(theta).nodes)
