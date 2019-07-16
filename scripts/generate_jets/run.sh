@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-ROOTDIR=/Users/dpappadopulo/Projects
 
 python3 generate_jets.py \
-    --outdir "${ROOTDIR}/ToyJetsShower/data" \
-    --filename "testjets" \
-    --num_samples 10
+    --outdir "../../data" \
+    --filename "tree_$1_truth" \
+    --num_samples 1\
+    --pt_cut 1\
+    --rate 10.0\
