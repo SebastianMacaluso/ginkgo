@@ -11,6 +11,5 @@ class Simulator:
         return self.forward(inputs, **kwargs)
 
 
-
 class IntractableException(Exception):
     pass
