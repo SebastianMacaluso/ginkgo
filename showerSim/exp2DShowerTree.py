@@ -34,10 +34,10 @@ class Simulator(PyroSimulator):
 
     def forward(self, inputs, num_samples=1):
         inputs = inputs.view(-1, 1)
-        kt = inputs[:, 0]  # Input kt scale
+        Delta_0 = inputs[:, 0]  # Input kt scale
 
         logger.info(f"Num samples: {num_samples}")
-        logger.info(f"Energy Scales: {kt}")
+        logger.info(f"Energy Scales: {Delta_0}")
 
         py = self.jet_p[0]
         pz = self.jet_p[1]
@@ -52,7 +52,7 @@ class Simulator(PyroSimulator):
             tree, content, deltas, draws = _traverse(
                 py,
                 pz,
-                delta_P=kt,
+                delta_P=Delta_0,
                 cut_off=self.pt_cut,
                 rate=self.rate,
                 Mw=self.Mw,
@@ -76,7 +76,7 @@ class Simulator(PyroSimulator):
             jet["tree"] = tree[0]  # Labels for the nodes in the tree
             jet["content"] = np.reshape(content[0], (-1, 2))
             jet["Lambda"] = self.rate
-            jet["Delta_0"] = kt
+            jet["Delta_0"] = Delta_0
             jet["pt_cut"] = self.pt_cut
             jet["M_Hard"] = self.Mw
             jet["deltas"] = deltas
