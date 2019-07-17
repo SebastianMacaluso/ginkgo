@@ -152,10 +152,23 @@ def _traverse_rec(
 
     draw_phi = pyro.sample("phi" + str(id) + str(is_left), phi_dist)
 
-    # Fix start delta_P for W jets
-    if Mw and id == 0:
-        delta_P = Mw / 2
-        drew = 1
+
+
+    if id==0:
+        if Mw:
+            delta_P = Mw / 2
+            drew = 1
+
+        elif Mw is None:
+            draw_decay_root = pyro.sample(
+                "decay" + str(id) + str(is_left), decay_dist
+            )
+            delta_P = delta_P * draw_decay_root
+            drew= draw_decay_root
+
+
+    deltas.append(delta_P)
+    draws.append(drew)
 
     # The cut_off gives a kt measure
     if delta_P > cut_off:
@@ -167,8 +180,7 @@ def _traverse_rec(
         ptR_z = root_z + delta_P * np.cos(draw_phi)
 
 
-        deltas.append(delta_P)
-        draws.append(drew)
+
 
         draw_decay_L = pyro.sample(
             "L_decay" + str(id) + str(is_left), decay_dist
@@ -176,6 +188,7 @@ def _traverse_rec(
         draw_decay_R = pyro.sample(
             "R_decay" + str(id) + str(is_left), decay_dist
         )  # We draw a number to get the right child delta
+
 
         delta_L = delta_P * draw_decay_L
         delta_R = delta_P * draw_decay_R
@@ -211,11 +224,11 @@ def _traverse_rec(
             drew=draw_decay_R,
         )
 
-    else:
-
-        # print('---' * 10)
-        deltas.append(-1)
-        draws.append(-1)
+    # else:
+    #
+    #     # print('---' * 10)
+    #     deltas.append(-1)
+    #     draws.append(-1)
 
 
 # -------------------------------------------------------------------------------------------------------------

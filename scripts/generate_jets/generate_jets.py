@@ -3,12 +3,12 @@ import argparse
 from showerSim import exp2DShowerTree
 from showerSim.utils import get_logger
 
-
 def generate_jets(args):
     logger.info(f"Starting generation of {args.num_samples} jets")
-    kt_scale = torch.tensor([[args.kt_scale]])
+
+    Delta_0 = torch.tensor([[args.Delta_0]])
     simulator = exp2DShowerTree.Simulator(jet_p=args.jet_p, rate=args.rate, Mw=80., pt_cut=args.pt_cut)
-    jet_list = simulator(kt_scale, num_samples=args.num_samples)
+    jet_list = simulator(Delta_0, num_samples=args.num_samples)
     logger.info(f"Starting generation of {args.num_samples} jets")
     simulator.save(jet_list, args.outdir, args.filename)
     logger.info(f"Done!")
@@ -31,7 +31,7 @@ if __name__ == "__main__":
         "--num_samples", type=int, required=True, help="Number of jet samples"
     )
     parser.add_argument(
-        "--kt_scale", type=float, default=60., help="kt-scale for clustering"
+        "--Delta_0", type=float, default=60., help="Delta_0 for clustering"
     )
     parser.add_argument(
         "--jet_p", nargs='+', type=float, default=[800., 600.], help="initial jet momentum"

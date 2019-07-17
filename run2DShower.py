@@ -17,7 +17,7 @@ Gaussian distribution shower
 
 
 # input_scale = torch.tensor(4*[[100.]])
-kt_scale = torch.tensor([[60.]])
+Delta_0 = torch.tensor([[60.]])
 
 
 # from gaussShowerTree import Simulator
@@ -35,25 +35,27 @@ kt_scale = torch.tensor([[60.]])
 
 
 # Values for tests
-simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, Mw=80., pt_cut=0.04)
-
+simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, Mw=80., pt_cut=1)
+# simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, pt_cut=0.5)
 #simulator = Simulator(sensitivities=True)
 
-jet_list = simulator(kt_scale, num_samples=1)
-simulator.save(jet_list, "./data", "tree_"+str(36)+"_truth")
+
 #
 
-sys.exit()
+# sys.exit()
 
 # print('Trace nodes =', simulator.trace(theta).nodes)
 #
 # x, joint_score, joint_log_ratio = simulator.augmented_data(theta,theta, theta_ref)
-x, joint_score, joint_log_ratio, joint_log_prob = simulator.augmented_data(kt_scale, None, None)
+jet_list, joint_score, joint_log_ratio, joint_log_prob = simulator.augmented_data(Delta_0, None, None)
 
-# print('x = ', x)
-# print('joint_score = ',joint_score)
-# print('joint_log_ratio= ',joint_log_ratio)
-# print('joint_log_prob= ',joint_log_prob)
+# jet_list = simulator(Delta_0, num_samples=1)
+simulator.save(jet_list, "./data", "tree_"+str(37)+"_truth")
+
+print('jet_list = ', jet_list)
+print('joint_score = ',joint_score)
+print('joint_log_ratio= ',joint_log_ratio)
+print('joint_log_prob= ',joint_log_prob)
 print('---'*5)
 
 

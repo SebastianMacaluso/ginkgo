@@ -6,7 +6,11 @@ import inspect
 import numpy as np
 
 from showerSim.simulator import Simulator
+from showerSim.utils import get_logger
+import os
 
+
+logger = get_logger()
 
 class PyroSimulator(Simulator):
     """ Pyro simulator interface """
@@ -39,7 +43,7 @@ class PyroSimulator(Simulator):
                                             `log (p(outputs, latents | inputs_num) / p(outputs, latents | inputs_den))`.
 
         """
-        inputs.requires_grad = True
+        inputs.requires_grad = False
 
         # Get dictionary
         trace = self.trace(inputs)
@@ -147,10 +151,12 @@ class PyroSimulator(Simulator):
                 params.append(param)
 
             # print('pyro params=', params)
+            # print(np.shape(params))
             if np.shape(params)[0] > 1:
-                params = torch.cat(params, 1)
+                # params = torch.cat(params, dim=0)
+                params = torch.tensor(params)
 
-            print("Params = ", params)
+            # print("Params = ", params)
 
             # We yield (keep track of the last state) the distribution, node values (probaility at each step) and parameters of the distribution
             yield dist, z, params
