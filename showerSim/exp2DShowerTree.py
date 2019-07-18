@@ -20,41 +20,45 @@ logger = get_logger()
 #-----------------------------
 class Simulator(PyroSimulator):
 
-    def __init__(self, jet_p=None, pt_cut=1.0, rate=1.0, Mw=None):
+    def __init__(self, jet_p=None, pt_cut=1.0, Mw=None, Delta_0=None, num_samples=1):
         super(Simulator, self).__init__()
 
         self.pt_cut = pt_cut
-        self.rate = rate
+        # self.rate = rate
         self.Mw = Mw
+        self.Delta_0=Delta_0
+        self.num_samples=num_samples
 
         if jet_p is None:
             self.jet_p = [0.0, 0.0]
         else:
             self.jet_p = jet_p
 
-    def forward(self, inputs, num_samples=1):
-        inputs = inputs.view(-1, 1)
-        Delta_0 = inputs[:, 0]  # Input kt scale
+    def forward(self, inputs):
+        # inputs = inputs.view(-1, 1)
+        # Delta_0 = inputs[:, 0]  # Input kt scale
 
-        logger.info(f"Num samples: {num_samples}")
-        logger.info(f"Energy Scales: {Delta_0}")
+        decay_rate = inputs
+
+        logger.info(f"Num samples: {self.num_samples}")
+        logger.info(f"Energy Scales: {self.Delta_0}")
 
         py = self.jet_p[0]
         pz = self.jet_p[1]
 
         # Define the pyro distributions for theta and Delta as global variables
         globals()["phi_dist"] = pyro.distributions.Uniform(0, 2 * np.pi)
-        globals()["decay_dist"] = pyro.distributions.Exponential(self.rate)
+        globals()["decay_dist"] = pyro.distributions.Exponential(decay_rate)
 
         jet_list = []
-        for i in range(num_samples):
+        for i in range(self.num_samples):
 
             tree, content, deltas, draws = _traverse(
                 py,
                 pz,
-                delta_P=Delta_0,
+                delta_P=self.Delta_0,
                 cut_off=self.pt_cut,
-                rate=self.rate,
+                rate=decay_rate,
                 Mw=self.Mw,
             )
 
@@ -65,18 +69,18 @@ class Simulator(PyroSimulator):
             deltas=np.asarray(deltas)
             draws = np.asarray(draws)
 
-            logger.debug(f"Tree: {tree}")
-            logger.debug(f"Content: {content}")
-            logger.debug(f"Deltas: {deltas}")
-            logger.debug(f"Draws: {draws}")
+            # logger.debug(f"Tree: {tree}")
+            # logger.debug(f"Content: {content}")
+            # logger.debug(f"Deltas: {deltas}")
+            # logger.debug(f"Draws: {draws}")
 
 
             jet = dict()
             jet["root_id"] = 0
             jet["tree"] = tree[0]  # Labels for the nodes in the tree
             jet["content"] = np.reshape(content[0], (-1, 2))
-            jet["Lambda"] = self.rate
-            jet["Delta_0"] = Delta_0
+            jet["Lambda"] = decay_rate
+            jet["Delta_0"] = self.Delta_0
             jet["pt_cut"] = self.pt_cut
             jet["M_Hard"] = self.Mw
             jet["deltas"] = deltas
@@ -150,19 +154,19 @@ def _traverse_rec(
     root_y = root_y / 2
     root_z = root_z / 2
 
-    draw_phi = pyro.sample("phi" + str(id) + str(is_left), phi_dist)
-
-
 
     if id==0:
+
+        draw_decay_root = pyro.sample(
+            "decay" + str(id) + str(is_left), decay_dist
+        )
         if Mw:
             delta_P = Mw / 2
-            drew = 1
+            # if rate.requires_grad:
+            #     rate_np=rate.detach().numpy()
+            #     drew = (-1/rate_np)*np.log(1/rate_np) #So that likelihood=1
 
         elif Mw is None:
-            draw_decay_root = pyro.sample(
-                "decay" + str(id) + str(is_left), decay_dist
-            )
             delta_P = delta_P * draw_decay_root
             drew= draw_decay_root
 
@@ -172,6 +176,8 @@ def _traverse_rec(
 
     # The cut_off gives a kt measure
     if delta_P > cut_off:
+
+        draw_phi = pyro.sample("phi" + str(id) + str(is_left), phi_dist)
 
         ptL_y = root_y - delta_P * np.sin(draw_phi)
         ptL_z = root_z - delta_P * np.cos(draw_phi)

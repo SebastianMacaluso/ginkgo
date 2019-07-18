@@ -3,9 +3,15 @@ import torch
 import pprint
 import matplotlib.pyplot as plt
 import sys
+import pickle
 
 from showerSim import exp2DShowerTree
+from showerSim.utils import get_logger
 
+
+logger = get_logger()
+
+augmented_data=True
 
 #-----------------------
 '''
@@ -17,8 +23,9 @@ Gaussian distribution shower
 
 
 # input_scale = torch.tensor(4*[[100.]])
-Delta_0 = torch.tensor([[60.]])
-
+# Delta_0 = torch.tensor([[60.]])
+rate=torch.tensor(10.)
+rate2=torch.tensor(8.)
 
 # from gaussShowerTree import Simulator
 # simulator = Simulator(jet_pt=0., rate=10., Mw=80., pt_cut=2.)
@@ -35,7 +42,7 @@ Delta_0 = torch.tensor([[60.]])
 
 
 # Values for tests
-simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, Mw=80., pt_cut=1)
+simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([800.,600.]), Mw=torch.tensor(80.), pt_cut=1, Delta_0=60., num_samples=1)
 # simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, pt_cut=0.5)
 #simulator = Simulator(sensitivities=True)
 
@@ -47,84 +54,55 @@ simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, Mw=80., pt_cut
 # print('Trace nodes =', simulator.trace(theta).nodes)
 #
 # x, joint_score, joint_log_ratio = simulator.augmented_data(theta,theta, theta_ref)
-jet_list, joint_score, joint_log_ratio, joint_log_prob = simulator.augmented_data(Delta_0, None, None)
 
-# jet_list = simulator(Delta_0, num_samples=1)
-simulator.save(jet_list, "./data", "tree_"+str(37)+"_truth")
+if not augmented_data:
+  jet_list = simulator(rate)
 
-print('jet_list = ', jet_list)
-print('joint_score = ',joint_score)
-print('joint_log_ratio= ',joint_log_ratio)
-print('joint_log_prob= ',joint_log_prob)
-print('---'*5)
+  logger.info(f"---"*10)
+  logger.info(f"jet_list = {jet_list}")
 
+else:
 
+  jet_list, joint_score, joint_log_ratio, joint_log_prob = simulator.augmented_data(rate,
+                                                                                    None,
+                                                                                    rate2,
+                                                                                    exponential=True,
+                                                                                    uniform=False)
 
+  # jet_list = simulator(Delta_0, num_samples=1)
+  filename=37
+  simulator.save(jet_list, "./data", "tree_"+str(filename)+"_truth")
 
-#---------------------------
-
-# #-----------------------
-# '''
-# Beta distribution shower
-# '''
-# # from benchmark.galton.galtonPyroWrong import Simulator
-# # from benchmark.galton.galtonPyro import Simulator
-# from betaShower import Simulator
-#
-# input_scale = torch.tensor(4*[[100.]])
-#
-# simulator = Simulator(start_pt=100.)
-# #simulator = Simulator(sensitivities=True)
-# output = simulator(input_scale)
-#
-#
-# # print('Trace nodes =', simulator.trace(theta).nodes)
-# #
-# # x, joint_score, joint_log_ratio = simulator.augmented_data(theta,theta, theta_ref)
-# ## x, joint_score, joint_log_ratio = simulator.augmented_data(theta,None, None)
-#
-# print('x = ', x)
-# print('joint_score = ',joint_score)
-# print('joint_log_ratio= ',joint_log_ratio)
-# print('---'*5)
-#
-#
-#
-#
-# #---------------------------
-
-# theta = torch.tensor(5000*[[3.]])
-# theta_ref = torch.tensor(5000*[[0.7]])
-
-# theta = torch.tensor(5*[[3.]])
-# theta_ref = torch.tensor(5*[[0.7]])
-#
-#
-# simulator = Simulator(n_rows=20, n_nails=31)
-# #simulator = Simulator(sensitivities=True)
-# # output = simulator(theta)
-#
-#
-# # print('Trace nodes =', simulator.trace(theta).nodes)
-# #
-# x, joint_score, joint_log_ratio = simulator.augmented_data(theta,theta, theta_ref)
-# ## x, joint_score, joint_log_ratio = simulator.augmented_data(theta,None, None)
-#
-# print('x = ', x)
-# print('joint_score = ',joint_score)
-# print('joint_log_ratio= ',joint_log_ratio)
-# print('---'*5)
+  logger.info(f"---"*10)
+  logger.debug(f"jet_list = {jet_list}")
+  logger.info(f"joint_score = {joint_score}")
+  logger.info(f"joint_log_likelihood_ratio= {joint_log_ratio}")
+  logger.info(f"joint_log_prob= {joint_log_prob}")
+  logger.info(f"---"*10)
 
 
-#
-# print(torch.mean(joint_score, dim=0))
-# print(torch.mean(torch.exp(joint_log_ratio), dim=0))
 
-#printer = pprint.PrettyPrinter(indent=4)
-#printer.pprint(simulator.trace(inputs).nodes)
 
-# plt.hist(output.numpy(), 31,range=[0,31])
-# plt.xlabel(r"$x$")
-# plt.ylabel("Frequency")
-#
-# plt.show()
+  def jet_log_likelihood():
+
+    Lambda = jet_list[0]['Lambda']
+    log_likelihood = 0
+
+    if Lambda.requires_grad:
+      Lambda=Lambda.detach().numpy()
+
+    for entry in jet_list[0]['draws'][1::]:
+      #     if entry!=-1:
+      if entry.requires_grad:
+        entry = entry.detach().numpy()
+
+      log_likelihood += np.log(Lambda * np.exp(-Lambda * entry))
+
+    return log_likelihood
+
+
+  jet_log_likelihood_cross_check=jet_log_likelihood()
+  logger.info(f" jet_log_likelihood cross-check = {jet_log_likelihood_cross_check}")
+  #---------------------------
+
+
