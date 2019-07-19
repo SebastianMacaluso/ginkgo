@@ -13,27 +13,21 @@ from showerSim.pyro_simulator import PyroSimulator
 from showerSim.utils import get_logger
 import os
 
-
 logger = get_logger()
 
 
-#-----------------------------
 class Simulator(PyroSimulator):
-
     def __init__(self, jet_p=None, pt_cut=1.0, Mw=None, Delta_0=None, num_samples=1):
         super(Simulator, self).__init__()
 
         self.pt_cut = pt_cut
-        # self.rate = rate
         self.Mw = Mw
-        self.Delta_0=Delta_0
-        self.num_samples=num_samples
+        self.Delta_0 = Delta_0
+        self.num_samples = num_samples
 
         self.jet_p = jet_p
 
     def forward(self, inputs):
-        # inputs = inputs.view(-1, 1)
-        # Delta_0 = inputs[:, 0]  # Input kt scale
 
         decay_rate = inputs
 
@@ -85,13 +79,7 @@ def dir2D(phi):
     return torch.tensor([np.sin(phi), np.cos(phi)])
 
 
-def _traverse(
-    root,
-    delta_P=None,
-    cut_off=None,
-    rate=None,
-    Mw=None,
-):
+def _traverse(root, delta_P=None, cut_off=None, rate=None, Mw=None):
 
     """
     This function call the recursive function _traverse_rec to make the trees starting from the root
@@ -171,25 +159,19 @@ def _traverse_rec(
     content.append(root)
 
     if idx == 0:
-        draw_decay_root = pyro.sample(
-            "decay" + str(idx) + str(is_left), decay_dist
-        )
+        draw_decay_root = pyro.sample("decay" + str(idx) + str(is_left), decay_dist)
         if Mw:
             delta_P = Mw / 2
 
         elif Mw is None:
             delta_P = delta_P * draw_decay_root
-            drew= draw_decay_root
+            drew = draw_decay_root
 
     deltas.append(delta_P)
     draws.append(drew)
 
     if delta_P > cut_off:
         draw_phi = pyro.sample("phi" + str(idx) + str(is_left), phi_dist)
-        print(draw_phi)
-        print(dir2D(draw_phi))
-        print(root)
-        print(root / 2)
         ptL = root / 2 - delta_P * dir2D(draw_phi)
         ptR = root / 2 - delta_P * dir2D(draw_phi)
 
@@ -230,5 +212,3 @@ def _traverse_rec(
             rate=rate,
             drew=draw_decay_R,
         )
-
-
