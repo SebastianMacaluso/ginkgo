@@ -173,7 +173,7 @@ def _traverse_rec(
     if delta_P > cut_off:
         draw_phi = pyro.sample("phi" + str(idx) + str(is_left), phi_dist)
         ptL = root / 2 - delta_P * dir2D(draw_phi)
-        ptR = root / 2 - delta_P * dir2D(draw_phi)
+        ptR = root / 2 + delta_P * dir2D(draw_phi)
 
         draw_decay_L = pyro.sample(
             "L_decay" + str(idx) + str(is_left), decay_dist
