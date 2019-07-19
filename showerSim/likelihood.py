@@ -19,7 +19,6 @@ def split_logLH(pL, delta_L, pR, delta_R, delta_min, lam):
     phi = np.arctan(delta_vec[0] / delta_vec[1])
     delta_P = np.sqrt(np.sum(delta_vec ** 2))
 
-
     def get_p(delta_P, delta, delta_min, lam):
         if delta > 0:
             if delta < delta_min:
@@ -30,9 +29,14 @@ def split_logLH(pL, delta_L, pR, delta_R, delta_min, lam):
             r = delta_min / delta_P
             return np.log(1 - np.exp(-lam * r))
 
-    logLH = get_p(delta_P, delta_L, delta_min, lam) + get_p(delta_P, delta_R, delta_min, lam) + np.log(1 / 2 / np.pi)
+    logLH = (
+        get_p(delta_P, delta_L, delta_min, lam)
+        + get_p(delta_P, delta_R, delta_min, lam)
+        + np.log(1 / 2 / np.pi)
+    )
 
     return p, delta_P, phi, logLH
+
 
 # -------------------------------------------------------------------------------------------------------------
 ###   GET THE SPLITTING LIKELIHOOD
