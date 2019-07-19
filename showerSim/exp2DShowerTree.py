@@ -13,38 +13,26 @@ from showerSim.pyro_simulator import PyroSimulator
 from showerSim.utils import get_logger
 import os
 
-
 logger = get_logger()
 
 
-#-----------------------------
 class Simulator(PyroSimulator):
-
     def __init__(self, jet_p=None, pt_cut=1.0, Mw=None, Delta_0=None, num_samples=1):
         super(Simulator, self).__init__()
 
         self.pt_cut = pt_cut
-        # self.rate = rate
         self.Mw = Mw
-        self.Delta_0=Delta_0
-        self.num_samples=num_samples
+        self.Delta_0 = Delta_0
+        self.num_samples = num_samples
 
-        if jet_p is None:
-            self.jet_p = [0.0, 0.0]
-        else:
-            self.jet_p = jet_p
+        self.jet_p = jet_p
 
     def forward(self, inputs):
-        # inputs = inputs.view(-1, 1)
-        # Delta_0 = inputs[:, 0]  # Input kt scale
 
         decay_rate = inputs
 
         logger.info(f"Num samples: {self.num_samples}")
         logger.info(f"Energy Scales: {self.Delta_0}")
-
-        py = self.jet_p[0]
-        pz = self.jet_p[1]
 
         # Define the pyro distributions for theta and Delta as global variables
         globals()["phi_dist"] = pyro.distributions.Uniform(0, 2 * np.pi)
@@ -54,39 +42,29 @@ class Simulator(PyroSimulator):
         for i in range(self.num_samples):
 
             tree, content, deltas, draws = _traverse(
-                py,
-                pz,
+                self.jet_p,
                 delta_P=self.Delta_0,
                 cut_off=self.pt_cut,
                 rate=decay_rate,
                 Mw=self.Mw,
             )
 
-            tree = np.asarray([tree])
-            tree = np.asarray([np.asarray(e).reshape(-1, 2) for e in tree])
-            content = np.asarray([content])
-            content = np.asarray([np.asarray(e).reshape(-1, 2) for e in content])
-            deltas=np.asarray(deltas)
-            draws = np.asarray(draws)
-
-            # logger.debug(f"Tree: {tree}")
-            # logger.debug(f"Content: {content}")
-            # logger.debug(f"Deltas: {deltas}")
-            # logger.debug(f"Draws: {draws}")
-
-
             jet = dict()
             jet["root_id"] = 0
-            jet["tree"] = tree[0]  # Labels for the nodes in the tree
-            jet["content"] = np.reshape(content[0], (-1, 2))
+            jet["tree"] = np.asarray(tree).reshape(-1, 2)  # Labels for the nodes in the tree
+            jet["content"] = np.array([np.asarray(c) for c in content])
             jet["Lambda"] = decay_rate
             jet["Delta_0"] = self.Delta_0
             jet["pt_cut"] = self.pt_cut
             jet["M_Hard"] = self.Mw
-            jet["deltas"] = deltas
-            jet["draws"] = draws
-            logger.debug(f"Jet dictionary: {jet}")
+            jet["deltas"] = np.asarray(deltas)
+            jet["draws"] = np.asarray(draws)
             jet_list.append(jet)
+
+            logger.debug(f"Tree: {jet['tree']}")
+            logger.debug(f"Content: {jet['content']}")
+            logger.debug(f"Deltas: {jet['deltas']}")
+            logger.debug(f"Draws: {jet['draws']}")
 
         return jet_list
 
@@ -97,170 +75,40 @@ class Simulator(PyroSimulator):
             pickle.dump(jet_list, f, protocol=2)
 
 
-
-# --------------------------------------------------------------------------------------------------------------
-# /////////////////////     AUXILIARY FUNCTIONS     //////////////////////////////////////////////
-# -------------------------------------------------------------------------------------------------------------
-
-def _traverse_rec(
-    root_y,
-    root_z,
-    parent_id,
-    is_left,
-    tree,
-    content,
-    deltas,
-    draws,
-    delta_P=None,
-    drew=None,
-    cut_off=None,
-    rate=None,
-    Mw=None,
-):
-
-    '''
-    Recursive function to make the tree. We will call this function below in _traverse.
-    '''
-
-    id = len(tree) // 2
-    if parent_id >= 0:
-        if is_left:
-            tree[
-                2 * parent_id
-            ] = (
-                id
-            )  # We set the location of the lef child in the content array of the 4-vector stored in content[parent_id]. So the left child will be content[tree[2 * parent_id]]
-        else:
-            tree[
-                2 * parent_id + 1
-            ] = (
-                id
-            )  # We set the location of the right child in the content array of the 4-vector stored in content[parent_id]. So the right child will be content[tree[2 * parent_id+1]]
-    #  This is correct because with each 4-vector we increase the content array by one element and the tree array by 2 elements. But then we take id=tree.size()//2, so the id increases by 1. The left and right children are added one after the other.
-
-    # -------------------------------
-    # We insert 2 new nodes to the vector that constitutes the tree. In the next iteration we will replace this 2 values with the location of the parent of the new nodes
-    tree.append(-1)
-    tree.append(-1)
-
-    #     We fill the content vector with the values of the node
-    content.append(root_y)
-    content.append(root_z)
+def dir2D(phi):
+    return torch.tensor([np.sin(phi), np.cos(phi)])
 
 
-    # ------------------------------
-    # Call the function recursively. We move from the root down until we get to the leaves.
+def _traverse(root, delta_P=None, cut_off=None, rate=None, Mw=None):
 
-    root_y = root_y / 2
-    root_z = root_z / 2
-
-
-    if id==0:
-
-        draw_decay_root = pyro.sample(
-            "decay" + str(id) + str(is_left), decay_dist
-        )
-        if Mw:
-            delta_P = Mw / 2
-            # if rate.requires_grad:
-            #     rate_np=rate.detach().numpy()
-            #     drew = (-1/rate_np)*np.log(1/rate_np) #So that likelihood=1
-
-        elif Mw is None:
-            delta_P = delta_P * draw_decay_root
-            drew= draw_decay_root
-
-
-    deltas.append(delta_P)
-    draws.append(drew)
-
-    # The cut_off gives a kt measure
-    if delta_P > cut_off:
-
-        draw_phi = pyro.sample("phi" + str(id) + str(is_left), phi_dist)
-
-        ptL_y = root_y - delta_P * np.sin(draw_phi)
-        ptL_z = root_z - delta_P * np.cos(draw_phi)
-
-        ptR_y = root_y + delta_P * np.sin(draw_phi)
-        ptR_z = root_z + delta_P * np.cos(draw_phi)
-
-
-
-
-        draw_decay_L = pyro.sample(
-            "L_decay" + str(id) + str(is_left), decay_dist
-        )  # We draw a number to get the left child delta
-        draw_decay_R = pyro.sample(
-            "R_decay" + str(id) + str(is_left), decay_dist
-        )  # We draw a number to get the right child delta
-
-
-        delta_L = delta_P * draw_decay_L
-        delta_R = delta_P * draw_decay_R
-
-
-        _traverse_rec(
-            ptL_y,
-            ptL_z,
-            id,
-            True,
-            tree,
-            content,
-            deltas,
-            draws,
-            delta_P=delta_L,
-            cut_off=cut_off,
-            rate=rate,
-            drew=draw_decay_L,
-        )
-
-        _traverse_rec(
-            ptR_y,
-            ptR_z,
-            id,
-            False,
-            tree,
-            content,
-            deltas,
-            draws,
-            delta_P=delta_R,
-            cut_off=cut_off,
-            rate=rate,
-            drew=draw_decay_R,
-        )
-
-    # else:
-    #
-    #     # print('---' * 10)
-    #     deltas.append(-1)
-    #     draws.append(-1)
-
-
-# -------------------------------------------------------------------------------------------------------------
-
-def _traverse(
-    root_y,
-    root_z,
-    delta_P=None,
-    cut_off=None,
-    rate=None,
-    Mw=None,
-):
-
-    '''
+    """
     This function call the recursive function _traverse_rec to make the trees starting from the root
-    '''
+
+    Inputs
+    root: numpy array representing the initial jet momentum
+    delta_P: Initial value for Delta
+    cut_off: Min value of Delta below which evolution stops
+    rate: parametrizes exponential distribution
+    Mw: if not None and if initial step, the next Delta_P is not drawn but set to Mw/2
+
+    Outputs
+    content: a list of numpy array representing the momenta flowing
+        through every possible edge of the tree. content[0] is the root momentum
+    tree: an array of integers >= -1, such that
+        content[tree[2 * i]] and content[tree[2 * i + 1]] represent the momenta
+        associated repsectively to the left and right child of content[i].
+        If content[i] is a leaf, tree[2 * i] == tree[2 * i + 1] == 1
+    deltas: Delta value associated to content[i]
+    draws: r value  associated to content[i]
+    """
 
     tree = []
     content = []
     deltas = []
     draws = []
 
-
     _traverse_rec(
-        root_y,
-        root_z,
+        root,
         -1,
         False,
         tree,
@@ -276,4 +124,92 @@ def _traverse(
     return tree, content, deltas, draws
 
 
+def _traverse_rec(
+    root,
+    parent_idx,
+    is_left,
+    tree,
+    content,
+    deltas,
+    draws,
+    delta_P=None,
+    drew=None,
+    cut_off=None,
+    rate=None,
+    Mw=None,
+):
 
+    """
+    Recursive function to make the tree.
+    """
+
+    idx = len(tree) // 2
+    if parent_idx >= 0:
+        if is_left:
+            tree[2 * parent_idx] = idx
+        else:
+            tree[2 * parent_idx + 1] = idx
+
+    # We insert 2 new nodes to the vector that constitutes the tree.
+    # In the next iteration we will replace this 2 values with the location of the parent of the new nodes
+    tree.append(-1)
+    tree.append(-1)
+
+    # We fill the content vector with the values of the node
+    content.append(root)
+
+    if idx == 0:
+        draw_decay_root = pyro.sample("decay" + str(idx) + str(is_left), decay_dist)
+        if Mw:
+            delta_P = Mw / 2
+
+        elif Mw is None:
+            delta_P = delta_P * draw_decay_root
+            drew = draw_decay_root
+
+    deltas.append(delta_P)
+    # TODO: we are appending delta_P != 0 even when delta_P < cut_off
+    draws.append(drew)
+
+    if delta_P > cut_off:
+        draw_phi = pyro.sample("phi" + str(idx) + str(is_left), phi_dist)
+        ptL = root / 2 - delta_P * dir2D(draw_phi)
+        ptR = root / 2 + delta_P * dir2D(draw_phi)
+
+        draw_decay_L = pyro.sample(
+            "L_decay" + str(idx) + str(is_left), decay_dist
+        )  # We draw a number to get the left child delta
+        draw_decay_R = pyro.sample(
+            "R_decay" + str(idx) + str(is_left), decay_dist
+        )  # We draw a number to get the right child delta
+
+        delta_L = delta_P * draw_decay_L
+        delta_R = delta_P * draw_decay_R
+
+        _traverse_rec(
+            ptL,
+            idx,
+            True,
+            tree,
+            content,
+            deltas,
+            draws,
+            delta_P=delta_L,
+            cut_off=cut_off,
+            rate=rate,
+            drew=draw_decay_L,
+        )
+
+        _traverse_rec(
+            ptR,
+            idx,
+            False,
+            tree,
+            content,
+            deltas,
+            draws,
+            delta_P=delta_R,
+            cut_off=cut_off,
+            rate=rate,
+            drew=draw_decay_R,
+        )
