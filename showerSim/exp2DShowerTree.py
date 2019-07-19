@@ -168,6 +168,7 @@ def _traverse_rec(
             drew = draw_decay_root
 
     deltas.append(delta_P)
+    # TODO: we are appending delta_P != 0 even when delta_P < cut_off
     draws.append(drew)
 
     if delta_P > cut_off:

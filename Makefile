@@ -10,7 +10,5 @@ VERSION=$(shell python setup.py --version)
 install: ./dist/ToyJetsShower-${VERSION}-py3-none-any.whl # pip install
 	pip install --upgrade ./dist/ToyJetsShower-${VERSION}-py3-none-any.whl
 
-uninstall:
-    pip uninstall ToyJetsShower
 
 %: Makefile
