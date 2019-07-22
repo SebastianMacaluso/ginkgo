@@ -57,13 +57,7 @@ def fill_jet_info(jet, root_id=0, parent_id=None):
     deltas = []
     draws = []
 
-    _get_jet_info(
-        jet,
-        root_id=root_id,
-        parent_id=parent_id,
-        deltas=deltas,
-        draws=draws,
-    )
+    _get_jet_info(jet, root_id=root_id, parent_id=parent_id, deltas=deltas, draws=draws)
 
     jet["deltas"] = deltas
     jet["draws"] = draws
@@ -118,11 +112,7 @@ def enrich_jet_logLH(jet, root_id=0, Lambda=None, delta_min=None):
             raise ValueError(f"No pt_cut specified by the jet.")
 
     _get_jet_logLH(
-        jet,
-        root_id=root_id,
-        Lambda=Lambda,
-        delta_min=delta_min,
-        logLH=logLH,
+        jet, root_id=root_id, Lambda=Lambda, delta_min=delta_min, logLH=logLH
     )
 
     jet["logLH"] = logLH
@@ -143,8 +133,12 @@ def _get_jet_logLH(jet, root_id=None, Lambda=None, delta_min=None, logLH=None):
         llh, _, _, _ = split_logLH(pL, delta_L, pR, delta_R, delta_min, Lambda)
         logLH.append(llh)
 
-        _get_jet_logLH(jet, root_id=idL, Lambda=Lambda, delta_min=delta_min, logLH=logLH)
-        _get_jet_logLH(jet, root_id=idR, Lambda=Lambda, delta_min=delta_min, logLH=logLH)
+        _get_jet_logLH(
+            jet, root_id=idL, Lambda=Lambda, delta_min=delta_min, logLH=logLH
+        )
+        _get_jet_logLH(
+            jet, root_id=idR, Lambda=Lambda, delta_min=delta_min, logLH=logLH
+        )
     else:
         logLH.append(0)
 
@@ -166,10 +160,10 @@ if __name__ == "__main__":
     jet_dic = jet_list[0]
 
     jet_dic_0 = {
-        "tree": jet_dic['tree'],
-        "content": jet_dic['content'],
-        "Lambda": jet_dic['Lambda'],
-        "pt_cut": jet_dic['pt_cut']
+        "tree": jet_dic["tree"],
+        "content": jet_dic["content"],
+        "Lambda": jet_dic["Lambda"],
+        "pt_cut": jet_dic["pt_cut"],
     }
 
     fill_jet_info(jet_dic_0)
@@ -183,5 +177,3 @@ if __name__ == "__main__":
     enrich_jet_logLH(jet_dic_0)
     logger.info(f"Top-down likelihood")
     logger.info(f"logLH: {jet_dic_0['logLH']}")
-
-
