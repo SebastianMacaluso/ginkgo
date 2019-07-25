@@ -162,16 +162,18 @@ def _traverse_rec(
         draw_decay_root = pyro.sample("decay" + str(idx) + str(is_left), decay_dist)
         if Mw:
             delta_P = Mw / 2
+            drew = (-1 / rate) * np.log(1 / rate)  # So that likelihood=1
 
         elif Mw is None:
             delta_P = delta_P * draw_decay_root
             drew = draw_decay_root
 
-    deltas.append(delta_P)
-    # TODO: we are appending delta_P != 0 even when delta_P < cut_off
-    draws.append(drew)
 
     if delta_P > cut_off:
+
+        deltas.append(delta_P)
+        draws.append(drew)
+
         draw_phi = pyro.sample("phi" + str(idx) + str(is_left), phi_dist)
         ptL = root / 2 - delta_P * dir2D(draw_phi)
         ptR = root / 2 + delta_P * dir2D(draw_phi)
@@ -213,3 +215,8 @@ def _traverse_rec(
             rate=rate,
             drew=draw_decay_R,
         )
+
+    else:
+
+        deltas.append(-1)
+        draws.append(-1)
