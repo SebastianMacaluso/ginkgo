@@ -40,9 +40,8 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a heat cluste
 
 
 ![Image description](/notes/plots/figTruthTruth_singlepath_jet2.pdf)
-![Image description 2](https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/figTruthTruth_singlepath_jet2.pdf)
-<!--![GitHub Logo](/images/logo.png)-->
-Format: ![Alt Text](url)
+<!--![Image description 2](https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/figTruthTruth_singlepath_jet2.pdf)-->
+
 
 **Relevant Structure**:
 
@@ -58,7 +57,7 @@ Format: ![Alt Text](url)
 
 - [`generate_jets`](scripts/generate_jets/):
 
-    -[`generate_jets.py`](scripts/generate_jets/generate_jets.py): Calls and runs the parton shower code in [`showerSim`](showerSim/). The code could be run to get the augmented data.
+    -[`generate_jets.py`](scripts/generate_jets/generate_jets.py): Calls and runs the parton shower code in [`showerSim`](showerSim/). The code could be run to get the augmented data as well.
 
 <!---[`run2DShower.py`](showerSim/run2DShower.py): Run the parton shower code in [`showerSim`](showerSim/).-->
     
