@@ -3,6 +3,20 @@
 
 \documentclass[12pt]{article}
 
+\usepackage{amsmath}
+\usepackage[linesnumbered,ruled,noline,noend]{algorithm2e}
+
+%\usepackage[linesnumbered,noline,noend]{algorithm2e}
+%\usepackage{amsmath}
+
+\SetNlSty{}{}{}
+
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand\nonl{%
+  \renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
+
+
+
 \def\beq{\begin{equation}}
 \def\eeq{\end{equation}}
 
@@ -183,15 +197,44 @@
 \newcommand{\MYhref}[3][blue]{\href{#2}{\color{#1}{#3}}}%
 
 \begin{document}
+%
+%\title{Toy Generative Model for Jets}
+%\author{Kyle Cranmer, Sebastian Macaluso and Duccio Pappadopulo}
+%\maketitle
 
-\title{Toy Generative Model for Jets}
-\maketitle
+
+\begin{center}
+
+\vskip 1cm
+{\Large \bf Kinematic considerations for a Toy Generative Model for Jets}
 
 
-In this notes, first we study the requirements for the simplest toy generative model that would resemble a full generative model for jets. Next, we describe how to build such a model.
 
-\section{Kinematic considerations}
 
+
+\vskip0.2cm{}
+
+\vskip 1.0cm
+{\large $\text{Kyle Cranmer}^1$, $\text{Sebastian Macaluso}^1$ and $\text{Duccio Pappadopulo}^2$}
+\vskip 0.6cm
+{\small \it 1 Center for Cosmology and Particle Physics $\&$ Center for Data Science, New York University, USA} \\
+{\small \it 2 Bloomberg LP, New York, NY 10022, USA.}
+\vskip 2.0cm
+
+\end{center}
+
+
+
+
+%\section{Introduction}
+
+%Start with a simple introduction about the motivation eg. a standalone description of a generative model to aid in ML research that is: easy to describe, has a tractable likelihood, captures the essential ingredients of the Parton shower, has python implementation with few software dependencies.
+%
+
+
+
+
+In this notes, we study the kinematics requirements and implications for a Toy Generative Model of Jets. There is a companion note describing the model.
 Let start by considering a a 2-body decay. In the parent rest frame, we have the parent momentum $p^\mu_p=p^\mu_{\text{L}}+p^\mu_{\text{R}}=(\sqrt{s}, 0, 0, 0)$. From requiring 4-momentum conservation, the children energies are given by
 \bea
 E_{\text{L}}=\frac{\sqrt{s}}{2}\bigg(1+\frac{m_{\text{L}}^2}{s}-\frac{m_{\text{R}}^2}{s} \bigg) \\
@@ -265,190 +308,5 @@ where $|\vec{p}|$ is as in (\ref{eq:Prestframe}):
 \bea
 |\vec{p}| =\frac{\sqrt{s}}{2} \bar{\beta}=\frac{\sqrt{s}}{2} \sqrt{1-\frac{2 (m_{\text{L}}^2+m_{\text{R}}^2)}{s}+\frac{(m_{\text{L}}^2-m_{\text{R}}^2)^2}{s^2}}\nonumber
 \eea
-
-% =====================================================
-\vspace{0.6cm}
-\section{Toy Model for Jets}
-
-In this section we describe the model we built as well as the previous versions and their issues. We also mention other possibilities for a toy model for jets.
-
-
-\subsection{Minimum requirements}
-
-The traditional clustering algorithms are based on a measure given by:
-\bea\label{eq:dij}
-d_{ij}= \text{min}({p_{\text{T}i}^{2\alpha}, {p_{\text{T}j}^{2\alpha}})\,\, \frac{\Delta R_{ij}^2}{R^2}}
-\eea
-where $\Delta R_{ij}=(\phi_i-\phi_j)$ in a 2D model, with $\phi_i$ the angle of particle $i$ with respect to the $\hat{z}$ axis in the lab frame. Also, $\alpha=\{-1,0,1\}$ defines the $\{\text{anti-kt, CA and kt}\}$ algorithms respectively. Thus for a meaningful definition of $d_{ij}$ the toy model should be at least 2D. 
-
-
-%%---------------------------------------------------------------------------------------
-\subsection{Current model: Model 4 }
-
-We build a 2D model in the $(y,z)$ plane, where $\hat{z}$ is the direction of the beam axis and $\hat{y}$ the transverse direction. 
-We define $p_{\text{T}} =|p_y|$.
-
-%\vspace{0.6cm}
-%\hspace{-0.8cm}
-%%-------------
-\subsubsection{Splitting of a node}
-
-Given a parent node with momentum $\vec{p}_\text{p}$, and a scalar value $\Delta_{\text{p}}$ that sets the scale of the splitting, we define the splitting function as follows:
-\begin{enumerate}
-
-\item We draw a value $\phi_\text{p}$ for the angle in the (y,z) plane, from a uniform distribution in the range $\{0,2\pi\}$ and define
-\bea\label{eq:Deltavec}
-\vec{\Delta}_\text{p}= \Delta_\text{p}\,\,(\sin\phi_\text{p},\cos\phi_\text{p})
-\eea 
-
-\item We define the L,R children nodes momentum following (\ref{eq:pChildLab2}),
-\bea\label{eq:pLR}
-\vec{p}_\text{L}= \frac{1}{2} \vec{p}_\text{p} - \vec{\Delta}_\text{p}  \\
-\vec{p}_\text{R}= \frac{1}{2} \vec{p}_\text{p} +\vec{\Delta}_\text{p}
-\eea
-
-\item We separately draw $r_\text{L}$ and $r_\text{R}$ from an exponential distribution 
-\bea \label{eq:exponential}
-f(r,\lambda)=\lambda e^{-\lambda r} 
-\eea
-
-and generate
-\bea
-\Delta_\text{L} &= \Delta_\text{p} \,\, r_\text{L}\\
-\Delta_\text{R} &= \Delta_\text{p} \,\, r_\text{R}
-\eea
-
-\end{enumerate}
-
-%%-------------
-\subsubsection{Generative process}
-
-Input parameters:
-\begin{itemize}
-
-\item $\vec{p}_0$: momentum of the jet. This will be the input value for the root node of the tree.
-\item $\lambda$: decaying rate for the exponential distribution.
-\item $\Delta_0$: Initial scale (units of energy). 
-\item $\Delta_\text{cut}$: cut-off scale to stop the showering process (units of energy). 
-
-\end{itemize}
-
-We start with the root of the tree as the parent node and build the jet binary tree recursively as follows:
-\begin{itemize}
-
-\item We split the parent node, and get $\vec{p}_\text{L}$, $\vec{p}_\text{R}$, $\Delta_\text{L}$, $\Delta_\text{R}$.
-
-\item If $\Delta_\text{L/R} > \Delta_\text{cut}$, we promote the L/R node to a parent node (i.e. we promote $\vec{p}_\text{L/R}$ to $\vec{p}_\text{p}$ and $\Delta_\text{L/R}$ to $\Delta_\text{p}$), and split again.
-
-\end{itemize}
-
-%%-------------
-\subsubsection{Heavy resonance vs QCD like jet}
-
-To model a jet coming from a heavy resonance X decay, e.g. a W boson jet, we use $\Delta_{\text{p}} =  \frac{m_X}{2}$ to split the root node.
-
-To model a QCD like jet, we split the root node with $\Delta_{\text{p}} = \Delta_0 \,\, r_{\text{root}}$, where $r_{\text{root}}$ is drawn from the exponential distribution (\ref{eq:exponential}).
-
-%%-------------
-\subsubsection{Reconstruct $\{\vec{p}_\text{p}$, $\Delta_{\text{p}}$, $\phi_{\text{p}}$, $r_L$, $r_R\}$ from  $\{\Delta_L$, $\Delta_R$, $\vec{p}_\text{L}$, $ \vec{p}_\text{R}\}$ }
-
-We show how to reconstruct $\{\vec{p}_\text{p}$, $\Delta_{\text{p}}$, $\phi_{\text{p}}$, $r_L$, $r_R\}$ from a bottom-up approach for each splitting. From  $\{\Delta_L$, $\Delta_R$, $\vec{p}_\text{L}$, $ \vec{p}_\text{R}\}$ we get:
-\bea
-\vec{p}_\text{p} &= \vec{p}_\text{L}+ \vec{p}_\text{R}\\
-\vec{\Delta}_\text{p} &= \frac{1}{2} (\vec{p}_\text{R} - \vec{p}_\text{L})
-\eea
-Next, we get
-\bea
-\Delta_\text{p} &= | \vec{ \Delta}_\text{p} |\\
-\phi_{\text{p}} &=\tan^{-1}\frac{(\Delta_\text{p})_y}{(\Delta_\text{p})_z}\\
-r_{\text{L}} &=\frac{\Delta_{\text{L}}}{\Delta_{\text{p}}}\\
-r_{\text{R}} &=\frac{\Delta_{\text{R}}}{\Delta_{\text{p}}}
-\eea
-If the L/R node is a leaf, then we set
-\bea
-\Delta_{\text{L/R}}=\Delta_{\text{cut}}
-\eea
-
-
-%%---------------------------------------------------------------------------------------
-\subsection{Previous toy models and their issues}
-
-
-\subsubsection{Model 1}
-
-This was a 1D model where $d_{ij}$ in (\ref{eq:dij}) was not well defined.
-
-%%-------------
-\subsubsection{Model 2}
-
-In this model we defined the splitting of (\ref{eq:pChildLab2}) as
-\bea\label{eq:pLRb}
-\vec{p}_\text{L}= \vec{p}_\text{p} - \vec{\Delta}_\text{p}  \\
-\vec{p}_\text{R}= \vec{p}_\text{p} +\vec{\Delta}_\text{p}
-\eea
-which gives
-\bea
-\vec{p}_\text{p}= \frac{1}{2} (\vec{p}_\text{L} + \vec{p}_\text{R} ) 
-\eea
-As a result, we would get jets with different momentum $\vec{p}$ depending on the clustering algorithm, e.g. $k_t$, $\text{anti-}k_t$, etc. The reason is that the jet momentum in this case is not permutation invariant with respect to the order in which we cluster its constituents.\footnote{E.g. when clustering 3 jet constituents with momentum $\{a,b,c\}$ we see $\frac{1}{2}(\frac{a+b}{2})+\frac{c}{2} \neq \frac{1}{2}(\frac{a+c}{2})+\frac{b}{2}$}
-
-%%-------------
-\subsubsection{Model 3}
-
-This model differs from Model 4 in the way we do the splitting of a node, which also changes the generative process. In this case, given a parent node with momentum $\vec{p}_\text{p}$, and a scalar value $\Delta_{\text{gp}}$ that comes from the grandparent node, we define the splitting function as follows:
-\begin{enumerate}
-
-\item We draw $r_\text{p}$ from the exponential distribution of (\ref{eq:exponential}) and calculate
-\bea\label{rp}
-\Delta_\text{p} &= \Delta_\text{gp} \,\, r_\text{p}
-\eea
-
-\item We draw a value $\phi_\text{p}$ for the angle in the (y,z) plane, from a uniform distribution in the range $\{0,2\pi\}$ and define as in (\ref{eq:Deltavec})
-\bea
-\vec{\Delta}_\text{p}= \Delta_\text{p}\,\,(\sin\phi_\text{p},\cos\phi_\text{p})\nonumber
-\eea 
-
-\item If $\Delta_\text{p} > \Delta_\text{cut}$ we split the parent node by defining the L,R children nodes momentum following (\ref{eq:pChildLab2}),
-\bea
-\vec{p}_\text{L}= \frac{1}{2} \vec{p}_\text{p} - \vec{\Delta}_\text{p}  \\
-\vec{p}_\text{R}= \frac{1}{2} \vec{p}_\text{p} +\vec{\Delta}_\text{p} \nonumber
-\eea
-
-\end{enumerate}
-
-Next, we promote the L and R nodes to a parent node each (i.e. we promote $\vec{p}_\text{L/R}$ to $\vec{p}_\text{p}$ and $\Delta_\text{p}$ to $\Delta_\text{gp}$), and repeat the splitting process.
-
-
-The problem with this model is that we cannot reconstruct $\Delta_\text{gp}$ from a bottom-up approach. As a result, we cannot derive from (\ref{rp}) the value $r_\text{p}$  drawn from the distribution. 
-
-
-%%---------------------------------------------------------------------------------------
-\subsection{Other ideas for Toy Generative Models}
-
-We could define $\vec{\Delta}$  as in (\ref{eq:delta}):
-\bea
- \vec{\Delta}   = E \sqrt{1-\frac{m^2}{E^2}} \,\,\,[ \hat{r} + (\gamma -1) (\hat{r} \cdot \hat{n}) \hat{n} ] = \vec{\Delta}(m,\phi)
-\eea
-
-We draw $\phi$ from a uniform distribution. We can get $m$ in a way to resemble the sudakov factor approach as:
-\beq\label{eq:drawMass}
-m_{\text{L/R}} = \frac{m_{\text{p}}}{2}\,\,  r_{\text{L/R}} 
-\eeq
-where $r_{\text{L/R}}$ is drawn from an exponential distribution $f(x,\lambda) \propto e^{-\lambda x}$ for $x \in (0,1)$. The prescription of (\ref{eq:drawMass}) solves one of the problems of the traditional parton showers given that it satisfies $m_{\text{L}} + m_{\text{R}} \leq m_{\text{p}}$\footnote{Traditional parton showers draw $m_{\text{L}}$ and $m_{\text{R}}$ independently, so they should check the constraint is satisfied.}. Then, we could think of $m_{\text{L/R}}$ as the off-shell mass value, to avoid the required reshuffling. This results in leaves where each pair of siblings have the same mass, all different among pairs of siblings.
-
-
-This case would be closer to a physics parton shower but more complex and time consuming.
-
-%%-------------
-\subsubsection{General case, with  $m_{\text{L}}\neq m_{\text{R}}$}
-
-We could also build a model for this case, adding extra features. 
-We should replace (\ref{eq:drawMass}) by
-\bea
-m_{\text{L}} &= m_{\text{p}}\,\,  r_{\text{L}}  \\
-m_{\text{R}} &= (m_{\text{p}}-m_{\text{L}})\,\,  r_{\text{R}}
-\eea
-where $r_{\text{L}}$ and $r_{\text{R}}$ are independently drawn from an exponential distribution $f(x,\lambda) \propto e^{-\lambda x}$ for $x \in (0,1)$.
-
 
 \end{document}
