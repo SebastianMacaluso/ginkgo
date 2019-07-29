@@ -39,7 +39,8 @@ We build our 2D model in the (y,z) plane, where *z* is the direction of the beam
 We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a heat clustermap plot of a sample jet generated with our model.
 
 
-![Image description](/notes/plots/figTruthTruth_singlepath_jet2.pdf)
+![Image description](/notes/plots/figTruthTruth_singlepath_jet2.jpg)
+
 <!--![Image description 2](https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/figTruthTruth_singlepath_jet2.pdf)-->
 
 
