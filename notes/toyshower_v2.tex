@@ -208,12 +208,6 @@
 \vskip 1cm
 {\Large \bf Toy Generative Model for Jets}
 
-
-
-
-
-\vskip0.2cm{}
-
 \vskip 1.0cm
 {\large $\text{Kyle Cranmer}^1$, $\text{Sebastian Macaluso}^1$ and $\text{Duccio Pappadopulo}^2$}
 \vskip 0.6cm
@@ -228,12 +222,6 @@
 
 \section{Introduction}
 
-%Start with a simple introduction about the motivation eg. a standalone description of a generative model to aid in ML research that is: easy to describe, has a tractable likelihood, captures the essential ingredients of the Parton shower, has python implementation with few software dependencies.
-%
-
-
-
-
 In this notes, we provide a standalone description of a generative model to aid in machine learning (ML) research for jet physics. The motivation is to build a model that has a tractable likelihood, and is as simple and easy to describe as possible but at the same time captures the essential ingredients of parton shower generators in full physics simulations.  The aim is for the model to have a python implementation with few software dependencies.
 
 Parton shower generators are software tools that encode a physics model for the simulation of jets that are produced at colliders, e.g. the Large Hadron Collider at CERN.
@@ -241,17 +229,10 @@ Jets are a collimated spray of energetic charged and neutral particles. Parton s
 
 As a result of this {\it showering process}, there could be many latent paths that may lead to a specific jet (i.e. the set of constituents). Thus, it is natural and straightforward to represent a jet and the particular showering path that gave rise to it as a binary tree, where the inner nodes represent each of the unstable particles and the leaves represent the jet constituents.  
 
-%that is: easy to describe, has a tractable likelihood, captures the essential ingredients of the Parton shower, has python implementation with few software dependencies.
-
-
-
-%first we study the requirements for the simplest toy generative model that would resemble a full generative model for jets. Next, we describe how to build such a model.
 
 % =====================================================
 \vspace{0.6cm}
 \section{Model description}
-
-%Maybe provide a simple narrative description of the Parton shower without physics jargon. Focus more on non-physicists, but have enough hints in the narrative description that a physicist could identify what's important. Maybe add a little dictionary about features of the model that we want to represent: running of Delta, momentum conservation, 2-d so analogue of kT clustering makes sense.
 
 Our model implements a recursive algorithm to generate a binary tree, whose leaves are the jet constituents. Jet constituents in full physics simulations are described in terms of a 4 dimensional vector that specifies their energy $E$ and spatial momentum $\vec{p}$, which determines the direction of motion. 
 There is a set of physics features that we want our model to represent, and they are described as follows:
@@ -271,44 +252,11 @@ where $\Delta R_{ij}$ is the angular separation between two particles.
 \end{itemize}
 
 Each node of the jet tree represents a particle and encodes its momentum vector. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. The L (R) child's momentum is obtained from subtracting (adding) a vector of magnitude $\Delta$ to half of the parent's momentum vector. This prescription ensures {\it momentum conservation} and {\it permutation invariance}.
-%2 basic features of jets:
-%\begin{itemize}
-%\item Momentum conservation: the total momentum of the jet (the momentum of the root of the tree) is obtained from adding the momentum of all of its constituents.
-%\item Permutation invariance: the jet momentum should be invariant with respect to the order in which we cluster its constituents.
-%
-%\end{itemize}
-%momentum conservation, i.e. the total momentum of the jet (the momentum of the root of the tree) is obtained from adding the momentum of all of its constituents.
-%Jet constituents in the real world have a momentum magnitude and a direction.
-%Thus for a meaningful definition of $d_{ij}$ the toy model should be at least 2D. 
 
 We consider a 2D model to be able to define an angular {\it distance measure}. Also, the angular separation between a parent and its L/R child's momentum is expected to decrease as the physics shower moves forward from the root to the leaves of the tree. The magnitude of the momentum of each node is also expected to drop in the same way, i.e. ``the radiation gets softer when evolving down the tree".
 Both requirements are satisfied by the {\it running of the splitting scale $\Delta$}, which we achieve by rescaling the value of $\Delta$ by a factor $r$. ($r$ is drawn from a decaying exponential distribution each time a new splitting is produced.)  
 This way, we also assign a $\Delta$ value to each node of the tree. 
 
-
-
-
-
-
-%Basic features from a physics parton shower that the model represents:
-%\begin{itemize}
-%\item Momentum conservation: 
-%Traditional physics jet clustering algorithms are based on an angular distance measure
-%\end{itemize}
-%In this section we describe the model we built as well as the previous versions and their issues. We also mention other possibilities for a toy model for jets.
-
-
-%\subsection{Minimum requirements}
-%
-%The traditional clustering algorithms are based on a measure given by:
-%\bea\label{eq:dij}
-%d_{ij}= \text{min}({p_{\text{T}i}^{2\alpha}, {p_{\text{T}j}^{2\alpha}})\,\, \frac{\Delta R_{ij}^2}{R^2}}
-%\eea
-%where $\Delta R_{ij}=(\phi_i-\phi_j)$ in a 2D model, with $\phi_i$ the angle of particle $i$ with respect to the $\hat{z}$ axis in the lab frame. Also, $\alpha=\{-1,0,1\}$ defines the $\{\text{anti-kt, CA and kt}\}$ algorithms respectively. Thus for a meaningful definition of $d_{ij}$ the toy model should be at least 2D. 
-
-
-%%---------------------------------------------------------------------------------------
-%\subsection{Current model: Model 4 }
 
 We build our 2D model in the $(y,z)$ plane, where $\hat{z}$ is the direction of the beam axis and $\hat{y}$ the transverse direction.\footnote{At the Large Hadron Collider, jets are produced from the collision of two beams of protons moving in opposite directions.} 
 We define the transverse momentum as $p_{\text{T}} =|p_y|$. We show in Fig.~\ref{fig:heatclustermapTree} a heat clustermap plot of a sample jet generated with our model.
@@ -322,6 +270,7 @@ We define the transverse momentum as $p_{\text{T}} =|p_y|$. We show in Fig.~\ref
 }}
 \label{fig:heatclustermapTree}
 \end{figure*}
+
 %%-------------
 \subsection{Generative process}
 
@@ -445,12 +394,17 @@ If the L/R node is a leaf, then we set
 
 \subsubsection{Model 1}
 
-This was a 1D model where $d_{ij}$ in (\ref{eq:dij}) was not well defined.
+The traditional clustering algorithms are based on a measure given by:
+\bea\label{eq:dij}
+d_{ij}= \text{min}({p_{\text{T}i}^{2\alpha}, {p_{\text{T}j}^{2\alpha}})\,\, \frac{\Delta R_{ij}^2}{R^2}}
+\eea
+where $\Delta R_{ij}$ is the angular separation between two particles momentum. Also, $\alpha=\{-1,0,1\}$ defines the $\{\text{anti-kt, CA and kt}\}$ algorithms respectively. 
+This model was a 1D model where $d_{ij}$ in (\ref{eq:dij}) was not well defined.
 
 %%-------------
 \subsubsection{Model 2}
 
-In this model we defined the splitting of (\ref{eq:pChildLab2}) as
+In this model we defined the splitting of a node as
 \bea\label{eq:pLRb}
 \vec{p}_\text{L}= \vec{p}_\text{p} - \vec{\Delta}_\text{p}  \\
 \vec{p}_\text{R}= \vec{p}_\text{p} +\vec{\Delta}_\text{p}
@@ -477,7 +431,7 @@ This model differs from Model 4 in the way we do the splitting of a node, which 
 \vec{\Delta}_\text{p}= \Delta_\text{p}\,\,(\sin\phi_\text{p},\cos\phi_\text{p})\nonumber
 \eea 
 
-\item If $\Delta_\text{p} > \Delta_\text{cut}$ we split the parent node by defining the L,R children nodes momentum following (\ref{eq:pChildLab2}),
+\item If $\Delta_\text{p} > \Delta_\text{cut}$ we split the parent node by defining the L,R children nodes momentum following (\ref{eq:pLR}),
 \bea
 \vec{p}_\text{L}= \frac{1}{2} \vec{p}_\text{p} - \vec{\Delta}_\text{p}  \\
 \vec{p}_\text{R}= \frac{1}{2} \vec{p}_\text{p} +\vec{\Delta}_\text{p} \nonumber
@@ -494,7 +448,7 @@ The problem with this model is that we cannot reconstruct $\Delta_\text{gp}$ fro
 %%---------------------------------------------------------------------------------------
 \subsection{Other ideas for Toy Generative Models}
 
-We could define $\vec{\Delta}$  as in (\ref{eq:delta}):
+We could define $\vec{\Delta}$, following the kinematics of a 2-body decay, as :
 \bea
  \vec{\Delta}   = E \sqrt{1-\frac{m^2}{E^2}} \,\,\,[ \hat{r} + (\gamma -1) (\hat{r} \cdot \hat{n}) \hat{n} ] = \vec{\Delta}(m,\phi)
 \eea
