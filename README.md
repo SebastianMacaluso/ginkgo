@@ -40,7 +40,8 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a heat cluste
 
 
 ![Fig.1](notes/plots/figTruthTruth_singlepath_jet2.jpg)
-Fig. 1: Heat clustermap visualization of a Tree. Given a pair of jet constituents {i,j\} and the number of steps needed for each constituent to reach their closest common ancestor {s_i,s_j}, the heat map scale represents the maximum number of steps, i.e. max{s_i,s_j}.
+
+#### Fig. 1: Heat clustermap visualization of a Tree. Given a pair of jet constituents {i,j\} and the number of steps needed for each constituent to reach their closest common ancestor {s_i,s_j}, the heat map scale represents the maximum number of steps, i.e. max{s_i,s_j}.
 
 
 **Relevant Structure**:
