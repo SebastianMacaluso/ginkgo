@@ -455,9 +455,9 @@ We could define $\vec{\Delta}$, following the kinematics of a 2-body decay, as :
 
 We draw $\phi$ from a uniform distribution. We can get $m$ in a way to resemble the sudakov factor approach as:
 \beq\label{eq:drawMass}
-m_{\text{L/R}} = \frac{m_{\text{p}}}{2}\,\,  r_{\text{L/R}} 
+m_{\text{L}} = m_{\text{R}} = \frac{m_{\text{p}}}{2}\,\,  r 
 \eeq
-where $r_{\text{L/R}}$ is drawn from an exponential distribution $f(x,\lambda) \propto e^{-\lambda x}$ for $x \in (0,1)$. The prescription of (\ref{eq:drawMass}) solves one of the problems of the traditional parton showers given that it satisfies $m_{\text{L}} + m_{\text{R}} \leq m_{\text{p}}$\footnote{Traditional parton showers draw $m_{\text{L}}$ and $m_{\text{R}}$ independently, so they should check the constraint is satisfied.}. Then, we could think of $m_{\text{L/R}}$ as the off-shell mass value, to avoid the required reshuffling. This results in leaves where each pair of siblings have the same mass, all different among pairs of siblings.
+where $r_{\text{L/R}}$ is drawn from an exponential distribution as in (\ref{eq:exponential}) with $r \in [0,1)$. The prescription of (\ref{eq:drawMass}) solves one of the problems of the traditional parton showers given that it satisfies $m_{\text{L}} + m_{\text{R}} \leq m_{\text{p}}$\footnote{Traditional parton showers draw $m_{\text{L}}$ and $m_{\text{R}}$ independently, so they should check the constraint is satisfied.}. Then, we could think of $m_{\text{L/R}}$ as the off-shell mass value, to avoid the required reshuffling. This results in leaves where each pair of siblings have the same mass, all different among pairs of siblings.
 
 
 This case would be closer to a physics parton shower but more complex and time consuming.
@@ -471,7 +471,7 @@ We should replace (\ref{eq:drawMass}) by
 m_{\text{L}} &= m_{\text{p}}\,\,  r_{\text{L}}  \\
 m_{\text{R}} &= (m_{\text{p}}-m_{\text{L}})\,\,  r_{\text{R}}
 \eea
-where $r_{\text{L}}$ and $r_{\text{R}}$ are independently drawn from an exponential distribution $f(x,\lambda) \propto e^{-\lambda x}$ for $x \in (0,1)$.
+where $r_{\text{L}}$ and $r_{\text{R}}$ are independently drawn from an exponential distribution as in (\ref{eq:exponential}) for $r \in [0,1)$.
 
 
 
