@@ -40,6 +40,8 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a heat cluste
 
 
 ![Image description](/notes/plots/figTruthTruth_singlepath_jet2.pdf)
+<!--![GitHub Logo](/images/logo.png)-->
+Format: ![Alt Text](url)
 
 **Relevant Structure**:
 
