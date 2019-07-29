@@ -39,9 +39,8 @@ We build our 2D model in the (y,z) plane, where *z* is the direction of the beam
 We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a heat clustermap plot of a sample jet generated with our model.
 
 
-![Fig. 1: Heat clustermap visualization of a Tree. Given a pair of jet constituents {i,j\} and the number of steps needed for each constituent to reach their closest common ancestor {s_i,s_j}, the heat map scale represents the maximum number of steps, i.e. max{s_i,s_j}.](notes/plots/figTruthTruth_singlepath_jet2.jpg)
-
-<!--![Image description 2](https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/figTruthTruth_singlepath_jet2.pdf)-->
+![Fig.1](notes/plots/figTruthTruth_singlepath_jet2.jpg)
+Fig. 1: Heat clustermap visualization of a Tree. Given a pair of jet constituents {i,j\} and the number of steps needed for each constituent to reach their closest common ancestor {s_i,s_j}, the heat map scale represents the maximum number of steps, i.e. max{s_i,s_j}.
 
 
 **Relevant Structure**:
