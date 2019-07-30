@@ -44,7 +44,7 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a tree visual
 
 ![Fig.1](notes/plots/figTruth_jet9.jpg)
 
-##### Fig. 1:Tree visualization of a sample jet generated with our model.}.
+##### Fig. 1: Tree visualization of a sample jet generated with our model.
 
 
 **Relevant Structure**:
