@@ -25,7 +25,7 @@ We want our model to represent the following set of features:
 
 - Running of the splitting scale Delta: each splitting is characterized by a scale that decreases when evolving down the tree from root to leaves.
 
-We also want our model to lead to a natural analogue of the generalized $k_t$ clustering algorithms for the generated jets. These algorithms are characterized by
+We also want our model to lead to a natural analogue of the generalized k_t clustering algorithms for the generated jets. These algorithms are characterized by
 
 - Permutation invariance: the jet momentum should be invariant with respect to the order in which we cluster its constituents.
 
