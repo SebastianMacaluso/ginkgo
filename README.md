@@ -19,29 +19,32 @@ As a result of this *showering process*, there could be many latent paths that m
 ## Model description
 
 Our model implements a recursive algorithm to generate a binary tree, whose leaves are the jet constituents. Jet constituents in full physics simulations are described in terms of a 4 dimensional vector that specifies their energy *E* and spatial momentum **p**, which determines the direction of motion. 
-There is a set of physics features that we want our model to represent, and they are described as follows:
+We want our model to represent the following set of features:
 
 - Momentum conservation: the total momentum of the jet (the momentum of the root of the tree) is obtained from adding the momentum of all of its constituents.
 
-- Permutation invariance: the jet momentum should be invariant with respect to the order in which we cluster its constituents.
-
 - Running of the splitting scale Delta: each splitting is characterized by a scale that decreases when evolving down the tree from root to leaves.
+
+We also want our model to lead to a natural analogue of the generalized $k_t$ clustering algorithms for the generated jets. These algorithms are characterized by
+
+- Permutation invariance: the jet momentum should be invariant with respect to the order in which we cluster its constituents.
 
 - Distance measure: the angular separation between two jet constituents is typically used as a distance measure among them. In particular, traditional jet clustering algorithms are based on a measure given by d_{ij} ~  Delta R_{ij}^2, where Delta R_{ij} is the angular separation between two particles.
 
-Each node of the jet tree represents a particle and encodes its momentum vector. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. The L (R) child's momentum is obtained from subtracting (adding) a vector of magnitude Delta to half of the parent's momentum vector. This prescription ensures *momentum conservation* and *permutation invariance*.
+As a result, we build our model as follows. Each node of the jet tree represents a particle and encodes its momentum vector. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. The L (R) child's momentum is obtained from subtracting (adding) a vector of magnitude Delta to half of the parent's momentum vector. This prescription ensures *momentum conservation* and *permutation invariance*.
 
 We consider a 2D model to be able to define an angular *distance measure*. Also, the angular separation between a parent and its L/R child's momentum is expected to decrease as the physics shower moves forward from the root to the leaves of the tree. The magnitude of the momentum of each node is also expected to drop in the same way, i.e. ``the radiation gets softer when evolving down the tree".
 Both requirements are satisfied by the *running of the splitting scale Delta*, which we achieve by rescaling the value of Delta by a factor r. (r is drawn from a decaying exponential distribution each time a new splitting is produced.) This way, we also assign a Delta value to each node of the tree. 
 
 
 We build our 2D model in the (y,z) plane, where *z* is the direction of the beam axis and *y* the transverse direction.(At the Large Hadron Collider, jets are produced from the collision of two beams of protons moving in opposite directions.)
-We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a heat clustermap plot of a sample jet generated with our model.
+We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a tree visualization plot of a sample jet generated with our model.
 
 
-![Fig.1](notes/plots/figTruthTruth_singlepath_jet2.jpg)
 
-##### Fig. 1: Heat clustermap visualization of a Tree. Given a pair of jet constituents {i,j\} and the number of steps needed for each constituent to reach their closest common ancestor {s_i,s_j}, the heat map scale represents the maximum number of steps, i.e. max{s_i,s_j}.
+![Fig.1](notes/plots/figTruth_jet9.png)
+
+##### Fig. 1:Tree visualization of a sample jet generated with our model.}.
 
 
 **Relevant Structure**:
