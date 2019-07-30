@@ -6,4 +6,4 @@ python3 generate_jets.py \
     --filename "tree_$1_truth" \
     --num_samples 1 \
     --pt_cut 1 \
-    --augmented_data
+#    --augmented_data

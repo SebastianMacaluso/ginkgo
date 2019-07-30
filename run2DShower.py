@@ -11,15 +11,12 @@ from showerSim.utils import get_logger
 
 logger = get_logger()
 
-augmented_data=True
+augmented_data=False
 
 #-----------------------
 '''
 Gaussian distribution shower
 '''
-# from benchmark.galton.galtonPyroWrong import Simulator
-# from benchmark.galton.galtonPyro import Simulator
-# from gaussShower import Simulator
 
 
 # input_scale = torch.tensor(4*[[100.]])
@@ -27,33 +24,18 @@ Gaussian distribution shower
 rate=torch.tensor(10.)
 rate2=torch.tensor(8.)
 
-# from gaussShowerTree import Simulator
-# simulator = Simulator(jet_pt=0., rate=10., Mw=80., pt_cut=2.)
-
-# import pyro
-# import exp2DShowerTree
-# from exp2DShowerTree import Simulator
-
-# Lambda=8
-# decay_dist = pyro.distributions.Exponential(Lambda)
+rate=torch.tensor(4.)
 
 # Values that give ~ 50 leaves, typically with px,py >0 for all of them.
 # simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=4, Mw=80., pt_cut=0.04)
+# simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([800.,600.]), Mw=torch.tensor(80.), pt_cut=0.04, Delta_0=60., num_samples=1)
 
 
 # Values for tests
-simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([800.,600.]), Mw=torch.tensor(80.), pt_cut=1, Delta_0=60., num_samples=1)
+simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([500.,200.]), Mw=torch.tensor(80.), pt_cut=0.04, Delta_0=60., num_samples=1)
 # simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, pt_cut=0.5)
 #simulator = Simulator(sensitivities=True)
 
-
-#
-
-# sys.exit()
-
-# print('Trace nodes =', simulator.trace(theta).nodes)
-#
-# x, joint_score, joint_log_ratio = simulator.augmented_data(theta,theta, theta_ref)
 
 if not augmented_data:
   jet_list = simulator(rate)
@@ -69,9 +51,7 @@ else:
                                                                                     exponential=True,
                                                                                     uniform=False)
 
-  # jet_list = simulator(Delta_0, num_samples=1)
-  filename=37
-  simulator.save(jet_list, "./data", "tree_"+str(filename)+"_truth")
+
 
   logger.info(f"---"*10)
   logger.debug(f"jet_list = {jet_list}")
@@ -106,3 +86,6 @@ else:
   #---------------------------
 
 
+# jet_list = simulator(Delta_0, num_samples=1)
+filename=sys.argv[1]
+simulator.save(jet_list, "./data", "tree_"+str(filename)+"_truth")
