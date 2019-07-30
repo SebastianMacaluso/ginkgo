@@ -51,7 +51,7 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a tree visual
 
 - [`data`](data/): Dir with the trees.
 
-<!--- [`analysis`](analysis): -->
+
 <!---->
 <!--    -[`likelihood.py`](showerSim/likelihood.py): Calculate the log likelihood of a splitting node and of (a branch of) a tree. There are examples on how to run it at the end of the script.-->
 
