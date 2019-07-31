@@ -47,6 +47,12 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a tree visual
 ##### Fig. 1: Tree visualization of a sample jet generated with our model that represents a W boson jet. We show the values of **p** =(p_y,p_z) for each node and the scale Delta for the splitting of the inner nodes. The horizontal ordering of the leaves corresponds to the order in which the leaves are accessed when traversing the tree (and is not related to the particle momentum **p**).
 
 
+The algorithm is outlined in more detail below:
+![Algorithm](notes/plots/Algorithm1.jpg)
+
+A more detailed description of the model can be found [`toyshower.pdf`](notes/toyshower_v3.pdf)
+
+
 **Relevant Structure**:
 
 - [`data`](data/): Dir with the trees.
