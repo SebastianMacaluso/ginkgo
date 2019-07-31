@@ -340,12 +340,12 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
     \SetKwInOut{Input}{Input}
     \SetKwInOut{Output}{Output}
 
-    function Exp2DShower $(\vec{p}_{\text{p}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
-    \Input{parent momentum $\vec{p}_{\text{p}}$, parent splitting scale $\Delta_\text{p}$, cut-off scale $\Delta_\text{cut}$, rate for the exponential distribution $\lambda$, list with tree structure $tree$, list with nodes momentum $content$}
+    function Exp2DShower $(\vec{p}_{\text{p}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree})$\\
+    \Input{parent momentum $\vec{p}_{\text{p}}$, parent splitting scale $\Delta_\text{p}$, cut-off scale $\Delta_\text{cut}$, rate for the exponential distribution $\lambda$, binary tree $tree$}
     \Indp
-    idx = length of tree modulo 2\\
-    Insert node idx to tree list. \\
-    Append node momentum $\vec{p}_{\text{p}}$ to content list.\\
+%    idx = length of tree modulo 2\\
+    Add parent node to tree. \\
+%    Append node momentum $\vec{p}_{\text{p}}$ to content list.\\
     \If{$\Delta_\text{p} > \Delta_\text{cut}$}
       {
       	draw $\phi$ from uniform distribution in $\{0,2\pi\}$\\
@@ -355,8 +355,8 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
         draw $r_L$, $r_R$ from the exponential distribution in Eq.~\ref{eq:exponential}.\\
         $\Delta_\text{L} = \Delta_\text{p} \,\, r_\text{L}$\\
 	$\Delta_\text{R} = \Delta_\text{p} \,\, r_\text{R}$\\
-	Exp2DShower $(\vec{p}_{\text{L}}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
-	Exp2DShower $(\vec{p}_{\text{R}}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+	Exp2DShower $(\vec{p}_{\text{L}}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree})$\\
+	Exp2DShower $(\vec{p}_{\text{R}}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree})$\\
       }
     \caption{Toy Parton Shower Generator}
 \end{algorithm}
