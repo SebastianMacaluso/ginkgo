@@ -340,12 +340,12 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
     \SetKwInOut{Input}{Input}
     \SetKwInOut{Output}{Output}
 
-    function Exp2DShower $(\vec{p}_{\text{p}},\text{idx}_{\text{gp}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
-    \Input{parent momentum $\vec{p}_{\text{p}}$, grandparent index $\text{idx}_\text{gp}$, parent splitting scale $\Delta_\text{p}$, cut-off scale $\Delta_\text{cut}$, rate for the exponential distribution $\lambda$, list with tree structure $tree$, list with nodes momentum $content$}
+    function Exp2DShower $(\vec{p}_{\text{p}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+    \Input{parent momentum $\vec{p}_{\text{p}}$, parent splitting scale $\Delta_\text{p}$, cut-off scale $\Delta_\text{cut}$, rate for the exponential distribution $\lambda$, list with tree structure $tree$, list with nodes momentum $content$}
     \Indp
     idx = length of tree modulo 2\\
-    Insert in tree list node idx at location $[\text{idx}_\text{gp},0]$ ($[\text{idx}_\text{gp},1]$) if node is L (R). \\
-    Append node momentum $\vec{p}_{\text{p}}$ in content list.\\
+    Insert node idx to tree list. \\
+    Append node momentum $\vec{p}_{\text{p}}$ to content list.\\
     \If{$\Delta_\text{p} > \Delta_\text{cut}$}
       {
       	draw $\phi$ from uniform distribution in $\{0,2\pi\}$\\
@@ -355,11 +355,41 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
         draw $r_L$, $r_R$ from the exponential distribution in Eq.~\ref{eq:exponential}.\\
         $\Delta_\text{L} = \Delta_\text{p} \,\, r_\text{L}$\\
 	$\Delta_\text{R} = \Delta_\text{p} \,\, r_\text{R}$\\
-	Exp2DShower $(\vec{p}_{\text{L}},\text{idx}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
-	Exp2DShower $(\vec{p}_{\text{R}},\text{idx}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+	Exp2DShower $(\vec{p}_{\text{L}}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+	Exp2DShower $(\vec{p}_{\text{R}}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
       }
     \caption{Toy Parton Shower Generator}
 \end{algorithm}
+
+
+
+
+
+
+%\begin{algorithm}
+%    \SetKwInOut{Input}{Input}
+%    \SetKwInOut{Output}{Output}
+%
+%    function Exp2DShower $(\vec{p}_{\text{p}},\text{idx}_{\text{gp}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+%    \Input{parent momentum $\vec{p}_{\text{p}}$, grandparent index $\text{idx}_\text{gp}$, parent splitting scale $\Delta_\text{p}$, cut-off scale $\Delta_\text{cut}$, rate for the exponential distribution $\lambda$, list with tree structure $tree$, list with nodes momentum $content$}
+%    \Indp
+%    idx = length of tree modulo 2\\
+%    Insert in tree list node idx at location $[\text{idx}_\text{gp},0]$ ($[\text{idx}_\text{gp},1]$) if node is L (R). \\
+%    Append node momentum $\vec{p}_{\text{p}}$ in content list.\\
+%    \If{$\Delta_\text{p} > \Delta_\text{cut}$}
+%      {
+%      	draw $\phi$ from uniform distribution in $\{0,2\pi\}$\\
+%	$\vec{\Delta}_\text{p}= \Delta_\text{p}\,\,(\sin\phi_\text{p},\cos\phi_\text{p})$\\
+%      	$\vec{p}_\text{L}= \frac{1}{2} \vec{p}_\text{p} - \vec{\Delta}_\text{p}$  \\
+%        $\vec{p}_\text{R}= \frac{1}{2} \vec{p}_\text{p} +\vec{\Delta}_\text{p}$\\
+%        draw $r_L$, $r_R$ from the exponential distribution in Eq.~\ref{eq:exponential}.\\
+%        $\Delta_\text{L} = \Delta_\text{p} \,\, r_\text{L}$\\
+%	$\Delta_\text{R} = \Delta_\text{p} \,\, r_\text{R}$\\
+%	Exp2DShower $(\vec{p}_{\text{L}},\text{idx}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+%	Exp2DShower $(\vec{p}_{\text{R}},\text{idx}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+%      }
+%    \caption{Toy Parton Shower Generator}
+%\end{algorithm}
 
 
 %%-------------
