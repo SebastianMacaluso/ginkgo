@@ -425,66 +425,6 @@ If the L/R node is a leaf, then we set
 
 
 
-
-
-
-%%---------------------------------------------------------------------------------------
-\subsection{Previous toy models and their issues}
-
-
-\subsubsection{Model 1}
-
-The traditional clustering algorithms are based on a measure given by:
-\bea\label{eq:dij}
-d_{ij}= \text{min}({p_{\text{T}i}^{2\alpha}, {p_{\text{T}j}^{2\alpha}})\,\, \frac{\Delta R_{ij}^2}{R^2}}
-\eea
-where $\Delta R_{ij}$ is the angular separation between two particles momentum. Also, $\alpha=\{-1,0,1\}$ defines the $\{\text{anti-kt, CA and kt}\}$ algorithms respectively. 
-This model was a 1D model where $d_{ij}$ in (\ref{eq:dij}) was not well defined.
-
-%%-------------
-\subsubsection{Model 2}
-
-In this model we defined the splitting of a node as
-\bea\label{eq:pLRb}
-\vec{p}_\text{L}= \vec{p}_\text{p} - \vec{\Delta}_\text{p}  \\
-\vec{p}_\text{R}= \vec{p}_\text{p} +\vec{\Delta}_\text{p}
-\eea
-which gives
-\bea
-\vec{p}_\text{p}= \frac{1}{2} (\vec{p}_\text{L} + \vec{p}_\text{R} ) 
-\eea
-As a result, we would get jets with different momentum $\vec{p}$ depending on the clustering algorithm, e.g. $k_t$, $\text{anti-}k_t$, etc. The reason is that the jet momentum in this case is not permutation invariant with respect to the order in which we cluster its constituents.\footnote{E.g. when clustering 3 jet constituents with momentum $\{a,b,c\}$ we see $\frac{1}{2}(\frac{a+b}{2})+\frac{c}{2} \neq \frac{1}{2}(\frac{a+c}{2})+\frac{b}{2}$}
-
-%%-------------
-\subsubsection{Model 3}
-
-This model differs from Model 4 in the way we do the splitting of a node, which also changes the generative process. In this case, given a parent node with momentum $\vec{p}_\text{p}$, and a scalar value $\Delta_{\text{gp}}$ that comes from the grandparent node, we define the splitting function as follows:
-\begin{enumerate}
-
-\item We draw $r_\text{p}$ from the exponential distribution of (\ref{eq:exponential}) and calculate
-\bea\label{rp}
-\Delta_\text{p} &= \Delta_\text{gp} \,\, r_\text{p}
-\eea
-
-\item We draw a value $\phi_\text{p}$ for the angle in the (y,z) plane, from a uniform distribution in the range $\{0,2\pi\}$ and define as in (\ref{eq:Deltavec})
-\bea
-\vec{\Delta}_\text{p}= \Delta_\text{p}\,\,(\sin\phi_\text{p},\cos\phi_\text{p})\nonumber
-\eea 
-
-\item If $\Delta_\text{p} > \Delta_\text{cut}$ we split the parent node by defining the L,R children nodes momentum following (\ref{eq:pLR}),
-\bea
-\vec{p}_\text{L}= \frac{1}{2} \vec{p}_\text{p} - \vec{\Delta}_\text{p}  \\
-\vec{p}_\text{R}= \frac{1}{2} \vec{p}_\text{p} +\vec{\Delta}_\text{p} \nonumber
-\eea
-
-\end{enumerate}
-
-Next, we promote the L and R nodes to a parent node each (i.e. we promote $\vec{p}_\text{L/R}$ to $\vec{p}_\text{p}$ and $\Delta_\text{p}$ to $\Delta_\text{gp}$), and repeat the splitting process.
-
-
-The problem with this model is that we cannot reconstruct $\Delta_\text{gp}$ from a bottom-up approach. As a result, we cannot derive from (\ref{rp}) the value $r_\text{p}$  drawn from the distribution. 
-
-
 %%---------------------------------------------------------------------------------------
 \subsection{Other ideas for Toy Generative Models}
 
