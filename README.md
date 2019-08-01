@@ -84,7 +84,7 @@ A more detailed description of the model can be found in [`toyshower.pdf`](notes
 
 
 
-<img src="https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/IRIS-HEP.png" width="300" align="left"> <img src="https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/NYU.png" width="100" align="center"> <img src="https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/MSDSE.png" width="300" align="right">
+<img src="https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/IRIS-HEP.png" width="300" align="left"> <img src="https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/NYU.png" width="300" align="center"> <img src="https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/MSDSE.png" width="300" align="right">
 
 
 
