@@ -83,7 +83,7 @@ A more detailed description of the model can be found in [`toyshower.pdf`](notes
 3. `make`
 
 
-![IRIS-HEP](notes/plots/IRIS-HEP.jpg)
+![IRIS-HEP](notes/plots/IRIS-HEP.png | width=5)
 
 
 
