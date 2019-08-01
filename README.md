@@ -83,8 +83,8 @@ A more detailed description of the model can be found in [`toyshower.pdf`](notes
 3. `make`
 
 
-![IRIS-HEP](notes/plots/IRIS-HEP.png | width=5)
-
+<!--![IRIS-HEP](notes/plots/IRIS-HEP.png | width=5)-->
+<img src="https://github.com/SebastianMacaluso/ToyJetsShower/blob/master/notes/plots/IRIS-HEP.png" width="5">
 
 
 
