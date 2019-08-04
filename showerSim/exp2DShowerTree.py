@@ -41,7 +41,7 @@ class Simulator(PyroSimulator):
         jet_list = []
         for i in range(self.num_samples):
 
-            tree, content, deltas, draws = _traverse(
+            tree, content, deltas, draws, leaves = _traverse(
                 self.jet_p,
                 delta_P=self.Delta_0,
                 cut_off=self.pt_cut,
@@ -59,12 +59,14 @@ class Simulator(PyroSimulator):
             jet["M_Hard"] = self.Mw
             jet["deltas"] = np.asarray(deltas)
             jet["draws"] = np.asarray(draws)
+            jet["leaves"] = np.array([np.asarray(c) for c in leaves])
             jet_list.append(jet)
 
             logger.debug(f"Tree: {jet['tree']}")
             logger.debug(f"Content: {jet['content']}")
             logger.debug(f"Deltas: {jet['deltas']}")
             logger.debug(f"Draws: {jet['draws']}")
+            logger.debug(f"Leaves: {jet['leaves']}")
 
         return jet_list
 
@@ -124,7 +126,7 @@ def _traverse(root, delta_P=None, cut_off=None, rate=None, Mw=None):
         Mw=Mw,
     )  # We start from the root=jet 4-vector
 
-    return tree, content, deltas, draws
+    return tree, content, deltas, draws, leaves
 
 
 def _traverse_rec(
