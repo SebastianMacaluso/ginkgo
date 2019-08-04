@@ -107,6 +107,8 @@ def _traverse(root, delta_P=None, cut_off=None, rate=None, Mw=None):
     deltas = []
     draws = []
 
+    leaves = []
+
     _traverse_rec(
         root,
         -1,
@@ -115,6 +117,7 @@ def _traverse(root, delta_P=None, cut_off=None, rate=None, Mw=None):
         content,
         deltas,
         draws,
+        leaves,
         delta_P=delta_P,
         cut_off=cut_off,
         rate=rate,
@@ -132,6 +135,7 @@ def _traverse_rec(
     content,
     deltas,
     draws,
+    leaves,
     delta_P=None,
     drew=None,
     cut_off=None,
@@ -171,6 +175,8 @@ def _traverse_rec(
         deltas.append(delta_P)
     else:
         deltas.append(0)
+        leaves.append(root)
+
     draws.append(drew)
 
     if delta_P > cut_off:
@@ -196,6 +202,7 @@ def _traverse_rec(
             content,
             deltas,
             draws,
+            leaves,
             delta_P=delta_L,
             cut_off=cut_off,
             rate=rate,
@@ -210,6 +217,7 @@ def _traverse_rec(
             content,
             deltas,
             draws,
+            leaves,
             delta_P=delta_R,
             cut_off=cut_off,
             rate=rate,
