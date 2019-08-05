@@ -1,4 +1,4 @@
-# Toy Jets Shower
+# Toy Generative Model for Jets
 
 ### **Kyle Cranmer, Sebastian Macaluso and Duccio Pappadopulo**
 
