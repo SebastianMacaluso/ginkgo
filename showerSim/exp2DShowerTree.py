@@ -41,7 +41,7 @@ class Simulator(PyroSimulator):
         jet_list = []
         for i in range(self.num_samples):
 
-            tree, content, deltas, draws = _traverse(
+            tree, content, deltas, draws, leaves = _traverse(
                 self.jet_p,
                 delta_P=self.Delta_0,
                 cut_off=self.pt_cut,
@@ -59,12 +59,14 @@ class Simulator(PyroSimulator):
             jet["M_Hard"] = self.Mw
             jet["deltas"] = np.asarray(deltas)
             jet["draws"] = np.asarray(draws)
+            jet["leaves"] = np.array([np.asarray(c) for c in leaves])
             jet_list.append(jet)
 
             logger.debug(f"Tree: {jet['tree']}")
             logger.debug(f"Content: {jet['content']}")
             logger.debug(f"Deltas: {jet['deltas']}")
             logger.debug(f"Draws: {jet['draws']}")
+            logger.debug(f"Leaves: {jet['leaves']}")
 
         return jet_list
 
@@ -107,6 +109,8 @@ def _traverse(root, delta_P=None, cut_off=None, rate=None, Mw=None):
     deltas = []
     draws = []
 
+    leaves = []
+
     _traverse_rec(
         root,
         -1,
@@ -115,13 +119,14 @@ def _traverse(root, delta_P=None, cut_off=None, rate=None, Mw=None):
         content,
         deltas,
         draws,
+        leaves,
         delta_P=delta_P,
         cut_off=cut_off,
         rate=rate,
         Mw=Mw,
     )  # We start from the root=jet 4-vector
 
-    return tree, content, deltas, draws
+    return tree, content, deltas, draws, leaves
 
 
 def _traverse_rec(
@@ -132,6 +137,7 @@ def _traverse_rec(
     content,
     deltas,
     draws,
+    leaves,
     delta_P=None,
     drew=None,
     cut_off=None,
@@ -168,11 +174,15 @@ def _traverse_rec(
             delta_P = delta_P * draw_decay_root
             drew = draw_decay_root
 
-
     if delta_P > cut_off:
-
         deltas.append(delta_P)
         draws.append(drew)
+    else:
+        deltas.append(0)
+        draws.append(drew)
+        leaves.append(root)
+
+    if delta_P > cut_off:
 
         draw_phi = pyro.sample("phi" + str(idx) + str(is_left), phi_dist)
         ptL = root / 2 - delta_P * dir2D(draw_phi)
@@ -196,6 +206,7 @@ def _traverse_rec(
             content,
             deltas,
             draws,
+            leaves,
             delta_P=delta_L,
             cut_off=cut_off,
             rate=rate,
@@ -210,13 +221,10 @@ def _traverse_rec(
             content,
             deltas,
             draws,
+            leaves,
             delta_P=delta_R,
             cut_off=cut_off,
             rate=rate,
             drew=draw_decay_R,
         )
 
-    else:
-
-        deltas.append(-1)
-        draws.append(-1)

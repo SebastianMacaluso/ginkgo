@@ -1,4 +1,3 @@
-import pickle
 import numpy as np
 import torch
 from showerSim import exp2DShowerTree
@@ -32,10 +31,8 @@ def split_logLH(pL, delta_L, pR, delta_R, delta_min, lam):
 
     def get_p(delta_P, delta, delta_min, lam):
         if delta > 0:
-            if delta < delta_min:
-                raise ValueError("Input delta is below cutoff but non-zero")
             r = delta / delta_P
-            return np.log(lam * np.exp(-lam * r))
+            return np.log(lam) - lam * r
         else:
             r = delta_min / delta_P
             return np.log(1 - np.exp(-lam * r))
