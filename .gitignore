@@ -1,7 +1,6 @@
 .ipynb_checkpoints
 .idea/
 data/
-notes/
 logs/
 *.swp
 # Byte-compiled / optimized / DLL files

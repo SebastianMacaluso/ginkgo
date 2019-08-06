@@ -4,9 +4,9 @@ SHELL := /bin/bash
 # You can set these variables from the commandline.
 VERSION=$(shell python setup.py --version)
 
-clean-dist:
+distclean:
 	pip uninstall ToyJetsShower
-	rm -r dist/
+	rm -r dist/ build/
 
 ./dist/ToyJetsShower-${VERSION}-py3-none-any.whl:
 	python ./setup.py sdist bdist_wheel
