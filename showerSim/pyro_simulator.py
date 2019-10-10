@@ -110,7 +110,7 @@ class PyroSimulator(Simulator):
         log_p = 0.0
         # for distribution, z, param in self._get_branchings(trace):
         for i,(distribution, z, param) in enumerate(self._get_branchings(trace)):
-            if i==0: continue
+            # if i==0: continue
             # logger.debug(f"items = {distribution.__dict__.items()}")
             if distribution.__class__.__name__ == str(type):
                 logger.debug(f"i={i}")

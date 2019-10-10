@@ -56,7 +56,8 @@ class Simulator(PyroSimulator):
             jet["Lambda"] = decay_rate
             jet["Delta_0"] = self.Delta_0
             jet["pt_cut"] = self.pt_cut
-            jet["M_Hard"] = self.Mw
+            jet["M_Hard"] = float(self.Mw)
+            jet["algorithm"] = "truth"
             jet["deltas"] = np.asarray(deltas)
             jet["draws"] = np.asarray(draws)
             jet["leaves"] = np.array([np.asarray(c) for c in leaves])
@@ -165,12 +166,15 @@ def _traverse_rec(
     content.append(root)
 
     if idx == 0:
-        draw_decay_root = pyro.sample("decay" + str(idx) + str(is_left), decay_dist)
+        # draw_decay_root = pyro.sample("decay" + str(idx) + str(is_left), decay_dist)
         if Mw:
             delta_P = Mw / 2
             drew = (-1 / rate) * np.log(1 / rate)  # So that likelihood=1
 
         elif Mw is None:
+
+            draw_decay_root = pyro.sample("decay" + str(idx) + str(is_left), decay_dist)
+
             delta_P = delta_P * draw_decay_root
             drew = draw_decay_root
 
