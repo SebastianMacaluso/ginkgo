@@ -80,11 +80,11 @@ if __name__ == "__main__":
         "--jet_p",
         nargs="+",
         type=float,
-        default=[800.0, 600.0],
+        default=[500.0, 400.0],
         help="initial jet momentum",
     )
     parser.add_argument("--pt_cut", type=float, default=0.04, help="IR cutoff")
-    parser.add_argument("--rate", type=float, default=4.0, help="Emission rate")
+    parser.add_argument("--rate", type=float, default=3.6, help="Emission rate")
 
     parser.add_argument(
         "--rate_2", type=float, default=10.0, help="Emission rate"
