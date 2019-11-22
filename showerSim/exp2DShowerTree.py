@@ -59,19 +59,23 @@ class Simulator(PyroSimulator):
             jet["Lambda"] = decay_rate
             jet["Delta_0"] = self.Delta_0
             jet["pt_cut"] = self.pt_cut
-            jet["M_Hard"] = float(self.Mw)
             jet["algorithm"] = "truth"
             jet["deltas"] = np.asarray(deltas)
             jet["draws"] = np.asarray(draws)
             jet["leaves"] = np.array([np.asarray(c) for c in leaves])
+            if self.Mw:
+                jet["M_Hard"] = float(self.Mw)
+            else:
+                jet["M_Hard"] = float(2*deltas[0])
 
             """Fill jet dictionaries with log likelihood of truth jet"""
             likelihood.enrich_jet_logLH(jet, dij=True)
 
             """ Angular quantities"""
-            ConstPhi, PhiDelta = auxFunctions.traversePhi(jet, jet["root_id"], [], [])
+            ConstPhi, PhiDelta, PhiDeltaListRel = auxFunctions.traversePhi(jet, jet["root_id"], [], [],[])
             jet["ConstPhi"] = ConstPhi
             jet["PhiDelta"] = PhiDelta
+            jet["PhiDeltaRel"] = PhiDeltaListRel
 
             jet_list.append(jet)
 
