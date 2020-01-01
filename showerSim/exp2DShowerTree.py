@@ -34,8 +34,8 @@ class Simulator(PyroSimulator):
 
         decay_rate = inputs
 
-        logger.info(f"Num samples: {self.num_samples}")
-        logger.info(f"Energy Scales: {self.Delta_0}")
+        logger.debug(f"Num samples: {self.num_samples}")
+        logger.debug(f"Energy Scales: {self.Delta_0}")
 
         # Define the pyro distributions for theta and Delta as global variables
         globals()["phi_dist"] = pyro.distributions.Uniform(0, 2 * np.pi)
