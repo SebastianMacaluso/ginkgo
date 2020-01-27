@@ -197,45 +197,45 @@ def _get_jet_logLH(
         idR = jet["tree"][root_id][1]
         pL = jet["content"][idL]
         pR = jet["content"][idR]
-        # delta_L = jet["deltas"][idL]
-        # delta_R = jet["deltas"][idR]
+        delta_L = jet["deltas"][idL]
+        delta_R = jet["deltas"][idR]
 
 
-        p_P =jet["content"][root_id]
-        delta_L = get_delta_PC(p_P, pL)
-        delta_R = get_delta_PC(p_P, pR)
+        # p_P =jet["content"][root_id]
+        # delta_L = get_delta_PC(p_P, pL)
+        # delta_R = get_delta_PC(p_P, pR)
         # print(idL, idR,pL,pR,delta_L,delta_R,  delta_min, Lambda)
 
-        # if M_Hard is not None and root_id == jet["root_id"]:
-        #
-        #     logLH.append(0)
-        #
-        #
-        # else:
+        if M_Hard is not None and root_id == jet["root_id"]:
 
-        llh, _ , _ , _ = split_logLH(pL, delta_L, pR, delta_R, delta_min, Lambda)
-        logLH.append(llh)
-        # print('logLH = ', llh)
+            logLH.append(0)
 
-        if dij:
 
-            """ dij=min(pTi^(2 alpha),pTj^(2 alpha)) * [arccos((pi.pj)/|pi|*|pj|)]^2 """
-            # epsilon = 1e-6  # For numerical stability
-            dijs= [float(llh)]
+        else:
 
-            for alpha in [-1,0,1]:
+            llh, _ , _ , _ = split_logLH(pL, delta_L, pR, delta_R, delta_min, Lambda)
+            logLH.append(llh)
+            # print('logLH = ', llh)
 
-                tempCos = np.dot(pL, pR) / (np.linalg.norm(pL) * np.linalg.norm(pR))
-                if abs(tempCos) > 1: tempCos = np.sign(tempCos)
+            if dij:
 
-                dijVal = np.sort((np.abs([pL[0],pR[0]])) ** (2 * alpha))[0]  * \
-                         (
-                             np.arccos(tempCos)
-                          ) ** 2
+                """ dij=min(pTi^(2 alpha),pTj^(2 alpha)) * [arccos((pi.pj)/|pi|*|pj|)]^2 """
+                # epsilon = 1e-6  # For numerical stability
+                dijs= [float(llh)]
 
-                dijs.append(dijVal)
+                for alpha in [-1,0,1]:
 
-            dijList.append(dijs)
+                    tempCos = np.dot(pL, pR) / (np.linalg.norm(pL) * np.linalg.norm(pR))
+                    if abs(tempCos) > 1: tempCos = np.sign(tempCos)
+
+                    dijVal = np.sort((np.abs([pL[0],pR[0]])) ** (2 * alpha))[0]  * \
+                             (
+                                 np.arccos(tempCos)
+                              ) ** 2
+
+                    dijs.append(dijVal)
+
+                dijList.append(dijs)
 
 
         _get_jet_logLH(
