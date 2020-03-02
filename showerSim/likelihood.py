@@ -18,6 +18,13 @@ def get_delta_PC(p, pC):
 
 
 
+
+
+
+
+
+
+
 def split_logLH(pL, delta_L, pR, delta_R, delta_min, lam):
     """
     Takes two edges (p, delta) and
@@ -197,21 +204,30 @@ def _get_jet_logLH(
         idR = jet["tree"][root_id][1]
         pL = jet["content"][idL]
         pR = jet["content"][idR]
-        # delta_L = jet["deltas"][idL]
-        # delta_R = jet["deltas"][idR]
+        delta_L = jet["deltas"][idL]
+        delta_R = jet["deltas"][idR]
+
+        # print(delta_L, delta_R, Lambda)
+        # print("---"*5)
+        # p_P =jet["content"][root_id]
+
+        # if jet["tree"][idL][0] !=-1:
+        #
+        #     delta_L = get_delta_PC(pL, jet["content"][jet["tree"][idL][0]])
+        #
+        # if jet["tree"][idR][0] != -1:
+        #     delta_R = get_delta_PC(pR, jet["content"][jet["tree"][idR][0]])
 
 
-        p_P =jet["content"][root_id]
-        delta_L = get_delta_PC(p_P, pL)
-        delta_R = get_delta_PC(p_P, pR)
+        #
+        # print(delta_L, delta_R, Lambda)
+
+        # jet["deltas"][idL] = delta_L
+        # jet["deltas"][idR] = delta_R
+
         # print(idL, idR,pL,pR,delta_L,delta_R,  delta_min, Lambda)
 
-        # if M_Hard is not None and root_id == jet["root_id"]:
-        #
-        #     logLH.append(0)
-        #
-        #
-        # else:
+ 
 
         llh, _ , _ , _ = split_logLH(pL, delta_L, pR, delta_R, delta_min, Lambda)
         logLH.append(llh)
