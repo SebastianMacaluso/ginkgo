@@ -211,6 +211,7 @@ def _get_jet_logLH(
         # print("---"*5)
         # p_P =jet["content"][root_id]
 
+
         # if jet["tree"][idL][0] !=-1:
         #
         #     delta_L = get_delta_PC(pL, jet["content"][jet["tree"][idL][0]])
@@ -228,6 +229,14 @@ def _get_jet_logLH(
         # print(idL, idR,pL,pR,delta_L,delta_R,  delta_min, Lambda)
 
  
+
+        # p_P =jet["content"][root_id]
+        # delta_L = get_delta_PC(p_P, pL)
+        # delta_R = get_delta_PC(p_P, pR)
+        # print(idL, idR,pL,pR,delta_L,delta_R,  delta_min, Lambda)
+
+
+
 
         llh, _ , _ , _ = split_logLH(pL, delta_L, pR, delta_R, delta_min, Lambda)
         logLH.append(llh)
