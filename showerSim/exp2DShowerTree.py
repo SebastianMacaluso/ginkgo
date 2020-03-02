@@ -79,6 +79,9 @@ class Simulator(PyroSimulator):
 
             jet_list.append(jet)
 
+            logger.info(f" content = {jet['leaves']}")
+            logger.info(f" N const = {len(jet['leaves'])}")
+
             logger.debug(f"Tree: {jet['tree']}")
             logger.debug(f"Content: {jet['content']}")
             logger.debug(f"Deltas: {jet['deltas']}")
