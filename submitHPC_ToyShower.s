@@ -25,13 +25,12 @@ mkdir -p $RUNDIR
 
 cd $HOME/ToyJetsShower/
 
-##python jetClustering.py --greedyScan=True --id=${SLURM_ARRAY_TASK_ID}
 
-## GREEDY
-##python jetClustering.py --greedyScan=True --N_jets=500 --id=${SLURM_ARRAY_TASK_ID}
+## W jets
+##python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=Wjets
 
-##Beam Search
-python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID}
+##QCD jets
+python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=QCDjets
 
 ## to submit(for 2 jobs): sbatch --array 0-2 submitHPC_ToyShower.s
 

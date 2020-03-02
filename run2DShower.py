@@ -6,6 +6,7 @@ import sys
 import pickle
 import argparse
 import logging
+import os
 
 from showerSim import exp2DShowerTree
 from showerSim.utils import get_logger
@@ -32,6 +33,10 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "--jetType", type=str, required=True, help="Input jet type, e.g. 'QCDjets' or 'Wjets' "
+)
+
+parser.add_argument(
     "--id", type=str, default=0, help="dataset id"
 )
 
@@ -45,17 +50,53 @@ args = parser.parse_args()
 
 rate2=torch.tensor(8.)
 
-rate=torch.tensor(3.6)
+# rate=torch.tensor(3.6)
+# jetPT = torch.tensor([10000.,10000.])
+jetPT = torch.tensor([0.,0.])
 
+
+
+## Values that result in a poor performance for beam search
+
+rate=torch.tensor(2.)
+Delta_start = 0.4
+pt_min = 0.008
+
+# rate=torch.tensor(2.2)
+# Delta_start = 0.4
+# pt_min = 0.006
+ ##########
+
+# rate=torch.tensor(10.)
+# Delta_start = 0.2
+# # pt_min = 0.004
+# pt_min = 0.08
+
+# Delta_start = 200
+# pt_min = 0.4
 
 # for i in range(start,end):
 
 # Values that give ~ 50 leaves, typically with px,py >0 for all of them.
 # simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=4, Mw=80., pt_cut=0.04)
-simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([500.,400.]), Mw=torch.tensor(80.), pt_cut=0.04, Delta_0=60., num_samples=int(args.Nsamples))
 
+
+if args.jetType == "Wjets":
+    simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([500.,400.]), Mw=torch.tensor(80.), pt_cut=0.04, Delta_0=60., num_samples=int(args.Nsamples))
+
+elif args.jetType == "QCDjets":
+    simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([500.,400.]), Mw=None, pt_cut=0.04, Delta_0=60., num_samples=int(args.Nsamples))
+
+elif args.jetType == "Topjets":
+    simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([500.,400.]), Mw=torch.tensor(173.), pt_cut=0.04, Delta_0=60., num_samples=int(args.Nsamples))
+
+else:
+    raise ValueError(f"Please choose a valid jet type (QCDjets, Wjets or Topjets)")
 
 # Values for tests
+# simulator = exp2DShowerTree.Simulator(jet_p=jetPT, pt_cut=pt_min, Delta_0=Delta_start, num_samples=int(args.Nsamples))
+simulator = exp2DShowerTree.Simulator(jet_p=jetPT,Mw=torch.tensor(0.1), pt_cut=pt_min, Delta_0=Delta_start, num_samples=int(args.Nsamples))
+
 # simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([400.,250.]), Mw=torch.tensor(80.), pt_cut=1, Delta_0=60., num_samples=1)
 # simulator = exp2DShowerTree.Simulator(jet_p=[800.,600.], rate=10, pt_cut=0.5)
 #simulator = Simulator(sensitivities=True)
@@ -114,11 +155,16 @@ else:
 
 
 
-ToyModelDir = "/scratch/sm4511/ToyJetsShower/data"
-TreeAlgoDir = "/scratch/sm4511/TreeAlgorithms/data/Truth"
+ToyModelDir = "/scratch/sm4511/ToyJetsShower/data/"+args.jetType
+TreeAlgoDir = "/scratch/sm4511/TreeAlgorithms/data/"+args.jetType+"/Truth/"
 
-simulator.save(jet_list, TreeAlgoDir, "tree_" + str(args.Nsamples) + "_truth_" + str(args.id))
-simulator.save(jet_list, ToyModelDir, "tree_"+str(args.Nsamples)+"_truth_"+str(args.id))
+os.system("mkdir -p "+ToyModelDir)
+os.system("mkdir -p "+TreeAlgoDir)
+
+# simulator.save(jet_list, TreeAlgoDir, "tree_" + str(args.Nsamples) + "_truth_" + str(args.id))
+# simulator.save(jet_list, ToyModelDir, "tree_"+str(args.Nsamples)+"_truth_"+str(args.id))
+
+
 
 # simulator.save(jet_list, "../TreeAlgorithms/data/truth", "tree_" + str(Nsamples) + "_truth_" + str(i))
 # simulator.save(jet_list, "./data/truth", "tree_"+str(Nsamples)+"_truth_"+str(i))
