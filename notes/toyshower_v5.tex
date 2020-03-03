@@ -341,7 +341,7 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
     \SetKwInOut{Input}{Input}
     \SetKwInOut{Output}{Output}
 
-    function Exp2DShower $(\vec{p}_{\text{p}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree})$\\
+    function NodeProcessing $(\vec{p}_{\text{p}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree})$\\
     \Input{parent momentum $\vec{p}_{\text{p}}$, parent splitting scale $\Delta_\text{p}$, cut-off scale $\Delta_\text{cut}$, rate for the exponential distribution $\lambda$, binary tree $tree$}
     \Indp
 %    idx = length of tree modulo 2\\
@@ -354,8 +354,8 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
       	$\vec{p}_\text{L}= \frac{1}{2} \vec{p}_\text{p} - \vec{\Delta}_\text{p}$  \\
         $\vec{p}_\text{R}= \frac{1}{2} \vec{p}_\text{p} +\vec{\Delta}_\text{p}$\\
         draw $\Delta_\text{L}$, $\Delta_\text{R}$ from the exponential distribution in Eq.~\ref{eq:exponential}.\\
-	Exp2DShower $(\vec{p}_{\text{L}}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree})$\\
-	Exp2DShower $(\vec{p}_{\text{R}}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree})$\\
+	NodeProcessing $(\vec{p}_{\text{L}}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree})$\\
+	NodeProcessing $(\vec{p}_{\text{R}}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree})$\\
       }
     \caption{Toy Parton Shower Generator}
 \end{algorithm}
@@ -369,7 +369,7 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
 %    \SetKwInOut{Input}{Input}
 %    \SetKwInOut{Output}{Output}
 %
-%    function Exp2DShower $(\vec{p}_{\text{p}},\text{idx}_{\text{gp}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+%    function NodeProcessing $(\vec{p}_{\text{p}},\text{idx}_{\text{gp}}, \Delta_\text{p}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
 %    \Input{parent momentum $\vec{p}_{\text{p}}$, grandparent index $\text{idx}_\text{gp}$, parent splitting scale $\Delta_\text{p}$, cut-off scale $\Delta_\text{cut}$, rate for the exponential distribution $\lambda$, list with tree structure $tree$, list with nodes momentum $content$}
 %    \Indp
 %    idx = length of tree modulo 2\\
@@ -384,8 +384,8 @@ The algorithm is outlined in more detail in Algorithm 1. After running the algor
 %        draw $r_L$, $r_R$ from the exponential distribution in Eq.~\ref{eq:exponential}.\\
 %        $\Delta_\text{L} = \Delta_\text{p} \,\, r_\text{L}$\\
 %	$\Delta_\text{R} = \Delta_\text{p} \,\, r_\text{R}$\\
-%	Exp2DShower $(\vec{p}_{\text{L}},\text{idx}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
-%	Exp2DShower $(\vec{p}_{\text{R}},\text{idx}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+%	NodeProcessing $(\vec{p}_{\text{L}},\text{idx}, \Delta_\text{L}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
+%	NodeProcessing $(\vec{p}_{\text{R}},\text{idx}, \Delta_\text{R}, \Delta_\text{cut}, \lambda, \text{tree}, \text{content})$\\
 %      }
 %    \caption{Toy Parton Shower Generator}
 %\end{algorithm}

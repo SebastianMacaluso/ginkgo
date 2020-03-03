@@ -18,82 +18,40 @@ def get_delta_PC(p, pC):
 
 
 
-
-
-
-
-
-
-
-def split_logLH(pL, delta_L, pR, delta_R, delta_min, lam):
+def split_logLH(pL, tL, pR, tR, t_cut, lam):
     """
-    Takes two edges (p, delta) and
-    return the splitting that generated them (p, delta_P, phi)
-    with its log likelihood
+    Take two nodes and return the splitting log likelihood
     """
-    p = pR + pL
-    delta_vec = (pR - pL) / 2
-    phi = np.arctan2(delta_vec[0], delta_vec[1])
-    delta_P = get_delta_LR(pL, pR)
+    pP = pR + pL
 
-    def get_p(delta_P, delta, delta_min, lam):
-        if delta > 0:
-            # r = delta / delta_P
-            return np.log(lam) - np.log(delta_P) - lam * delta / delta_P
-        else:
-            # r = delta_min / delta_P
-            return np.log(1 - np.exp(-lam * delta_min / delta_P))
+    """Parent invariant mass squared"""
+    tp1 = pP[0] ** 2 - np.linalg.norm(pP[1::]) ** 2
 
+    tmax = max(tL,tR)
+    tmin = min(tL,tR)
+
+    tp2 = (np.sqrt(tp1) - np.sqrt(tmax)) ** 2
+
+    """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing """
+    def get_p(tP, t, t_cut, lam):
+        if t > 0:
+            return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP
+
+        else: # if t<t_min then we set t=0
+            return -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_cut / tP))
+
+    """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
     logLH = (
-        get_p(delta_P, delta_L, delta_min, lam)
-        + get_p(delta_P, delta_R, delta_min, lam)
-        + np.log(1 / 2 / np.pi)
+        get_p(tp1, tmax, t_cut, lam)
+        + get_p(tp2, tmin, t_cut, lam)
+        + np.log(1 / (4 * np.pi))
     )
 
-    if delta_P < delta_min:
+    "If the pairing is not allowed"
+    if tp1 < t_cut:
         logLH = - np.inf
-
-    return logLH, p, delta_P, phi
-
-
-
-
-def Basic_split_logLH(pL, delta_L, pR, delta_R, delta_min, lam):
-    """
-    Takes two edges (p, delta) and
-    return the splitting that generated them (p, delta_P, phi)
-    with its log likelihood
-
-    Note: Leaves in the Toy Generative Model are assigned Delta=0
-    """
-
-    delta_P = get_delta_LR(pL, pR)
-
-    # Get logLH
-    def get_p(delta_P, delta, delta_min, lam):
-        if delta > 0:
-            # r = delta / delta_P
-            return np.log(lam) - np.log(delta_P) - lam * delta / delta_P
-        else:
-            """ We set Delta=0 if the node is a leaf """
-            # r = delta_min / delta_P
-            return np.log(1 - np.exp(-lam * delta_min / delta_P))
-
-    if delta_P < delta_min:
-        logLH = - np.inf
-
-    else:
-
-        logLH = (
-            get_p(delta_P, delta_L, delta_min, lam)
-            + get_p(delta_P, delta_R, delta_min, lam)
-            + np.log(1 / 2 / np.pi)
-        )
 
     return logLH
-
-
-
 
 
 
@@ -147,7 +105,7 @@ def _get_jet_info(jet, root_id=None, parent_id=None, deltas=None, draws=None):
             draws.append(None)
 
 
-def enrich_jet_logLH(jet, Lambda=None, delta_min=None, dij=False, alpha = None):
+def enrich_jet_logLH(jet, delta_min=None, dij=False, alpha = None):
     """
     Attach splitting log likelihood to each edge, by calling recursive
     _get_jet_likelihood.
@@ -157,10 +115,6 @@ def enrich_jet_logLH(jet, Lambda=None, delta_min=None, dij=False, alpha = None):
 
     root_id = jet["root_id"]
 
-    if Lambda is None:
-        Lambda = float(jet.get("Lambda"))
-        if Lambda is None:
-            raise ValueError(f"No Lambda specified by the jet.")
     if delta_min is None:
         delta_min = jet.get("pt_cut")
         if delta_min is None:
@@ -169,7 +123,6 @@ def enrich_jet_logLH(jet, Lambda=None, delta_min=None, dij=False, alpha = None):
     _get_jet_logLH(
         jet,
         root_id = root_id,
-        Lambda = Lambda,
         delta_min = delta_min,
         logLH = logLH,
         dij = dij,
@@ -186,7 +139,6 @@ def enrich_jet_logLH(jet, Lambda=None, delta_min=None, dij=False, alpha = None):
 def _get_jet_logLH(
         jet,
         root_id = None,
-        Lambda = None,
         delta_min = None,
         logLH = None,
         dij = False,
@@ -204,56 +156,29 @@ def _get_jet_logLH(
         idR = jet["tree"][root_id][1]
         pL = jet["content"][idL]
         pR = jet["content"][idR]
-        delta_L = jet["deltas"][idL]
-        delta_R = jet["deltas"][idR]
+        tL = jet["deltas"][idL]
+        tR = jet["deltas"][idR]
 
-        # print(delta_L, delta_R, Lambda)
-        # print("---"*5)
-        # p_P =jet["content"][root_id]
-
-
-        # if jet["tree"][idL][0] !=-1:
-        #
-        #     delta_L = get_delta_PC(pL, jet["content"][jet["tree"][idL][0]])
-        #
-        # if jet["tree"][idR][0] != -1:
-        #     delta_R = get_delta_PC(pR, jet["content"][jet["tree"][idR][0]])
+        Lambda = jet["Lambda"]
+        if root_id == jet["root_id"]:
+            Lambda = jet["LambdaRoot"]
 
 
-        #
-        # print(delta_L, delta_R, Lambda)
-
-        # jet["deltas"][idL] = delta_L
-        # jet["deltas"][idR] = delta_R
-
-        # print(idL, idR,pL,pR,delta_L,delta_R,  delta_min, Lambda)
-
- 
-
-        # p_P =jet["content"][root_id]
-        # delta_L = get_delta_PC(p_P, pL)
-        # delta_R = get_delta_PC(p_P, pR)
-        # print(idL, idR,pL,pR,delta_L,delta_R,  delta_min, Lambda)
-
-
-
-
-        llh, _ , _ , _ = split_logLH(pL, delta_L, pR, delta_R, delta_min, Lambda)
+        llh = split_logLH(pL, tL, pR, tR, delta_min, Lambda)
         logLH.append(llh)
         # print('logLH = ', llh)
 
         if dij:
 
             """ dij=min(pTi^(2 alpha),pTj^(2 alpha)) * [arccos((pi.pj)/|pi|*|pj|)]^2 """
-            # epsilon = 1e-6  # For numerical stability
             dijs= [float(llh)]
 
             for alpha in [-1,0,1]:
 
-                tempCos = np.dot(pL, pR) / (np.linalg.norm(pL) * np.linalg.norm(pR))
+                tempCos = np.dot(pL[1::], pR[1::]) / (np.linalg.norm(pL[1::]) * np.linalg.norm(pR[1::]))
                 if abs(tempCos) > 1: tempCos = np.sign(tempCos)
 
-                dijVal = np.sort((np.abs([pL[0],pR[0]])) ** (2 * alpha))[0]  * \
+                dijVal = np.sort((np.array([np.linalg.norm(pL[1:3]),np.linalg.norm(pR[1:3])])) ** (2 * alpha))[0]  * \
                          (
                              np.arccos(tempCos)
                           ) ** 2
@@ -266,7 +191,6 @@ def _get_jet_logLH(
         _get_jet_logLH(
             jet,
             root_id = idL,
-            Lambda = Lambda,
             delta_min = delta_min,
             logLH = logLH,
             dij = dij,
@@ -276,7 +200,6 @@ def _get_jet_logLH(
         _get_jet_logLH(
             jet,
             root_id = idR,
-            Lambda = Lambda,
             delta_min = delta_min,
             logLH = logLH,
             dij = dij,
