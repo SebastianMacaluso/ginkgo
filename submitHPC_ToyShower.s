@@ -25,14 +25,29 @@ mkdir -p $RUNDIR
 
 cd $HOME/ToyJetsShower/
 
-
+######  Ginkgo 2D  ############
 ## W jets
 ##python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=Wjets
 
 ##QCD jets
-python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=QCDjets
+#python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=QCDjets
 
-## to submit(for 2 jobs): sbatch --array 0-2 submitHPC_ToyShower.s
+##TELLIS
+#python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=TrellisMw300
+
+#python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=TrellisMw01
+
+#python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=TrellisMw01B
+
+#To test
+#python run2DShower.py --Nsamples=3 --id=${SLURM_ARRAY_TASK_ID} --jetType=QCDjets
+
+
+######  Ginkgo invariant mass  ############
+python run_invMassGinkgo.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=QCD
+
+
+## to submit(for 3 jobs): sbatch --array 0-2 submitHPC_ToyShower.s
 
 
 
