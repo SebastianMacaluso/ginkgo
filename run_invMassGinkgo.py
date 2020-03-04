@@ -68,7 +68,12 @@ else:
 
 
 jetM = np.sqrt(M2start.numpy())
+<<<<<<< Updated upstream
 
+=======
+# pt_min = torch.tensor(1**2)
+pt_min = torch.tensor(10**2)
+>>>>>>> Stashed changes
 
 jetdir = np.array([1,1,1])
 jetP = 400.
@@ -141,8 +146,12 @@ TreeAlgoDir = "/scratch/sm4511/TreeAlgorithms/data/invMassGinkgo/Trellis/Truth"
 os.system("mkdir -p "+ToyModelDir)
 os.system("mkdir -p "+TreeAlgoDir)
 
+
 simulator.save(jet_list, TreeAlgoDir, "tree_" + str(args.Nsamples) + "_truth_" + str(args.id))
 simulator.save(jet_list, ToyModelDir, "tree_"+str(args.Nsamples)+"_truth_"+str(args.id))
+
+save = True
+
 
 
 # save = False

@@ -83,6 +83,7 @@ class Simulator(PyroSimulator):
             # print(" N const = ",len(jet['leaves']))
             logger.info(f" Leaves  = {jet['leaves']}")
             logger.info(f" N const = {len(jet['leaves'])}")
+            # print(" N const =",len(jet['leaves']))
             logger.debug(f"Tree: {jet['tree']}")
             logger.debug(f"Content: {jet['content']}")
             logger.info(f" Total momentum from root = {jet['content'][0]}")
