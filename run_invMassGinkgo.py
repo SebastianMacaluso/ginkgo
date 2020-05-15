@@ -39,6 +39,17 @@ parser.add_argument(
     "--jetType", type=str, default="W", help="jet type: W or QCD"
 )
 
+
+parser.add_argument(
+    "--minLeaves", type=int, help="Minimum number of jet constituents (leaves)"
+)
+parser.add_argument(
+    "--maxLeaves", type=int, help="Maximum number of jet constituents (leaves)"
+)
+parser.add_argument(
+    "--maxNTry", type=int, default=20000, help="Maximum number of times we run the simulator"
+)
+
 args = parser.parse_args()
 
 
@@ -46,6 +57,8 @@ rate2=torch.tensor(8.)
 
 # Parameters to get ~<10 constituents to test the trellis algorithm
 pt_min = torch.tensor(4.**2)
+
+# pt_min = torch.tensor(0.6**2)
 
 ### Physics inspired parameters to get ~ between 20 and 50 constituents
 W_rate = 3.
@@ -68,12 +81,10 @@ else:
 
 
 jetM = np.sqrt(M2start.numpy())
-<<<<<<< Updated upstream
 
-=======
 # pt_min = torch.tensor(1**2)
-pt_min = torch.tensor(10**2)
->>>>>>> Stashed changes
+# pt_min = torch.tensor(10**2)
+
 
 jetdir = np.array([1,1,1])
 jetP = 400.
@@ -84,7 +95,15 @@ logger.debug(f"jet4vec = {jet4vec}")
 
 
 
-simulator = invMass_ginkgo.Simulator(jet_p=jet4vec, pt_cut=float(pt_min), Delta_0=M2start, M_hard=jetM , num_samples=int(args.Nsamples))
+simulator = invMass_ginkgo.Simulator(jet_p=jet4vec,
+                                     pt_cut=float(pt_min),
+                                     Delta_0=M2start,
+                                     M_hard=jetM ,
+                                     num_samples=int(args.Nsamples),
+                                     minLeaves =int(args.minLeaves),
+                                     maxLeaves = int(args.maxLeaves),
+                                     maxNTry = int(args.maxNTry)
+                                     )
 
 
 #---------------
@@ -150,7 +169,6 @@ os.system("mkdir -p "+TreeAlgoDir)
 simulator.save(jet_list, TreeAlgoDir, "tree_" + str(args.Nsamples) + "_truth_" + str(args.id))
 simulator.save(jet_list, ToyModelDir, "tree_"+str(args.Nsamples)+"_truth_"+str(args.id))
 
-save = True
 
 
 
@@ -158,12 +176,13 @@ save = True
 #
 # if save:
 #     TreeAlgoDataDir = "../TreeAlgorithms/data/invMassGinkgo/Truth"
-#     ShowerDatadir = "./data/invMassGinkgo"
+#     # ShowerDatadir = "./data/invMassGinkgo"
+#     ShowerDatadir = "/Users/sebastianmacaluso/Documents/PrinceData/invMassGinkgo"
 #     os.system("mkdir -p "+ShowerDatadir)
 #     os.system("mkdir -p "+TreeAlgoDataDir)
 #
-#     simulator.save(jet_list, ShowerDatadir, "tree_"+ str(args.jetType)+"_" + str(args.Nsamples) +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
-#     simulator.save(jet_list,TreeAlgoDataDir, "tree_"+ str(args.jetType)+"_" +str(args.Nsamples) +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
+#     simulator.save(jet_list, ShowerDatadir, "tree_"+ str(args.jetType)+"_" + str(args.Nsamples)+"_m2min_"+str(float(pt_min))[0:3] +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
+#     # simulator.save(jet_list,TreeAlgoDataDir, "tree_"+ str(args.jetType)+"_" +str(args.Nsamples) +"_m2min_"+str(float(pt_min))[0:3]+"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
 
 
 # To run: python run_invMassGinkgo.py --jetType=W --Nsamples=2 --id=0
