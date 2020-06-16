@@ -18,13 +18,16 @@ logger = get_logger()
 
 
 class Simulator(PyroSimulator):
-    def __init__(self, jet_p=None, pt_cut=1.0, M_hard=None, Delta_0=None, num_samples=1):
+    def __init__(self, jet_p=None, pt_cut=1.0, M_hard=None, Delta_0=None, num_samples=1, minLeaves =2 , maxLeaves=np.inf, maxNTry=20000 ):
         super(Simulator, self).__init__()
 
         self.pt_cut = pt_cut
         self.M_hard = M_hard
         self.Delta_0 = Delta_0
         self.num_samples = num_samples
+        self.minLeaves = minLeaves
+        self.maxLeaves = maxLeaves
+        self.maxNTry = maxNTry
 
         self.jet_p = jet_p
 
@@ -45,7 +48,9 @@ class Simulator(PyroSimulator):
 
 
         jet_list = []
-        for i in range(self.num_samples):
+        # for i in range(self.num_samples):
+        i=0
+        while len(jet_list)< self.num_samples and i<self.maxNTry:
 
             tree, content, deltas, draws, leaves = _traverse(
                 self.jet_p,
@@ -66,38 +71,51 @@ class Simulator(PyroSimulator):
             jet["deltas"] = np.asarray(deltas)
             jet["draws"] = np.asarray(draws)
             jet["leaves"] = np.array([np.asarray(c) for c in leaves])
-            if self.M_hard:
-                jet["M_Hard"] = float(self.M_hard)
 
-            """Fill jet dictionaries with log likelihood of truth jet"""
-            likelihood.enrich_jet_logLH(jet, dij=True)
+            if self.minLeaves <= len(jet["leaves"]) < self.maxLeaves:
 
-            """ Angular quantities"""
-            ConstPhi, PhiDelta, PhiDeltaListRel = auxFunctions.traversePhi(jet, jet["root_id"], [], [],[])
-            jet["ConstPhi"] = ConstPhi
-            jet["PhiDelta"] = PhiDelta
-            jet["PhiDeltaRel"] = PhiDeltaListRel
+                if self.M_hard:
+                    jet["M_Hard"] = float(self.M_hard)
 
-            jet_list.append(jet)
+                """Fill jet dictionaries with log likelihood of truth jet"""
+                likelihood.enrich_jet_logLH(jet, dij=True)
 
-            logger.info(f" Leaves  = {jet['leaves']}")
-            logger.info(f" N const = {len(jet['leaves'])}")
-            logger.debug(f"Tree: {jet['tree']}")
-            logger.debug(f"Content: {jet['content']}")
-            logger.info(f" Total momentum from root = {jet['content'][0]}")
-            logger.info(f" Total momentum from leaves = {np.sum(jet['leaves'],axis=0)}")
-            logger.info(f" Jet Mass = {jet['M_Hard']}")
-            logger.info(f" Jet likelihood = {jet['logLH']}")
+                """ Angular quantities"""
+                ConstPhi, PhiDelta, PhiDeltaListRel = auxFunctions.traversePhi(jet, jet["root_id"], [], [],[])
+                jet["ConstPhi"] = ConstPhi
+                jet["PhiDelta"] = PhiDelta
+                jet["PhiDeltaRel"] = PhiDeltaListRel
 
 
-            logger.debug(f"Tree: {jet['tree']}")
-            logger.debug(f"Content: {jet['content']}")
-            logger.debug(f"Deltas: {jet['deltas']}")
-            logger.debug(f"Draws: {jet['draws']}")
-            logger.debug(f"Leaves: {jet['leaves']}")
 
-            if i%100==0:
+                jet_list.append(jet)
+
+                print(" N const = ", len(jet['leaves']))
+
+                if len(jet_list) % 1000 == 0:
+                    print("Generated ", len(jet_list), "jets with ", self.minLeaves, "<=number of leaves<", self.maxLeaves)
+
+
+                logger.info(f" Leaves  = {jet['leaves']}")
+                logger.info(f" N const = {len(jet['leaves'])}")
+                logger.debug(f"Tree: {jet['tree']}")
+                logger.debug(f"Content: {jet['content']}")
+                logger.info(f" Total momentum from root = {jet['content'][0]}")
+                logger.info(f" Total momentum from leaves = {np.sum(jet['leaves'],axis=0)}")
+                logger.info(f" Jet Mass = {jet['M_Hard']}")
+                logger.info(f" Jet likelihood = {jet['logLH']}")
+
+
+                logger.debug(f"Tree: {jet['tree']}")
+                logger.debug(f"Content: {jet['content']}")
+                logger.debug(f"Deltas: {jet['deltas']}")
+                logger.debug(f"Draws: {jet['draws']}")
+                logger.debug(f"Leaves: {jet['leaves']}")
+
+            i += 1
+            if i%1000==0:
                 print("Generated ",i," jets")
+
 
         return jet_list
 

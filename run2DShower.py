@@ -49,10 +49,15 @@ args = parser.parse_args()
 # rate=torch.tensor(10.)
 
 rate2=torch.tensor(8.)
+#
+# rate=torch.tensor(3.6)
+
+
 
 # rate=torch.tensor(3.6)
 # jetPT = torch.tensor([10000.,10000.])
 jetPT = torch.tensor([0.,0.])
+
 
 
 
@@ -89,6 +94,32 @@ elif args.jetType == "QCDjets":
 
 elif args.jetType == "Topjets":
     simulator = exp2DShowerTree.Simulator(jet_p=torch.tensor([500.,400.]), Mw=torch.tensor(173.), pt_cut=0.04, Delta_0=60., num_samples=int(args.Nsamples))
+
+if args.jetType == "TrellisMw300":
+    ## TRELLIS
+    jetPT = torch.tensor([0., 0.])
+    rate = torch.tensor(10.)
+    Delta_start = 0.2
+    # pt_min = 0.004
+    pt_min = 0.08
+    simulator = exp2DShowerTree.Simulator(jet_p=jetPT, Mw=torch.tensor(300.), pt_cut=pt_min, Delta_0=60., num_samples=int(args.Nsamples))
+
+if args.jetType == "TrellisMw01":
+    ## TRELLIS
+    jetPT = torch.tensor([0., 0.])
+    rate = torch.tensor(2.2)
+    Delta_start = 0.4
+    pt_min = 0.006
+    simulator = exp2DShowerTree.Simulator(jet_p=jetPT, Mw=torch.tensor(0.1), pt_cut=pt_min, Delta_0=60., num_samples=int(args.Nsamples))
+
+if args.jetType == "TrellisMw01B":
+    ## TRELLIS
+    jetPT = torch.tensor([0., 0.])
+    rate = torch.tensor(2.)
+    Delta_start = 0.4
+    pt_min = 0.008
+    simulator = exp2DShowerTree.Simulator(jet_p=jetPT, Mw=torch.tensor(0.1), pt_cut=pt_min, Delta_0=60., num_samples=int(args.Nsamples))
+
 
 else:
     raise ValueError(f"Please choose a valid jet type (QCDjets, Wjets or Topjets)")

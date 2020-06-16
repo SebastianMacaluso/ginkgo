@@ -5,16 +5,21 @@ import torch
 
 def get_delta_LR(pL, pR):
     """
-    Calculate delta of an edge, given its child momenta
+    Calculate invariant mass of a node, given its child momenta
     """
-    return np.sqrt(np.sum((pR / 2 - pL / 2) ** 2))
+    pP = pR + pL
 
+    """Parent invariant mass squared"""
+    tp1 = pP[0] ** 2 - np.linalg.norm(pP[1::]) ** 2
 
-def get_delta_PC(p, pC):
-    """
-    Calculate delta of an edge, given its momentum and the momentum of a child
-    """
-    return np.sqrt(np.sum((p / 2 - pC) ** 2))
+    return tp1
+
+#
+# def get_delta_PC(p, pC):
+#     """
+#     Calculate delta of an edge, given its momentum and the momentum of a child
+#     """
+#     return np.sqrt(np.sum((p / 2 - pC) ** 2))
 
 
 
