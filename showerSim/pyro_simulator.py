@@ -92,8 +92,8 @@ class PyroSimulator(Simulator):
     def _calculate_x(trace):
         """
         Access the output values (this is why we use the key "_RETURN")
-        :param trace:
-        :return:
+        param trace
+        return
         """
         node = trace.nodes["_RETURN"]
         x = node["value"]
@@ -101,12 +101,12 @@ class PyroSimulator(Simulator):
 
     # -------------------------------
     def _calculate_dist_joint_log_prob(self, trace, type= None):
-        '''
+        """
         We multiply the prob of making a decision at each step ( or add the log of the prob: Sum_t log[prob(x,z^i_t|theta)])
-        :param trace:
-        :param type:
-        :return:
-        '''
+        param trace:
+        param type:
+        return:
+        """
         log_p = 0.0
         # for distribution, z, param in self._get_branchings(trace):
         for i,(distribution, z, param) in enumerate(self._get_branchings(trace)):
