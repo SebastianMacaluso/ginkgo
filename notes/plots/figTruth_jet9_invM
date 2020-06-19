@@ -1,0 +1,1346 @@
+digraph {
+	graph [rank=flow]
+	node [style=filled]
+	edge [arrowsize=0.1]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:326.6
+ m:80.00 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		0 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:106.4
+ m:39.09 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		1 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	0 -> 1 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:89.2
+ m:14.21 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		2 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	1 -> 2 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:28.2
+ m:7.04 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		3 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	2 -> 3 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:18.1
+ m:5.59 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		4 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	3 -> 4 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:11.0
+ m:3.69 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		5 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	4 -> 5 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:10.7
+ m:2.78 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		6 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	5 -> 6 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:7.0
+ m:2.21 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		7 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	6 -> 7 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:5.4
+ m:1.82 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		8 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	7 -> 8 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:4.0
+ m:1.13 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		9 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	8 -> 9 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.5
+ m:0.51 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		10 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	9 -> 10 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:2.6
+ m:0.46 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		11 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	9 -> 11 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.4
+ m:0.44 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		12 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	8 -> 12 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.6
+ m:0.35 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		13 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	7 -> 13 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:3.7
+ m:0.10 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		14 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	6 -> 14 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:0.3
+ m:0.43 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		15 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	5 -> 15 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:7.3
+ m:1.01 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		16 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	4 -> 16 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:6.5
+ m:0.80 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		17 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	16 -> 17 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:0.8
+ m:0.10 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		18 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	16 -> 18 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:10.1
+ m:0.11 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		19 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	3 -> 19 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:61.1
+ m:1.36 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		20 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	2 -> 20 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:43.0
+ m:1.05 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		21 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	20 -> 21 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:34.9
+ m:0.91 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		22 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	21 -> 22 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:8.1
+ m:0.11 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		23 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	21 -> 23 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:18.1
+ m:0.26 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		24 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	20 -> 24 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:17.5
+ m:13.66 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		25 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	1 -> 25 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:10.8
+ m:2.99 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		26 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	25 -> 26 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:7.7
+ m:1.91 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		27 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	26 -> 27 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:6.4
+ m:1.35 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		28 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	27 -> 28 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:4.9
+ m:1.07 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		29 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	28 -> 29 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:3.0
+ m:0.81 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		30 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	29 -> 30 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.9
+ m:0.18 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		31 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	29 -> 31 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.5
+ m:0.19 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		32 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	28 -> 32 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.4
+ m:0.23 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		33 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	27 -> 33 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:3.1
+ m:0.81 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		34 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	26 -> 34 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:9.3
+ m:5.77 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		35 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	25 -> 35 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:8.4
+ m:5.24 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		36 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	35 -> 36 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:4.6
+ m:0.98 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		37 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	36 -> 37 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:3.9
+ m:3.36 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		38 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	36 -> 38 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.9
+ m:1.11 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		39 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	38 -> 39 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:0.4
+ m:0.47 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		40 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	39 -> 40 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.5
+ m:0.15 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		41 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	39 -> 41 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:2.8
+ m:0.74 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		42 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	38 -> 42 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.0
+ m:0.24 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		43 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	35 -> 43 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:222.1
+ m:18.29 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		44 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	0 -> 44 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:187.6
+ m:16.13 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		45 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	44 -> 45 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:8.3
+ m:2.18 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		46 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	45 -> 46 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:1.9
+ m:0.30 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		47 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	46 -> 47 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:6.5
+ m:1.29 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		48 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	46 -> 48 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:4.3
+ m:0.63 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		49 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	48 -> 49 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:2.2
+ m:0.21 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		50 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	48 -> 50 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:179.4
+ m:10.60 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		51 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	45 -> 51 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:95.5
+ m:3.01 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		52 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	51 -> 52 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:18.6
+ m:0.48 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		53 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	52 -> 53 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:77.0
+ m:1.72 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		54 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	52 -> 54 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:58.0
+ m:0.91 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		55 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	54 -> 55 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:18.9
+ m:0.44 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		56 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	54 -> 56 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:84.0
+ m:4.93 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		57 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	51 -> 57 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:68.8
+ m:3.58 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		58 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	57 -> 58 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:31.5
+ m:1.10 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		59 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	58 -> 59 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:10.4
+ m:0.57 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		60 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	59 -> 60 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:21.2
+ m:0.30 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		61 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	59 -> 61 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:37.3
+ m:2.23 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		62 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	58 -> 62 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:17.8
+ m:1.00 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		63 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	62 -> 63 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:11.5
+ m:0.74 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		64 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	63 -> 64 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:6.3
+ m:0.21 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		65 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	63 -> 65 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:19.5
+ m:0.94 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		66 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	62 -> 66 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:15.2
+ m:0.31 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		67 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	57 -> 67 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:34.5
+ m:1.03 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		68 [color=wheat height=1.25 shape=circle width=1.25]
+	}
+	44 -> 68 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:16.5
+ m:0.40 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		69 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	68 -> 69 [color=black]
+	{
+		node [fixedsize=true fontsize=20.0 height=0.1 label="pT:18.0
+ m:0.21 " style=filled width=0.1]
+		edge [arrowsize=0.1 minlen=0.1]
+		70 [color=lightblue height=1.25 shape=circle width=1.25]
+	}
+	68 -> 70 [color=black]
+	{
+		edge [arrowsize=0.1 style=invis]
+		rank=same
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		10 -> 11 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		11 -> 12 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		12 -> 13 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		13 -> 14 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		14 -> 15 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		15 -> 17 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		17 -> 18 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		18 -> 19 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		19 -> 22 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		22 -> 23 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		23 -> 24 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		24 -> 30 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		30 -> 31 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		31 -> 32 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		32 -> 33 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		33 -> 34 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		34 -> 37 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		37 -> 40 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		40 -> 41 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		41 -> 42 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		42 -> 43 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		43 -> 47 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		47 -> 49 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		49 -> 50 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		50 -> 53 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		53 -> 55 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		55 -> 56 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		56 -> 60 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			61 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		60 -> 61 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			61 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			64 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		61 -> 64 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			61 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			64 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			65 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		64 -> 65 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			61 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			64 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			65 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			66 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		65 -> 66 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			61 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			64 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			65 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			66 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			67 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		66 -> 67 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			61 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			64 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			65 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			66 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			67 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			69 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		67 -> 69 [color=black]
+		{
+			node [fixedsize=true height=0.1 style=filled width=0.1]
+			edge [arrowsize=0.1]
+			10 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			11 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			12 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			13 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			14 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			15 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			17 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			18 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			19 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			22 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			23 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			24 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			30 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			31 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			32 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			33 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			34 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			37 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			40 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			41 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			42 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			43 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			47 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			49 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			50 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			53 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			55 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			56 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			60 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			61 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			64 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			65 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			66 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			67 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			69 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+			70 [color=lightblue fontsize=17.0 height=0.8 shape=circle width=0.8]
+		}
+		69 -> 70 [color=black]
+	}
+	margin=0 nodesep=0.01 rankdir=TB ratio=0.5 size=10
+}

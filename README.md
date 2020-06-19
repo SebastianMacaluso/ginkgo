@@ -23,7 +23,7 @@ We want our model to represent the following set of features:
 
 - Momentum conservation: the total momentum of the jet (the momentum of the root of the tree) is obtained from adding the momentum of all of its constituents.
 
-- Running of the splitting scale Delta: each splitting is characterized by a scale that decreases when evolving down the tree from root to leaves.
+- Running of the splitting scale: each splitting is characterized by a scale t that decreases when evolving down the tree from root to leaves. In particular t is the invariant mass squared, t = m^2.
 
 We also want our model to lead to a natural analogue of the generalized k_t clustering algorithms for the generated jets. These algorithms are characterized by
 
@@ -31,26 +31,34 @@ We also want our model to lead to a natural analogue of the generalized k_t clus
 
 - Distance measure: the angular separation between two jet constituents is typically used as a distance measure among them. In particular, traditional jet clustering algorithms are based on a measure given by d_{ij} ~  Delta R_{ij}^2, where Delta R_{ij} is the angular separation between two particles.
 
-As a result, we build our model as follows. Each node of the jet tree represents a particle and encodes its momentum vector. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. The L (R) child's momentum is obtained from subtracting (adding) a vector of magnitude Delta to half of the parent's momentum vector. This prescription ensures *momentum conservation* and *permutation invariance*.
+We build our model as follows. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. At each splitting we sample squared invariant masses for the children, $t_L, t_R$ from a decaying exponential. We require the constraint t_L^0.5 + t_R^0.5 < t_P^0.5, where t_P is the parent mass squared. Then we implement a 2-body decay in the parent center-of-mass frame. The children direction is obtained by uniformly sampling a unit vector on the 2-sphere (in the parent center-of-mass frame the children move in opposite directions). Finally, we apply a Lorentz boost to the lab frame, to obtain the 4 dimensional vector p_\mu=(E, p_x, p_y, p_z) $ that characterizes each node.
+This prescription ensures *momentum conservation* and *permutation invariance**.
+
+<!-- 
+As a result, we build our model as follows. Each node of the jet tree represents a particle and encodes its momentum 4-vector. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. The L (R) child's momentum is obtained from subtracting (adding) a vector of magnitude Delta to half of the parent's momentum vector. This prescription ensures *momentum conservation* and *permutation invariance*.
 
 We consider a 2D model to be able to define an angular *distance measure*. Also, the angular separation between a parent and its L/R child's momentum is expected to decrease as the physics shower moves forward from the root to the leaves of the tree. The magnitude of the momentum of each node is also expected to drop in the same way, i.e. ``the radiation gets softer when evolving down the tree".
 Both requirements are satisfied by the *running of the splitting scale Delta*, which we achieve by rescaling the value of Delta by a factor r. (r is drawn from a decaying exponential distribution each time a new splitting is produced.) This way, we also assign a Delta value to each node of the tree. 
+ -->
 
 
+<!-- 
 We build our 2D model in the (y,z) plane, where *z* is the direction of the beam axis and *y* the transverse direction.(At the Large Hadron Collider, jets are produced from the collision of two beams of protons moving in opposite directions.)
 We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a tree visualization plot of a sample jet generated with our model.
+ -->
 
 
 <!--This should be  a jpg file for the figure to be displayed-->
-![Fig.1](notes/plots/figTruth_jet9.jpg)
+![Fig.1](notes/plots/figTruth_jet9_invM.jpg)
 
-##### Fig. 1: Tree visualization of a sample jet generated with our model that represents a W boson jet. We show the values of **p** =(p_y,p_z) for each node and the scale Delta for the splitting of the inner nodes. The horizontal ordering of the leaves corresponds to the order in which the leaves are accessed when traversing the tree (and is not related to the particle momentum **p**).
+##### Fig. 1: Tree visualization of a sample jet generated with our model that represents a W boson jet. We show the values of p_T =\sqrt{ p_x^2 +p_y^2} for each node and their mass. The horizontal ordering of the leaves corresponds to the order in which the leaves are accessed when traversing the tree (and is not related to the particle momentum \vec{p}).
 
 
 The algorithm is outlined in more detail below:
-![Algorithm](notes/plots/Algorithm1.jpg)
+![Algorithm](notes/plots/AlgInv_M.jpg)
 
-A more detailed description of the model can be found in [`toyshower.pdf`](notes/toyshower_v4.pdf)
+A more detailed description of the model can be found in [`Ginkgo`](https://www.overleaf.com/read/vwrfrkpgqqyt
+)
 
 
 **Relevant Structure**:
@@ -63,13 +71,13 @@ A more detailed description of the model can be found in [`toyshower.pdf`](notes
 
 - [`showerSim`](showerSim/): Dir with the simulation code.
 
-    -[`exp2DShowerTree.py`](showerSim/exp2DShowerTree.py): Parton shower code to generate the trees. 
+    -[`invMass_ginkgo.py`](showerSim/invMass_ginkgo.py): Parton shower code to generate the trees. 
 
-- [`generate_jets`](scripts/generate_jets/):
+<!-- - [`generate_jets`](scripts/generate_jets/): -->
 
-    -[`generate_jets.py`](scripts/generate_jets/generate_jets.py): Calls and runs the parton shower code in [`showerSim`](showerSim/). The code could be run to get the augmented data as well.
+<!--     -[`generate_jets.py`](scripts/generate_jets/generate_jets.py): Calls and runs the parton shower code in [`showerSim`](showerSim/). The code could be run to get the augmented data as well. -->
 
-<!---[`run2DShower.py`](showerSim/run2DShower.py): Run the parton shower code in [`showerSim`](showerSim/).-->
+-[`run_invMassGinkgo.py`](showerSim/run_invMassGinkgo.py): Run the parton shower code in [`showerSim`](showerSim/).
     
 <!--- [`visualized-recursion_2D.ipynb`](visualized-recursion_2D.ipynb): Jet trees visualization.-->
 
