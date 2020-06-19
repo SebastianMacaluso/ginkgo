@@ -23,7 +23,7 @@ We want our model to represent the following set of features:
 
 - Momentum conservation: the total momentum of the jet (the momentum of the root of the tree) is obtained from adding the momentum of all of its constituents.
 
-- Running of the splitting scale: each splitting is characterized by a scale $t$ that decreases when evolving down the tree from root to leaves. In particular $t$ is the invariant mass squared, t = m^2.
+- Running of the splitting scale: each splitting is characterized by a scale t that decreases when evolving down the tree from root to leaves. In particular t is the invariant mass squared, t = m^2.
 
 We also want our model to lead to a natural analogue of the generalized k_t clustering algorithms for the generated jets. These algorithms are characterized by
 
@@ -49,7 +49,7 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a tree visual
 
 
 <!--This should be  a jpg file for the figure to be displayed-->
-![Fig.1](notes/plots/figTruth_jet9_invM)
+![Fig.1](notes/plots/figTruth_jet9_invM.jpg)
 
 ##### Fig. 1: Tree visualization of a sample jet generated with our model that represents a W boson jet. We show the values of p_T =\sqrt{ p_x^2 +p_y^2} for each node and their mass. The horizontal ordering of the leaves corresponds to the order in which the leaves are accessed when traversing the tree (and is not related to the particle momentum \vec{p}).
 
