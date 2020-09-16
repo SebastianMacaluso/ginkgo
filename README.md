@@ -57,7 +57,7 @@ We define the transverse momentum as p_T =|p_y|. We show in Fig. 1 a tree visual
 The algorithm is outlined in more detail below:
 ![Algorithm](notes/plots/AlgInv_M.jpg)
 
-A more detailed description of the model can be found in [`Ginkgo`](https://www.overleaf.com/read/vwrfrkpgqqyt
+A more detailed description of the model can be found in [`Ginkgo`](https://github.com/SebastianMacaluso/Paper_Ginkgo/blob/master/main.pdf
 )
 
 
