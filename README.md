@@ -31,8 +31,8 @@ We also want our model to lead to a natural analogue of the generalized k_t clus
 
 - Distance measure: the angular separation between two jet constituents is typically used as a distance measure among them. In particular, traditional jet clustering algorithms are based on a measure given by d_{ij} ~  Delta R_{ij}^2, where Delta R_{ij} is the angular separation between two particles.
 
-We build our model as follows. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. At each splitting we sample squared invariant masses for the children, $t_L, t_R$ from a decaying exponential. We require the constraint t_L^0.5 + t_R^0.5 < t_P^0.5, where t_P is the parent mass squared. Then we implement a 2-body decay in the parent center-of-mass frame. The children direction is obtained by uniformly sampling a unit vector on the 2-sphere (in the parent center-of-mass frame the children move in opposite directions). Finally, we apply a Lorentz boost to the lab frame, to obtain the 4 dimensional vector p_\mu=(E, p_x, p_y, p_z) $ that characterizes each node.
-This prescription ensures *momentum conservation* and *permutation invariance**.
+We build our model as follows. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. At each splitting we sample squared invariant masses for the children, t_L, t_R from a decaying exponential. We require the constraint t_L^0.5 + t_R^0.5 < t_P^0.5, where t_P is the parent mass squared. Then we implement a 2-body decay in the parent center-of-mass frame. The children direction is obtained by uniformly sampling a unit vector on the 2-sphere (in the parent center-of-mass frame the children move in opposite directions). Finally, we apply a Lorentz boost to the lab frame, to obtain the 4 dimensional vector p_\mu=(E, p_x, p_y, p_z)  that characterizes each node.
+This prescription ensures *momentum conservation* and *permutation invariance*.
 
 <!-- 
 As a result, we build our model as follows. Each node of the jet tree represents a particle and encodes its momentum 4-vector. During the generative process, starting from the root of the tree, each parent node is split, generating a left (L) and a right (R) child. The L (R) child's momentum is obtained from subtracting (adding) a vector of magnitude Delta to half of the parent's momentum vector. This prescription ensures *momentum conservation* and *permutation invariance*.
@@ -86,9 +86,8 @@ A more detailed description of the model can be found in [`Ginkgo`](https://gith
 ##### **Running the simulation locally as a python package:**
 
 
-1. Clone the ToyJetsShower repository
-2. `cd ToyJetsShower`
-3. `make`
+1. Clone ginkgo repository
+2. From root dir: `pip install -e .`
 
 
 

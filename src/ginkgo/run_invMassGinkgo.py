@@ -8,8 +8,8 @@ import argparse
 import logging
 import os
 
-from showerSim import invMass_ginkgo
-from showerSim.utils import get_logger
+from ginkgo import invMass_ginkgo
+from ginkgo.utils import get_logger
 
 
 logger = get_logger(level=logging.WARNING)
@@ -57,13 +57,13 @@ rate2=torch.tensor(8.)
 
 # Parameters to get ~<10 constituents to test the trellis algorithm
 # pt_min = torch.tensor(4.**2)
-
-pt_min = torch.tensor(0.3**2)
+#
+pt_min = torch.tensor(0.5**2)
 
 ### Physics inspired parameters to get ~ between 20 and 50 constituents
 W_rate = 3.
 QCD_rate = 1.5
-# pt_min = torch.tensor(1.**2)
+# pt_min = torch.tensor(1.2**2)
 
 QCD_mass = 30.
 
@@ -151,7 +151,8 @@ else:
 
 
   jet_log_likelihood_cross_check=jet_log_likelihood()
-  logger.info(f" jet_log_likelihood cross-check = {jet_log_likelihood_cross_check}")
+  logger.info(f" jet_log_likelihood cross-chec"
+              f"k = {jet_log_likelihood_cross_check}")
   #---------------------------
 
 
@@ -178,12 +179,13 @@ if save:
     TreeAlgoDataDir = "../TreeAlgorithms/data/invMassGinkgo/Truth"
     # ShowerDatadir = "./data/invMassGinkgo"
     ShowerDatadir = "/Users/sebastianmacaluso/Documents/PrinceData/invMassGinkgo"
+    A_star_dir="/Users/sebastianmacaluso/Dropbox/Documents/Physics_projects/simulator/a_star_trellis/data/Ginkgo"
     os.system("mkdir -p "+ShowerDatadir)
     os.system("mkdir -p "+TreeAlgoDataDir)
 
-    simulator.save(jet_list, ShowerDatadir, "tree_"+ str(args.jetType)+"_leaves_"+str(args.minLeaves)+"_" + str(args.Nsamples)+"_m2min_"+str(float(pt_min))[0:3] +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
+    # simulator.save(jet_list, ShowerDatadir, "tree_"+ str(args.jetType)+"_leaves_"+str(args.minLeaves)+"_" + str(args.Nsamples)+"_m2min_"+str(float(pt_min))[0:3] +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
     # simulator.save(jet_list,TreeAlgoDataDir, "tree_"+ str(args.jetType)+"_" +str(args.Nsamples) +"_m2min_"+str(float(pt_min))[0:3]+"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
-
+    simulator.save(jet_list, A_star_dir, "test_" + str(args.minLeaves) + "_jets")
 
 # To run: python run_invMassGinkgo.py --jetType=W --Nsamples=2 --id=0
 #         python run_invMassGinkgo.py --jetType=QCD --Nsamples=2 --id=0

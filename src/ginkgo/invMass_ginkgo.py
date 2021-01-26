@@ -9,10 +9,10 @@ import pickle
 import torch
 from torch import nn
 import pyro
-from showerSim.pyro_simulator import PyroSimulator
-from showerSim.utils import get_logger
-from showerSim import likelihood_invM as likelihood
-from showerSim import auxFunctions
+from ginkgo.pyro_simulator import PyroSimulator
+from ginkgo.utils import get_logger
+from ginkgo import likelihood_invM as likelihood
+from ginkgo import auxFunctions
 
 logger = get_logger()
 
@@ -285,8 +285,8 @@ def _traverse_rec(
         pR_mu = labEP(tp = t0, Ep_lab = root[0], Pp_lab = P0_lab, n = n0, Echild_CM = ER_cm, Pchild_CM = P_CM, p_versor = - r_CM)
 
         logger.debug(f" Off-shell subjets mass = {np.sqrt(tL), np.sqrt(tR)}")
-        logger.debug(f"pL inv mass from p^2 in lab  frame: {np.sqrt(pL_mu[0]**2-np.linalg.norm(pL_mu[1::])**2)}")
-        logger.debug(f"pR inv mass from p^2 in lab  frame: {np.sqrt(pR_mu[0] ** 2 - np.linalg.norm(pR_mu[1::]) ** 2)}")
+        logger.debug(f"pL inv mass from p^2 in lab  frame: {np.sqrt(pL_mu[0]**2 + 1e-4 -np.linalg.norm(pL_mu[1::])**2)}")
+        logger.debug(f"pR inv mass from p^2 in lab  frame: {np.sqrt(pR_mu[0] ** 2 + 1e-4 - np.linalg.norm(pR_mu[1::]) ** 2)}")
         logger.debug(f"----"*10)
 
 

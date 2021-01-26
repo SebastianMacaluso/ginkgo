@@ -5,8 +5,8 @@ from pyro import poutine
 import inspect
 import numpy as np
 
-from showerSim.simulator import Simulator
-from showerSim.utils import get_logger
+from ginkgo.simulator import Simulator
+from ginkgo.utils import get_logger
 import os
 
 

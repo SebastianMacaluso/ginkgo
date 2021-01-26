@@ -37,7 +37,8 @@ def split_logLH(pL, tL, pR, tR, t_cut, lam):
 
     tp2 = (np.sqrt(tp1) - np.sqrt(tmax)) ** 2
 
-    """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing """
+    """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing.
+     All leaves should have t=0"""
     def get_p(tP, t, t_cut, lam):
         if t > 0:
             return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP
