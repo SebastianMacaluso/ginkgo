@@ -58,7 +58,7 @@ rate2=torch.tensor(8.)
 # Parameters to get ~<10 constituents to test the trellis algorithm
 # pt_min = torch.tensor(4.**2)
 #
-pt_min = torch.tensor(0.5**2)
+pt_min = torch.tensor(2.5**2)
 
 ### Physics inspired parameters to get ~ between 20 and 50 constituents
 W_rate = 3.
@@ -173,19 +173,19 @@ TreeAlgoDir = "/scratch/sm4511/TreeAlgorithms/data/invMassGinkgo/Trellis/Truth"
 
 
 
-save = False
+save = True
 
 if save:
-    TreeAlgoDataDir = "../TreeAlgorithms/data/invMassGinkgo/Truth"
-    # ShowerDatadir = "./data/invMassGinkgo"
-    ShowerDatadir = "/Users/sebastianmacaluso/Documents/PrinceData/invMassGinkgo"
-    A_star_dir="/Users/sebastianmacaluso/Dropbox/Documents/Physics_projects/simulator/a_star_trellis/data/Ginkgo"
-    os.system("mkdir -p "+ShowerDatadir)
-    os.system("mkdir -p "+TreeAlgoDataDir)
+    # TreeAlgoDataDir = "../TreeAlgorithms/data/invMassGinkgo/Truth"
+    output_dir = "../../data/invMassGinkgo"
+    # output_dir = "/Users/sebastianmacaluso/Documents/PrinceData/invMassGinkgo"
+    # A_star_dir="/Users/sebastianmacaluso/Dropbox/Documents/Physics_projects/simulator/a_star_trellis/data/Ginkgo"
+    os.system("mkdir -p "+output_dir)
+    # os.system("mkdir -p "+TreeAlgoDataDir)
 
     # simulator.save(jet_list, ShowerDatadir, "tree_"+ str(args.jetType)+"_leaves_"+str(args.minLeaves)+"_" + str(args.Nsamples)+"_m2min_"+str(float(pt_min))[0:3] +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
     # simulator.save(jet_list,TreeAlgoDataDir, "tree_"+ str(args.jetType)+"_" +str(args.Nsamples) +"_m2min_"+str(float(pt_min))[0:3]+"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
-    simulator.save(jet_list, A_star_dir, "test_" + str(args.minLeaves) + "_jets")
+    simulator.save(jet_list, output_dir, "jets_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min))) +"tcut_")
 
 # To run: python run_invMassGinkgo.py --jetType=W --Nsamples=2 --id=0
 #         python run_invMassGinkgo.py --jetType=QCD --Nsamples=2 --id=0
