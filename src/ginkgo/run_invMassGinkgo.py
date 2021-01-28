@@ -185,7 +185,7 @@ if save:
 
     # simulator.save(jet_list, ShowerDatadir, "tree_"+ str(args.jetType)+"_leaves_"+str(args.minLeaves)+"_" + str(args.Nsamples)+"_m2min_"+str(float(pt_min))[0:3] +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
     # simulator.save(jet_list,TreeAlgoDataDir, "tree_"+ str(args.jetType)+"_" +str(args.Nsamples) +"_m2min_"+str(float(pt_min))[0:3]+"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
-    simulator.save(jet_list, output_dir, "jets_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min))) +"tcut_")
+    simulator.save(jet_list, output_dir, "jets_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min))) +"tcut_"+str(args.id))
 
 # To run: python run_invMassGinkgo.py --jetType=W --Nsamples=2 --id=0
 #         python run_invMassGinkgo.py --jetType=QCD --Nsamples=2 --id=0
