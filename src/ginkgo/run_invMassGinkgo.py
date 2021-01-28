@@ -50,6 +50,10 @@ parser.add_argument(
     "--maxNTry", type=int, default=20000, help="Maximum number of times we run the simulator"
 )
 
+parser.add_argument(
+    "--out_dir", type=str, default="../../data/invMassGinkgo", help="Output dataset dir"
+)
+
 args = parser.parse_args()
 
 
@@ -165,10 +169,11 @@ save = True
 
 if save:
 
-    output_dir = "../../data/invMassGinkgo"
-    os.system("mkdir -p "+output_dir)
+    # output_dir = "../../data/invMassGinkgo"
+    # output_dir = "/scratch/sm4511/ginkgo/data/invMassGinkgo"
+    os.system("mkdir -p "+args.out_dir)
 
-    simulator.save(jet_list, output_dir, "jets_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min))) +"tcut_"+str(args.id))
+    simulator.save(jet_list, args.out_dir, "jets_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min))) +"tcut_"+str(args.id))
 
 # To run: python run_invMassGinkgo.py --jetType=W --Nsamples=2 --id=0
 #         python run_invMassGinkgo.py --jetType=QCD --Nsamples=2 --id=0

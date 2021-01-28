@@ -13,9 +13,9 @@ module purge
 
 ## executable
 ##SRCDIR=$HOME/ReclusterTreeAlgorithms/scripts
-
-LOGSDIR=$SCRATCH/ginkgo/logs/
-mkdir -p $LOGSDIR
+#
+##LOGSDIR=$SCRATCH/ginkgo/logs/.*
+mkdir -p $SCRATCH/ginkgo/logs
 
 RUNDIR=$SCRATCH/ginkgo/runs/run-${SLURM_JOB_ID/.*}
 mkdir -p $RUNDIR
@@ -26,8 +26,8 @@ mkdir -p $RUNDIR
 ##cd $RUNDIR
 ##module load fftw/intel/3.3.5
 
-cd $SCRATCH
-pwd
+#cd $SCRATCH
+#pwd
 ######  Ginkgo 2D  ############
 ## W jets
 ##python run2DShower.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=Wjets
@@ -46,13 +46,22 @@ pwd
 #python run2DShower.py --Nsamples=3 --id=${SLURM_ARRAY_TASK_ID} --jetType=QCDjets
 
 
-singularity exec --overlay pytorch1.7.0-cuda11.0.ext3 /scratch/work/public/singularity/cuda11.0-cudnn8-devel-ubuntu18.04.sif /bin/bash
-source /ext3/env.sh
 
-cd $SCRATCH/ginkgo/src/ginkgo
+#singularity exec --overlay pytorch1.7.0-cuda11.0.ext3 /scratch/work/public/singularity/cuda11.0-cudnn8-devel-ubuntu18.04.sif /bin/bash
+#source /ext3/env.sh
+
+#cd $SCRATCH/ginkgo/src/ginkgo
+
+#singularity exec --overlay pytorch1.7.0-cuda11.0.ext3 /scratch/work/public/singularity/cuda11.0-cudnn8-devel-ubuntu18.04.sif /bin/bash
+
+singularity exec --nv \
+	    --overlay /scratch/sm4511/pytorch1.7.0-cuda11.0.ext3:ro \
+	    /scratch/work/public/singularity/cuda11.0-cudnn8-devel-ubuntu18.04.sif \
+	    bash -c "source /ext3/env.sh; python $SCRATCH/ginkgo/src/ginkgo/run_invMassGinkgo.py --jetType=QCD --Nsamples=10 --id=${SLURM_ARRAY_TASK_ID} --minLeaves=6 --maxLeaves=7 --maxNTry=20000 --out_dir=/scratch/sm4511/ginkgo/data/invMassGinkgo"
+
 ######  Ginkgo invariant mass  ############
 #python run_invMassGinkgo.py --Nsamples=100 --id=${SLURM_ARRAY_TASK_ID} --jetType=QCD
-python run_invMassGinkgo.py --jetType=QCD --Nsamples=10 --id=${SLURM_ARRAY_TASK_ID} --minLeaves=6 --maxLeaves=7 --maxNTry=20000
+#python run_invMassGinkgo.py --jetType=QCD --Nsamples=10 --id=${SLURM_ARRAY_TASK_ID} --minLeaves=6 --maxLeaves=7 --maxNTry=20000
 
 ## to submit(for 3 jobs): sbatch --array 0-2 submitHPC_ginkgo.s
 
