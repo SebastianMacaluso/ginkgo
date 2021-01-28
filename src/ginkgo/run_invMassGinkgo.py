@@ -157,18 +157,6 @@ else:
 
 
 
-ToyModelDir = "/scratch/sm4511/ToyJetsShower/data/invMassGinkgo/Trellis"
-TreeAlgoDir = "/scratch/sm4511/TreeAlgorithms/data/invMassGinkgo/Trellis/Truth"
-
-# ToyModelDir = "/scratch/sm4511/ToyJetsShower/data/invMassGinkgo/"
-# TreeAlgoDir = "/scratch/sm4511/TreeAlgorithms/data/invMassGinkgo/Truth"
-
-# os.system("mkdir -p "+ToyModelDir)
-# os.system("mkdir -p "+TreeAlgoDir)
-#
-#
-# simulator.save(jet_list, TreeAlgoDir, "tree_" + str(args.Nsamples) + "_truth_" + str(args.id))
-# simulator.save(jet_list, ToyModelDir, "tree_"+str(args.Nsamples)+"_truth_"+str(args.id))
 
 
 
@@ -176,15 +164,10 @@ TreeAlgoDir = "/scratch/sm4511/TreeAlgorithms/data/invMassGinkgo/Trellis/Truth"
 save = True
 
 if save:
-    # TreeAlgoDataDir = "../TreeAlgorithms/data/invMassGinkgo/Truth"
-    output_dir = "../../data/invMassGinkgo"
-    # output_dir = "/Users/sebastianmacaluso/Documents/PrinceData/invMassGinkgo"
-    # A_star_dir="/Users/sebastianmacaluso/Dropbox/Documents/Physics_projects/simulator/a_star_trellis/data/Ginkgo"
-    os.system("mkdir -p "+output_dir)
-    # os.system("mkdir -p "+TreeAlgoDataDir)
 
-    # simulator.save(jet_list, ShowerDatadir, "tree_"+ str(args.jetType)+"_leaves_"+str(args.minLeaves)+"_" + str(args.Nsamples)+"_m2min_"+str(float(pt_min))[0:3] +"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
-    # simulator.save(jet_list,TreeAlgoDataDir, "tree_"+ str(args.jetType)+"_" +str(args.Nsamples) +"_m2min_"+str(float(pt_min))[0:3]+"_rate01_"+str(rate.numpy()[0])+"_"+str(rate.numpy()[1]))
+    output_dir = "../../data/invMassGinkgo"
+    os.system("mkdir -p "+output_dir)
+
     simulator.save(jet_list, output_dir, "jets_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min))) +"tcut_"+str(args.id))
 
 # To run: python run_invMassGinkgo.py --jetType=W --Nsamples=2 --id=0
