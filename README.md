@@ -67,30 +67,36 @@ A more detailed description of the model can be found in [`Ginkgo`](https://gith
 
 
 <!---->
-<!--    -[`likelihood.py`](showerSim/likelihood.py): Calculate the log likelihood of a splitting node and of (a branch of) a tree. There are examples on how to run it at the end of the script.-->
+<!--    -[`likelihood.py`](src/ginkgo/likelihood.py): Calculate the log likelihood of a splitting node and of (a branch of) a tree. There are examples on how to run it at the end of the script.-->
 
-- [`showerSim`](showerSim/): Dir with the simulation code.
+- [`ginkgo`](src/ginkgo/): Dir with the simulation code.
 
-    -[`invMass_ginkgo.py`](showerSim/invMass_ginkgo.py): Parton shower code to generate the trees. 
+    -[`invMass_ginkgo.py`](src/ginkgo/invMass_ginkgo.py): Parton shower code to generate the trees. 
 
-<!-- - [`generate_jets`](scripts/generate_jets/): -->
 
-<!--     -[`generate_jets.py`](scripts/generate_jets/generate_jets.py): Calls and runs the parton shower code in [`showerSim`](showerSim/). The code could be run to get the augmented data as well. -->
-
--[`run_invMassGinkgo.py`](showerSim/run_invMassGinkgo.py): Run the parton shower code in [`showerSim`](showerSim/).
+-[`run_invMassGinkgo.py`](src/ginkgo/run_invMassGinkgo.py): Run the parton shower code in [`showerSim`](showerSim/).
     
-<!--- [`visualized-recursion_2D.ipynb`](visualized-recursion_2D.ipynb): Jet trees visualization.-->
 
 
 
-##### **Running the simulation locally as a python package:**
 
+#### Installing Ginkgo
 
-1. Clone ginkgo repository
-2. From root dir: `pip install -e .`
+1. Install [`pyro`](https://pyro.ai/)
+2. Clone ginkgo repository
+3. From root dir: `pip install -e .`
 
+###**Running the simulation locally as a python package:**
 
+`python run_invMassGinkgo.py --jetType=QCD --Nsamples=100 --minLeaves=9 --maxLeaves=10 --maxNTry=20000`
 
+Args:
+`jetType`: "QCD" or "W" like jet
+`Nsamples`: Number of jets
+`minLeaves`: cut on the minimum number of leaves of the jets to save (including)
+`maxLeaves`: cut on the maximum number of leaves of the jets to save (excluding)
+`maxNTry`: maximum number of jets generated
+`id`: id number of the dataset
 <pre>
 
 
