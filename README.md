@@ -86,17 +86,18 @@ A more detailed description of the model can be found in [`Ginkgo`](https://gith
 2. Clone ginkgo repository
 3. From root dir: `pip install -e .`
 
-###**Running the simulation locally as a python package:**
+### **Running the simulation locally as a python package:**
 
 `python run_invMassGinkgo.py --jetType=QCD --Nsamples=100 --minLeaves=9 --maxLeaves=10 --maxNTry=20000`
 
 Args:
-`jetType`: "QCD" or "W" like jet
-`Nsamples`: Number of jets
-`minLeaves`: cut on the minimum number of leaves of the jets to save (including)
-`maxLeaves`: cut on the maximum number of leaves of the jets to save (excluding)
-`maxNTry`: maximum number of jets generated
-`id`: id number of the dataset
+- `jetType`: "QCD" or "W" like jet
+- `Nsamples`: Number of jets
+- `minLeaves`: cut on the minimum number of leaves of the jets to save (including)
+- `maxLeaves`: cut on the maximum number of leaves of the jets to save (excluding)
+- `maxNTry`: maximum number of jets generated
+- `id`: id number of the dataset
+
 <pre>
 
 
