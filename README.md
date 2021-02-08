@@ -67,14 +67,14 @@ A more detailed description of the model can be found in [`Ginkgo`](https://gith
 
 
 <!---->
-<!--    -[`likelihood.py`](src/ginkgo/likelihood.py): Calculate the log likelihood of a splitting node and of (a branch of) a tree. There are examples on how to run it at the end of the script.-->
+<!--    -[`likelihood_invM.py`](src/ginkgo/likelihood_invM.py): Calculate the log likelihood of a splitting node and of (a branch of) a tree. There are examples on how to run it at the end of the script.-->
 
 - [`ginkgo`](src/ginkgo/): Dir with the simulation code.
 
-    -[`invMass_ginkgo.py`](src/ginkgo/invMass_ginkgo.py): Parton shower code to generate the trees. 
+	-[`invMass_ginkgo.py`](src/ginkgo/invMass_ginkgo.py): Parton shower code to generate the trees. 
 
 
--[`run_invMassGinkgo.py`](src/ginkgo/run_invMassGinkgo.py): Run the parton shower code in [`showerSim`](showerSim/).
+	-[`run_invMassGinkgo.py`](src/ginkgo/run_invMassGinkgo.py): Run the parton shower code in [`invMass_ginkgo.py`](src/ginkgo/invMass_ginkgo.py).
     
 
 
