@@ -90,7 +90,7 @@ class Simulator(PyroSimulator):
 
                 jet_list.append(jet)
 
-                print(" N const = ", len(jet['leaves']))
+                # print(" N const = ", len(jet['leaves']))
 
                 if len(jet_list) % 1000 == 0:
                     print("Generated ", len(jet_list), "jets with ", self.minLeaves, "<=number of leaves<", self.maxLeaves)
