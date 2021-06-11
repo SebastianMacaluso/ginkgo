@@ -44,7 +44,10 @@ def split_logLH(pL, tL, pR, tR, t_cut, lam):
         log_F_s = -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_cut / tP))
 
         if t > 0:
-            return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP + np.log(1-F_s)
+            if F_s> 1- 1e-30:
+                return - np.inf
+            else:
+                return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP + np.log(1-F_s)
 
         else: # if t<t_min then we set t=0
             return log_F_s
