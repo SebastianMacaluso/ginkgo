@@ -22,7 +22,6 @@ def get_delta_LR(pL, pR):
 #     return np.sqrt(np.sum((p / 2 - pC) ** 2))
 
 
-
 def split_logLH(pL, tL, pR, tR, t_cut, lam):
     """
     Take two nodes and return the splitting log likelihood
@@ -37,8 +36,49 @@ def split_logLH(pL, tL, pR, tR, t_cut, lam):
 
     tp2 = (np.sqrt(tp1) - np.sqrt(tmax)) ** 2
 
-    """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing.
-     All leaves should have t=0"""
+    """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing. This way the likelihood integrates to 1 for 0<t<t_p. All leaves should have t=0, this is a convention we are taking (instead of keeping their value for t given that it is below the threshold t_cut)"""
+    def get_p(tP, t, t_cut, lam):
+
+        """Probability of the shower to stop F_s"""
+        F_s = 1/(1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tP))
+        log_F_s = -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_cut / tP))
+
+        if t > 0:
+            return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP + np.log(1-F_s)
+
+        else: # if t<t_min then we set t=0
+            return log_F_s
+
+    """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
+    logLH = (
+        get_p(tp1, tmax, t_cut, lam)
+        + get_p(tp2, tmin, t_cut, lam)
+        + np.log(1 / (4 * np.pi))
+    )
+
+    "If the pairing is not allowed"
+    if tp1 < t_cut:
+        logLH = - np.inf
+
+    return logLH
+
+
+
+def split_logLH_without_non_stop_prob(pL, tL, pR, tR, t_cut, lam):
+    """
+    Take two nodes and return the splitting log likelihood
+    """
+    pP = pR + pL
+
+    """Parent invariant mass squared"""
+    tp1 = pP[0] ** 2 - np.linalg.norm(pP[1::]) ** 2
+
+    tmax = max(tL,tR)
+    tmin = min(tL,tR)
+
+    tp2 = (np.sqrt(tp1) - np.sqrt(tmax)) ** 2
+
+    """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing. This way the likelihood integrates to 1 for 0<t<t_p. All leaves should have t=0, this is a convention we are taking (instead of keeping their value for t given that it is below the threshold t_cut)"""
     def get_p(tP, t, t_cut, lam):
         if t > 0:
             return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP
