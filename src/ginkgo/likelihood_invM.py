@@ -39,29 +39,29 @@ def split_logLH(pL, tL, pR, tR, t_cut, lam):
     """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing. This way the likelihood integrates to 1 for 0<t<t_p. All leaves should have t=0, this is a convention we are taking (instead of keeping their value for t given that it is below the threshold t_cut)"""
     def get_p(tP, t, t_cut, lam):
 
-        """Probability of the shower to stop F_s"""
-        F_s = 1/(1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tP))
-        log_F_s = -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_cut / tP))
-
         if t > 0:
-            if F_s> 1- 1e-30:
-                return - np.inf
-            else:
-                return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP + np.log(1-F_s)
+            return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP) - lam * t / tP
 
-        else: # if t<t_min then we set t=0
+        else: # For leaves we have t<t_min, then we set t=0
+            t_upper = min(tP,t_cut)
+            log_F_s = -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_upper / tP))
             return log_F_s
-
-    """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
-    logLH = (
-        get_p(tp1, tmax, t_cut, lam)
-        + get_p(tp2, tmin, t_cut, lam)
-        + np.log(1 / (4 * np.pi))
-    )
 
     "If the pairing is not allowed"
     if tp1 < t_cut:
         logLH = - np.inf
+
+    else:
+        """ Probability of the shower to stop F_s"""
+        F_s = 1 / (1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tp1))
+
+        """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
+        logLH = (
+            get_p(tp1, tmax, t_cut, lam)
+            + get_p(tp2, tmin, t_cut, lam)
+            + np.log(1 / (4 * np.pi))
+            + np.log(1-F_s)
+        )
 
     return logLH
 
