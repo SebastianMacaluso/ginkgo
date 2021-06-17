@@ -48,12 +48,13 @@ def split_logLH(pL, tL, pR, tR, t_cut, lam):
             return log_F_s
 
     "If the pairing is not allowed"
-    if tp1 < t_cut:
+    if tp1 <= t_cut:
         logLH = - np.inf
 
     else:
         """ Probability of the shower to stop F_s"""
         F_s = 1 / (1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tp1))
+        print( "Fs = ",F_s, "tp1 = ", tp1, "| t_cut = ", t_cut)
 
         """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
         logLH = (
