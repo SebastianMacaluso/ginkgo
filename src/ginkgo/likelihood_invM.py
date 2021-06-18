@@ -70,7 +70,7 @@ def split_logLH(pL, tL, pR, tR, t_cut, lam):
 
 def split_logLH_without_non_stop_prob(pL, tL, pR, tR, t_cut, lam):
     """
-    Take two nodes and return the splitting log likelihood
+    Likelihood function used in  arXiv:2105.10512 , arXiv:2104.07061, arXiv:2011.08191 and arXiv:2002.11661. Take two nodes and return the splitting log likelihood
     """
     pP = pR + pL
 
