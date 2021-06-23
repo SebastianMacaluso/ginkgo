@@ -24,10 +24,14 @@ def get_delta_LR(pL, pR):
 
 
 
-def split_logLH_with_stop_nonstop_prob(pL, tL, pR, tR, t_cut, lam):
+def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
     """
     Take two nodes and return the splitting log likelihood
     """
+    tL = pL[0] ** 2 - np.linalg.norm(pL[1::]) ** 2
+    tR = pR[0] ** 2 - np.linalg.norm(pR[1::]) ** 2
+
+
     pP = pR + pL
 
     """Parent invariant mass squared"""
