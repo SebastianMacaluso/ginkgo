@@ -1,6 +1,8 @@
 import pickle
 import numpy as np
 import torch
+from scipy.special import logsumexp
+
 import warnings
 warnings.simplefilter('default')
 
@@ -35,15 +37,11 @@ def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
     pP = pR + pL
 
     """Parent invariant mass squared"""
-    tp1 = pP[0] ** 2 - np.linalg.norm(pP[1::]) ** 2
+    tp = pP[0] ** 2 - np.linalg.norm(pP[1::]) ** 2
 
-    tmax = max(tL,tR)
-    tmin = min(tL,tR)
-
-    tp2 = (np.sqrt(tp1) - np.sqrt(tmax)) ** 2
 
     """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing. This way the likelihood integrates to 1 for 0<t<t_p. All leaves should have t=0, this is a convention we are taking (instead of keeping their value for t given that it is below the threshold t_cut)"""
-    def get_p(tP_local, t, t_cut, lam):
+    def get_logp(tP_local, t, t_cut, lam):
 
 
         if t > t_cut:
@@ -60,19 +58,77 @@ def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
             return log_F_s
 
 
-    if tp1 <= t_cut:
+    if tp <= t_cut:
         "If the pairing is not allowed"
         logLH = - np.inf
 
     else:
         """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
-        logLH = (
-            get_p(tp1, tmax, t_cut, lam)
-            + get_p(tp2, tmin, t_cut, lam)
-            + np.log(1 / (4 * np.pi))
-        )
+
+        tpLR = (np.sqrt(tp) - np.sqrt(tL)) ** 2
+        tpRL = (np.sqrt(tp) - np.sqrt(tR)) ** 2
+
+        logpLR = get_logp(tp, tL, t_cut, lam) + get_logp(tpLR, tR, t_cut, lam) #First sample tL
+        logpRL = get_logp(tp, tR, t_cut, lam) + get_logp(tpRL, tL, t_cut, lam) #First sample tR
+
+        logp_split = logsumexp(np.asarray([logpLR, logpRL]))
+
+        logLH = (logp_split + np.log(1 / (4 * np.pi)) )
 
     return logLH
+
+
+
+
+# def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
+#     """
+#     Take two nodes and return the splitting log likelihood
+#     """
+#     tL = pL[0] ** 2 - np.linalg.norm(pL[1::]) ** 2
+#     tR = pR[0] ** 2 - np.linalg.norm(pR[1::]) ** 2
+#
+#
+#     pP = pR + pL
+#
+#     """Parent invariant mass squared"""
+#     tp1 = pP[0] ** 2 - np.linalg.norm(pP[1::]) ** 2
+#
+#     tmax = max(tL,tR)
+#     tmin = min(tL,tR)
+#
+#     tp2 = (np.sqrt(tp1) - np.sqrt(tmax)) ** 2
+#
+#     """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing. This way the likelihood integrates to 1 for 0<t<t_p. All leaves should have t=0, this is a convention we are taking (instead of keeping their value for t given that it is below the threshold t_cut)"""
+#     def get_logp(tP_local, t, t_cut, lam):
+#
+#
+#         if t > t_cut:
+#             """ Probability of the shower to stop F_s"""
+#             F_s = 1 / (1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tP_local))
+#             # if F_s>=1:
+#             #     print("Fs = ", F_s, "| tP_local = ", tP_local, "| t_cut = ", t_cut, "| t = ",t)
+#
+#             return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local + np.log(1-F_s)
+#
+#         else: # For leaves we have t<t_cut
+#             t_upper = min(tP_local,t_cut) #There are cases where tp2 < t_cut
+#             log_F_s = -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_upper / tP_local))
+#             return log_F_s
+#
+#
+#     if tp1 <= t_cut:
+#         "If the pairing is not allowed"
+#         logLH = - np.inf
+#
+#     else:
+#         """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
+#         logLH = (
+#             get_logp(tp1, tmax, t_cut, lam)
+#             + get_logp(tp2, tmin, t_cut, lam)
+#             + np.log(1 / (4 * np.pi))
+#         )
+#
+#     return logLH
 
 
 
