@@ -93,7 +93,7 @@ class Simulator(PyroSimulator):
 
                 jet_list.append(jet)
 
-                print(" N const = ", len(jet['leaves']))
+                # print(" N const = ", len(jet['leaves']))
 
                 if len(jet_list) % 1000 == 0:
                     print("Generated ", len(jet_list), "jets with ", self.minLeaves, "<=number of leaves<", self.maxLeaves)
@@ -294,18 +294,30 @@ def _traverse_rec(
 
         """ Shuffle L and R randomly. This will contribute a factor of 1/2 to the likelihood"""
         flip = pyro.sample("Bernoulli" + str(idx), Bernoulli_dist)
+
+        # tL_rand = tL
+        # tR_rand = tR
+
         if flip==True:
             # print("Flipping L/R")
             tL_rand = tR
             tR_rand = tL
+            pL_mu_rand = pR_mu
+            pR_mu_rand = pL_mu
+            draw_decay_L_rand = draw_decay_R
+            draw_decay_R_rand = draw_decay_L
         else:
             # print("Same L/R order")
             tL_rand = tL
             tR_rand = tR
+            pL_mu_rand = pL_mu
+            pR_mu_rand = pR_mu
+            draw_decay_L_rand = draw_decay_L
+            draw_decay_R_rand = draw_decay_R
 
 
         _traverse_rec(
-            pL_mu,
+            pL_mu_rand,
             idx,
             True,
             tree,
@@ -316,11 +328,11 @@ def _traverse_rec(
             delta_P=tL_rand,
             cut_off=cut_off,
             rate=rate,
-            drew=draw_decay_L,
+            drew=draw_decay_L_rand,
         )
 
         _traverse_rec(
-            pR_mu,
+            pR_mu_rand,
             idx,
             False,
             tree,
@@ -331,7 +343,7 @@ def _traverse_rec(
             delta_P=tR_rand,
             cut_off=cut_off,
             rate=rate,
-            drew=draw_decay_R,
+            drew=draw_decay_R_rand,
         )
 
 
