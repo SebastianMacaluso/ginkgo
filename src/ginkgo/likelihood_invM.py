@@ -68,8 +68,8 @@ def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
         tpLR = (np.sqrt(tp) - np.sqrt(tL)) ** 2
         tpRL = (np.sqrt(tp) - np.sqrt(tR)) ** 2
 
-        logpLR = get_logp(tp, tL, t_cut, lam) + get_logp(tpLR, tR, t_cut, lam) #First sample tL
-        logpRL = get_logp(tp, tR, t_cut, lam) + get_logp(tpRL, tL, t_cut, lam) #First sample tR
+        logpLR = np.log(1/2)+ get_logp(tp, tL, t_cut, lam) + get_logp(tpLR, tR, t_cut, lam) #First sample tL
+        logpRL = np.log(1/2)+ get_logp(tp, tR, t_cut, lam) + get_logp(tpRL, tL, t_cut, lam) #First sample tR
 
         logp_split = logsumexp(np.asarray([logpLR, logpRL]))
 
