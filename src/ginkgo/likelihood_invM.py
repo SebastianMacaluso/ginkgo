@@ -335,7 +335,7 @@ def _get_jet_logLH(
 
 
         # llh = split_logLH(pL, tL, pR, tR, delta_min, Lambda)
-        llh = split_logLH_with_stop_nonstop_prob(pL, tL, pR, tR, delta_min, Lambda)
+        llh = split_logLH_with_stop_nonstop_prob(pL,  pR,  delta_min, Lambda)
         logLH.append(llh)
         # print('logLH = ', llh)
 

@@ -43,6 +43,9 @@ class Simulator(PyroSimulator):
         """Sample a unit vector uniformly over the 2-sphere"""
         globals()["multiNormal_dist"] = pyro.distributions.MultivariateNormal(torch.zeros(3), torch.eye(3))
 
+        """ Add a Bernoulli dist to randomly shuffle the L/R siblings"""
+        globals()["Bernoulli_dist"] = pyro.distributions.Bernoulli(probs=0.5)
+
         globals()["root_dist"] = pyro.distributions.Exponential(root_rate)
         globals()["decay_dist"] = pyro.distributions.Exponential(decay_rate)
 
@@ -78,7 +81,7 @@ class Simulator(PyroSimulator):
                     jet["M_Hard"] = float(self.M_hard)
 
                 """Fill jet dictionaries with log likelihood of truth jet"""
-                likelihood.enrich_jet_logLH(jet, dij=True)
+                likelihood.enrich_jet_logLH(jet, dij=False)
 
                 """ Angular quantities"""
                 ConstPhi, PhiDelta, PhiDeltaListRel = auxFunctions.traversePhi(jet, jet["root_id"], [], [],[])
@@ -90,7 +93,7 @@ class Simulator(PyroSimulator):
 
                 jet_list.append(jet)
 
-                # print(" N const = ", len(jet['leaves']))
+                print(" N const = ", len(jet['leaves']))
 
                 if len(jet_list) % 1000 == 0:
                     print("Generated ", len(jet_list), "jets with ", self.minLeaves, "<=number of leaves<", self.maxLeaves)
@@ -289,6 +292,17 @@ def _traverse_rec(
         # logger.debug(f"pR inv mass from p^2 in lab  frame: {np.sqrt(pR_mu[0] ** 2 + 1e-4 - np.linalg.norm(pR_mu[1::]) ** 2)}")
         logger.debug(f"----"*10)
 
+        """ Shuffle L and R randomly. This will contribute a factor of 1/2 to the likelihood"""
+        flip = pyro.sample("Bernoulli" + str(idx), Bernoulli_dist)
+        if flip==True:
+            # print("Flipping L/R")
+            tL_rand = tR
+            tR_rand = tL
+        else:
+            # print("Same L/R order")
+            tL_rand = tL
+            tR_rand = tR
+
 
         _traverse_rec(
             pL_mu,
@@ -299,7 +313,7 @@ def _traverse_rec(
             deltas,
             draws,
             leaves,
-            delta_P=tL,
+            delta_P=tL_rand,
             cut_off=cut_off,
             rate=rate,
             drew=draw_decay_L,
@@ -314,7 +328,7 @@ def _traverse_rec(
             deltas,
             draws,
             leaves,
-            delta_P=tR,
+            delta_P=tR_rand,
             cut_off=cut_off,
             rate=rate,
             drew=draw_decay_R,
@@ -350,7 +364,7 @@ def labEP(tp= None,Ep_lab= None, Pp_lab= None , n= None, Echild_CM= None, Pchild
     Plab = - Pp_lab/np.sqrt(tp) * Echild_CM * n + Pchild_CM * (p_versor + (Ep_lab/np.sqrt(tp) - 1) * np.dot(p_versor,n) * n)
 
     if Elab < np.linalg.norm(Plab):
-        print("---" * 10)
+        logger.debug(f"---" * 10)
         logger.debug(f" Elab = {Elab}")
         logger.debug(f" Plab = {np.linalg.norm(Plab)}")
         logger.debug(f" sqrt(tp) = {np.sqrt(tp)}")
