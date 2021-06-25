@@ -387,7 +387,7 @@ def _get_jet_logLH(
 
 
 ##############################
-def reevaluate_jet_logLH(in_jet, delta_min=None, Lambda = None):
+def reevaluate_jet_logLH(in_jet, delta_min=None, Lambda = None, split_log_LH=None):
     """
     Attach splitting log likelihood to each edge, by calling recursive
     _get_jet_likelihood.
@@ -407,7 +407,8 @@ def reevaluate_jet_logLH(in_jet, delta_min=None, Lambda = None):
         root_id = root_id,
         delta_min = delta_min,
         Lambda=Lambda,
-        logLH = logLH
+        logLH = logLH,
+        split_log_LH=split_log_LH
     )
 
     jet["logLH"] = np.asarray(logLH)
@@ -421,7 +422,8 @@ def _evaluate_jet_logLH(
         root_id = None,
         delta_min = None,
         Lambda = None,
-        logLH = None
+        logLH = None,
+        split_log_LH = None
 ):
     """
     Recursively enrich every edge from root_id downward with their log likelihood.
@@ -436,7 +438,7 @@ def _evaluate_jet_logLH(
         pR = jet["content"][idR]
 
         # llh = split_logLH(pL, tL, pR, tR, delta_min, Lambda)
-        llh = split_logLH_with_stop_nonstop_prob(pL,  pR,  delta_min, Lambda)
+        llh = split_log_LH(pL,  pR,  delta_min, Lambda)
         # print(llh)
 
         logLH.append(llh)
@@ -448,16 +450,69 @@ def _evaluate_jet_logLH(
             root_id = idL,
             delta_min = delta_min,
             Lambda =Lambda,
-            logLH = logLH
+            logLH = logLH,
+            split_log_LH = split_log_LH
         )
         _evaluate_jet_logLH(
             jet,
             root_id = idR,
             delta_min = delta_min,
             Lambda=Lambda,
-            logLH = logLH
+            logLH = logLH,
+            split_log_LH= split_log_LH
         )
 
     else:
 
         logLH.append(0)
+
+
+
+
+
+def split_logLH_forceLR(pL, pR, t_cut, lam):
+    """
+    Take two nodes and return the splitting log likelihood
+    """
+    tL = pL[0] ** 2 - np.linalg.norm(pL[1::]) ** 2
+    tR = pR[0] ** 2 - np.linalg.norm(pR[1::]) ** 2
+
+
+    pP = pR + pL
+
+    """Parent invariant mass squared"""
+    tp = pP[0] ** 2 - np.linalg.norm(pP[1::]) ** 2
+
+
+    """ We add a normalization factor -np.log(1 - np.exp(- lam)) because we need the mass squared to be strictly decreasing. This way the likelihood integrates to 1 for 0<t<t_p. All leaves should have t=0, this is a convention we are taking (instead of keeping their value for t given that it is below the threshold t_cut)"""
+    def get_logp(tP_local, t, t_cut, lam):
+
+
+        if t > t_cut:
+            """ Probability of the shower to stop F_s"""
+            F_s = 1 / (1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tP_local))
+            # if F_s>=1:
+            #     print("Fs = ", F_s, "| tP_local = ", tP_local, "| t_cut = ", t_cut, "| t = ",t)
+
+            return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local + np.log(1-F_s)
+
+        else: # For leaves we have t<t_cut
+            t_upper = min(tP_local,t_cut) #There are cases where tp2 < t_cut
+            log_F_s = -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_upper / tP_local))
+            return log_F_s
+
+
+    if tp <= t_cut:
+        "If the pairing is not allowed"
+        logLH = - np.inf
+
+    else:
+        """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
+
+        tpLR = (np.sqrt(tp) - np.sqrt(tL)) ** 2
+
+        logpLR = get_logp(tp, tL, t_cut, lam) + get_logp(tpLR, tR, t_cut, lam) #First sample tL
+
+        logLH = logpLR + np.log(1 / (4 * np.pi))
+
+    return logLH
