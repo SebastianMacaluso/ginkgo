@@ -2,6 +2,7 @@ import pickle
 import numpy as np
 import torch
 from scipy.special import logsumexp
+import copy
 
 import warnings
 warnings.simplefilter('default')
@@ -383,3 +384,80 @@ def _get_jet_logLH(
         logLH.append(0)
 
 
+
+
+##############################
+def reevaluate_jet_logLH(in_jet, delta_min=None, Lambda = None):
+    """
+    Attach splitting log likelihood to each edge, by calling recursive
+    _get_jet_likelihood.
+    """
+    jet = copy.deepcopy(in_jet)
+    logLH = []
+    root_id = jet["root_id"]
+
+    if delta_min is None:
+        raise ValueError(f"No pt_cut parameter specified.")
+    if Lambda is None:
+        raise ValueError(f"No lambda parameter specified.")
+
+
+    _evaluate_jet_logLH(
+        jet,
+        root_id = root_id,
+        delta_min = delta_min,
+        Lambda=Lambda,
+        logLH = logLH
+    )
+
+    jet["logLH"] = np.asarray(logLH)
+
+
+    return jet
+
+
+def _evaluate_jet_logLH(
+        jet,
+        root_id = None,
+        delta_min = None,
+        Lambda = None,
+        logLH = None
+):
+    """
+    Recursively enrich every edge from root_id downward with their log likelihood.
+    log likelihood of a leaf is 0. Assumes a valid jet.
+    """
+    if jet["tree"][root_id][0] != -1:
+
+        # print('Lambda = ', Lambda)
+        idL = jet["tree"][root_id][0]
+        idR = jet["tree"][root_id][1]
+        pL = jet["content"][idL]
+        pR = jet["content"][idR]
+
+        # llh = split_logLH(pL, tL, pR, tR, delta_min, Lambda)
+        llh = split_logLH_with_stop_nonstop_prob(pL,  pR,  delta_min, Lambda)
+        # print(llh)
+
+        logLH.append(llh)
+        # print('logLH = ', llh)
+
+
+        _evaluate_jet_logLH(
+            jet,
+            root_id = idL,
+            delta_min = delta_min,
+            Lambda =Lambda,
+            logLH = logLH
+        )
+        _evaluate_jet_logLH(
+            jet,
+            root_id = idR,
+            delta_min = delta_min,
+            Lambda=Lambda,
+            logLH = logLH
+        )
+
+    else:
+
+        logLH.append(0)
