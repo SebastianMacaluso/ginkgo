@@ -47,11 +47,12 @@ def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
 
         if t > t_cut:
             """ Probability of the shower to stop F_s"""
-            F_s = 1 / (1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tP_local))
+            # F_s = 1 / (1 - np.exp(- lam)) * (1 - np.exp(-lam * t_cut / tP_local))
             # if F_s>=1:
             #     print("Fs = ", F_s, "| tP_local = ", tP_local, "| t_cut = ", t_cut, "| t = ",t)
 
-            return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local + np.log(1-F_s)
+            # return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local + np.log(1-F_s)
+            return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local
 
         else: # For leaves we have t<t_cut
             t_upper = min(tP_local,t_cut) #There are cases where tp2 < t_cut
