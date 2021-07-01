@@ -64,6 +64,10 @@ def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
         "If the pairing is not allowed"
         logLH = - np.inf
 
+    elif tL >=(1/4 - 1e-3)* tp or tR >=(1/4 - 1e-3)* tp:
+        "If the pairing is not allowed"
+        logLH = - np.inf
+
     else:
         """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
 
