@@ -51,11 +51,11 @@ def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
 
             # print("Inner - t = ",t," | tL =",tL, " | tR = ",tR," pL = ", pL, " | pR= ", pR, " | pP = ", pP, "logLH = ",-np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local)
             # return -np.log(1 - np.exp(- lam)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local + np.log(1-F_s)
-            return -np.log(1 - np.exp(- lam/4)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local
+            return -np.log(1 - np.exp(- (1. - 1e-3)*lam/4)) + np.log(lam) - np.log(tP_local) - lam * t / tP_local
 
         else: # For leaves we have t<t_cut
             t_upper = min(tP_local,t_cut) #There are cases where tp2 < t_cut
-            log_F_s = -np.log(1 - np.exp(- lam)) + np.log(1 - np.exp(-lam * t_upper / tP_local))
+            log_F_s = -np.log(1 - np.exp(- (1. - 1e-3)*lam/4)) + np.log(1 - np.exp(-lam * t_upper / tP_local))
             # print("Outer - t = ",t," | tL =",tL, " | tR = ",tR," pL = ", pL, " | pR= ", pR, " | pP = ", pP, "logLH = ", log_F_s)
             return log_F_s
 
