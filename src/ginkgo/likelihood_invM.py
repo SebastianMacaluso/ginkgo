@@ -64,7 +64,7 @@ def get_delta_LR(pL, pR):
 #         logLH = - np.inf
 #
 #     elif (tL > t_cut and L_is_leaf) or (tR > t_cut and R_is_leaf):
-#         """If we vary t_cut such that the leaves values for t in the dataset are above t_cut"""
+#         """If we vary t_cut such that the leaves values for t in the dataset are above t_cut. Important for 2D scans"""
 #         # print("Leaf value above t_cut, not allowed | ","tL = ", tL, " | tR = ", tR, " | t_cut =", t_cut )
 #         logLH = - np.inf
 #
@@ -200,6 +200,15 @@ def split_logLH_with_stop_nonstop_prob(pL, pR, t_cut, lam):
     if tp <= t_cut:
         "If the pairing is not allowed"
         logLH = - np.inf
+
+    elif tL >=(1 - 1e-3)* tp or tR >=(1 - 1e-3)* tp:
+        print("The pairing is not allowed because tL or tR are greater than tP")
+        logLH = - np.inf
+
+    elif np.sqrt(tL) + np.sqrt(tR) > np.sqrt(tp):
+        print("Breaking invariant mass inequality condition")
+        logLH = - np.inf
+
 
     else:
         """We sample a unit vector uniformly over the 2-sphere, so the angular likelihood is 1/(4*pi)"""
