@@ -298,7 +298,70 @@ def _traverse_rec(
         # tL_rand = tL
         # tR_rand = tR
 
-        if flip==True:
+        # if flip==True:
+        #
+        #     _traverse_rec(
+        #         pL_mu,
+        #         idx,
+        #         False,
+        #         tree,
+        #         content,
+        #         deltas,
+        #         draws,
+        #         leaves,
+        #         delta_P=tL,
+        #         cut_off=cut_off,
+        #         rate=rate,
+        #         drew=draw_decay_L,
+        #     )
+        #
+        #     _traverse_rec(
+        #         pR_mu,
+        #         idx,
+        #         True,
+        #         tree,
+        #         content,
+        #         deltas,
+        #         draws,
+        #         leaves,
+        #         delta_P=tR,
+        #         cut_off=cut_off,
+        #         rate=rate,
+        #         drew=draw_decay_R,
+        #     )
+        # else:
+        #
+        #     _traverse_rec(
+        #         pL_mu,
+        #         idx,
+        #         True,
+        #         tree,
+        #         content,
+        #         deltas,
+        #         draws,
+        #         leaves,
+        #         delta_P=tL,
+        #         cut_off=cut_off,
+        #         rate=rate,
+        #         drew=draw_decay_L,
+        #     )
+        #
+        #     _traverse_rec(
+        #         pR_mu,
+        #         idx,
+        #         False,
+        #         tree,
+        #         content,
+        #         deltas,
+        #         draws,
+        #         leaves,
+        #         delta_P=tR,
+        #         cut_off=cut_off,
+        #         rate=rate,
+        #         drew=draw_decay_R,
+        #     )
+
+        if flip == True:
             # print("Flipping L/R")
             tL_rand = tR
             tR_rand = tL

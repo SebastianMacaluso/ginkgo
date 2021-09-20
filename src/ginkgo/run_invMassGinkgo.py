@@ -60,16 +60,23 @@ args = parser.parse_args()
 rate2=torch.tensor(8.)
 
 # Parameters to get ~<10 constituents to test the trellis algorithm
-# pt_min = torch.tensor(4.**2)
-#
-pt_min = torch.tensor(2.5**2)
+pt_min = torch.tensor(6.**2)
+# pt_min = torch.tensor(83.) # Marginal likelihood fits values
+# pt_min = torch.tensor(2.3**2)
+
+# pt_min = torch.tensor(1.1**2) # For leaves between 5 and 40
+
+# pt_min = torch.tensor(0.02**2)
 
 ### Physics inspired parameters to get ~ between 20 and 50 constituents
 W_rate = 3.
 QCD_rate = 1.5
+# QCD_rate = 0.0 # Marginal likelihood fits values
 # pt_min = torch.tensor(1.2**2)
 
 QCD_mass = 30.
+
+
 
 if args.jetType == "W":
     """ W jets"""
@@ -172,8 +179,9 @@ if save:
     # output_dir = "../../data/invMassGinkgo"
     # output_dir = "/scratch/sm4511/ginkgo/data/invMassGinkgo"
     os.system("mkdir -p "+args.out_dir)
+    print("Output dir = ", args.out_dir)
 
-    simulator.save(jet_list, args.out_dir, "jets_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min))) +"tcut_"+str(args.id))
+    simulator.save(jet_list, args.out_dir, "jets_"+str(args.jetType)+"_" + str(args.minLeaves) + "N_"+ str(args.Nsamples)+"trees_"+str(int(10*np.sqrt(pt_min)))+"tcut_"+ str(args.id))
 
 # To run: python run_invMassGinkgo.py --jetType=W --Nsamples=2 --id=0
 #         python run_invMassGinkgo.py --jetType=QCD --Nsamples=2 --id=0
