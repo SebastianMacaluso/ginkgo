@@ -60,7 +60,7 @@ args = parser.parse_args()
 rate2=torch.tensor(8.)
 
 # Parameters to get ~<10 constituents to test the trellis algorithm
-pt_min = torch.tensor(6.**2)
+pt_min = torch.tensor(4.**2)
 # pt_min = torch.tensor(83.) # Marginal likelihood fits values
 # pt_min = torch.tensor(2.3**2)
 

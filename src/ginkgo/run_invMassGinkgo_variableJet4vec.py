@@ -109,7 +109,7 @@ else:
 
 # mean_mass = [30.]
 sigma = [5.]
-mean_p_xyz = [200., 200., 200.]
+mean_p_xyz = [230., 230., 230.]
 covariance_vec = [100., 100., 100.]
 
 
